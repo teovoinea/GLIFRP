@@ -1,11 +1,15 @@
-# xbTeam
+# GLIFRP
 Scrum board can be found here: 
 <a href="https://trello.com/b/YEKUDQie">GLFRP Scrum Board</a>
 To use this sign up for a Trello account
-# TODO:
-* Everything
 
-# b -> Back End
-
-
-# f -> Front End
+# To Run/Test the backend
+1. <a href="https://pip.pypa.io/en/stable/installing"> **Install pip** </a>
+2. ** Install cherrypy **
+	* ```bash
+		pip install cherrypy
+		```
+3. Run the server
+	* ```bash
+		python serv.py
+		```
