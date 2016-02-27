@@ -13,3 +13,13 @@ To use this sign up for a Trello account
 	* ```shell
 		python serv.py
 		```
+
+# To Run/Test the frontend
+1. <a href="https://nodejs.org/en/"> **Install NodeJs and npm** </a>
+2. **Install Bower and grunt**
+	* ```npm install -g bower grunt-cli```
+3. **Run server**
+	```
+	cd FrontEnd
+	grunt server
+	```
