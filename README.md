@@ -5,11 +5,11 @@ To use this sign up for a Trello account
 
 # To Run/Test the backend
 1. <a href="https://pip.pypa.io/en/stable/installing"> **Install pip** </a>
-2. ** Install cherrypy **
-	* ```bash
+2. **Install cherrypy**
+	* ```
 		pip install cherrypy
 		```
 3. Run the server
-	* ```bash
+	* ```
 		python serv.py
 		```
