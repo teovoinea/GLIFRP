@@ -1,6 +1,8 @@
 import static spark.Spark.*;
+import com.google.gson.*;
 
 public class Main {
+	private Gson gson = new Gson();
     public static void main(String[] args) {
         get("/", (req, res) -> "Hello World");
         
@@ -10,17 +12,13 @@ public class Main {
 
         post("/search", (request, response) ->{
         	try{
-	        	String latitude = request.attribute("lat");
-	        	String longitude = request.attribute("lon");
-	        	String zip_code = request.attribute("zip");
+	        	Gson receive_object = new GsonBuilder().create();
+	        	System.out.println(request.body());
+	        	City rec = receive_object.fromJson(request.body(), City.class);
+	        	Gson return_object= new GsonBuilder().create();
         		response.type("application/javascript");
         		response.status(200);
-        		String r = String.format("{
-        						lat:%s,
-        						lon:%s,
-        						zip:%s
-        					}", latitude, longitude, zip_code);
-        		return r;
+        		return return_object.toJson(rec);
         	}
         	catch (Exception e){
         		response.type("text/plain");

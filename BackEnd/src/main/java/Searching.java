@@ -1,4 +1,4 @@
-public interface Searching{
+public class Searching{
 
 	/**
 	 * Sorts the comparable array by any of the following attributes
