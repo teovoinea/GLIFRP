@@ -8,9 +8,15 @@ public class Main {
     public static void main(String[] args) {
         graph = new Graph();
         staticFileLocation("/public");
-        get("/", (req, res) -> response.redirect("/public/index.html"));
+        get("/", (req, res) -> {
+        	res.redirect("/index.html");
+        	//dunno why index.html has GoWrench page title
+        	//*ahem* Roberto *ahem*
+        	//but it routes properly
+        	return "";
+        });
         
-        get("/test", (req, res) -> 
+        get("/dankmeme", (req, res) -> 
         	"<img src='/img/2.PNG'/>"
         );
 
