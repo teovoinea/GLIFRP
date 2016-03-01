@@ -43,7 +43,7 @@ module.exports = function(grunt) {
         tasks: ['jshint', 'uglify']
       }
     },
-
+    /*
     run: {
       options: {
         // Task-specific options go here. 
@@ -53,11 +53,12 @@ module.exports = function(grunt) {
         args: []
       }
     },
+    */
     concurrent: {
       options: {
         logConcurrentOutput: true
       },
-      tasks: ['run:your_target', 'watch']
+      tasks: [/*'run:your_target',*/ 'watch']
     }   
 
   });
@@ -68,7 +69,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-concurrent');
-  grunt.loadNpmTasks('grunt-run');
+  //grunt.loadNpmTasks('grunt-run');
 
   grunt.registerTask('default', ['less', 'cssmin', 'jshint', 'uglify', 'concurrent']);
 
