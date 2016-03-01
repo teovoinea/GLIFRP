@@ -7,7 +7,7 @@ public class Main {
     private Gson gson = new Gson();
     public static void main(String[] args) {
         graph = new Graph();
-        get("/", (req, res) -> "Hello World");
+        get("/", (req, res) -> "<iframe src='index.html'></iframe>");
         
         get("/test", (req, res) -> 
         	"<img src='/img/2.PNG'/>"
