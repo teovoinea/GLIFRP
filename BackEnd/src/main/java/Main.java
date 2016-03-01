@@ -2,7 +2,7 @@ import static spark.Spark.*;
 import com.google.gson.*;
 
 public class Main {
-	private static int count = 0;
+	private static int currentId = 0;
     private static Graph graph; 
     private Gson gson = new Gson();
     public static void main(String[] args) {
@@ -20,13 +20,13 @@ public class Main {
 	        	JsonObject jobject = new JsonParser().parse(request.body()).getAsJsonObject();
 	        	City rec = null;
 	        	if (jobject.has("zip")){
-	        		rec = new City(count, jobject.get("zip").getAsString());
+	        		rec = new City(currentId, jobject.get("zip").getAsString());
 	        	}
 	        	if (jobject.has("lat") && jobject.has("lon")){
-	        		rec = new City(count,jobject.get("lat").getAsString(), jobject.get("lon").getAsString());
+	        		rec = new City(currentId,jobject.get("lat").getAsString(), jobject.get("lon").getAsString());
 	        	}
                 graph.addNode(rec);
-                count++;
+                currentId++;
 
 	        	Gson return_object= new GsonBuilder().create();
         		response.type("application/javascript");
