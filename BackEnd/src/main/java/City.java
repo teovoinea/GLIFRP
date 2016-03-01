@@ -1,7 +1,6 @@
 import com.google.gson.annotations.SerializedName;
 
-
-public class City implements Comparable<City>{
+public class City extends Node implements Comparable<City>{
 	private static OpenStreetMapWrapper mapwrap = new OpenStreetMapWrapper();
 	
 	//Pirvate Variables
@@ -19,14 +18,16 @@ public class City implements Comparable<City>{
 	private double score;
 	
 	//Constructors (lat + long) OR zip code
-	public City(String lati, String longi){
+	public City(int id, String lati, String longi){
+		super(id);
 		lat = lati;
 		lon = longi;
 		String[] ll = {lat, lon};
 		zip = mapwrap.getZipCode(ll);
 	}
 	
-	public City(String zip_code){
+	public City(int id, String zip_code){
+		super(id);
 		zip = zip_code;
 		String[] ll = mapwrap.getLatLong(zip);
 		lat = ll[0];

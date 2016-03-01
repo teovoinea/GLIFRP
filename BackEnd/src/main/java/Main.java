@@ -2,8 +2,11 @@ import static spark.Spark.*;
 import com.google.gson.*;
 
 public class Main {
-	private Gson gson = new Gson();
+	private int count = 0;
+    private Graph graph; 
+    private Gson gson = new Gson();
     public static void main(String[] args) {
+        graph = new Graph();
         get("/", (req, res) -> "Hello World");
         
         get("/test", (req, res) -> 
@@ -17,17 +20,13 @@ public class Main {
 	        	JsonObject jobject = new JsonParser().parse(request.body()).getAsJsonObject();
 	        	City rec = null;
 	        	if (jobject.has("zip")){
-	        		rec = new City(jobject.get("zip").getAsString());
+	        		rec = new City(count, jobject.get("zip").getAsString());
 	        	}
-//	        	if (!t.getZip().equals("")){
-//	        		rec = new City(t.getZip());
-//	        	}
-//	        	else if(!t.getLat().equals("") && !t.getLong().equals("")){
-//	        		rec = new City(t.getLat(), t.getLong());
-//	        	}
 	        	if (jobject.has("lat") && jobject.has("lon")){
-	        		rec = new City(jobject.get("lat").getAsString(), jobject.get("lon").getAsString());
+	        		rec = new City(count,jobject.get("lat").getAsString(), jobject.get("lon").getAsString());
 	        	}
+                graph.addNode(rec);
+                count++;
 
 	        	Gson return_object= new GsonBuilder().create();
         		response.type("application/javascript");
