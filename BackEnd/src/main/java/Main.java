@@ -14,7 +14,21 @@ public class Main {
         	try{
 	        	Gson receive_object = new GsonBuilder().create();
 	        	System.out.println(request.body());
-	        	City rec = receive_object.fromJson(request.body(), City.class);
+	        	JsonObject jobject = new JsonParser().parse(request.body()).getAsJsonObject();
+	        	City rec = null;
+	        	if (jobject.has("zip")){
+	        		rec = new City(jobject.get("zip").getAsString());
+	        	}
+//	        	if (!t.getZip().equals("")){
+//	        		rec = new City(t.getZip());
+//	        	}
+//	        	else if(!t.getLat().equals("") && !t.getLong().equals("")){
+//	        		rec = new City(t.getLat(), t.getLong());
+//	        	}
+	        	if (jobject.has("lat") && jobject.has("lon")){
+	        		rec = new City(jobject.get("lat").getAsString(), jobject.get("lon").getAsString());
+	        	}
+
 	        	Gson return_object= new GsonBuilder().create();
         		response.type("application/javascript");
         		response.status(200);

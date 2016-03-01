@@ -1,4 +1,4 @@
-public class Searching{
+public class Sorting{
 
 	/**
 	 * Sorts the comparable array by any of the following attributes
