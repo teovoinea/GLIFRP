@@ -2,8 +2,8 @@ import static spark.Spark.*;
 import com.google.gson.*;
 
 public class Main {
-	private int count = 0;
-    private Graph graph; 
+	private static int count = 0;
+    private static Graph graph; 
     private Gson gson = new Gson();
     public static void main(String[] args) {
         graph = new Graph();
