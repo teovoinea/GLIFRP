@@ -4,13 +4,13 @@ module.exports = function(grunt) {
 
     // JS TASKS ================================================================
     jshint: {
-      all: ['BackEnd/src/main/resources/public/src/js/**/*.js'] 
+      all: ['FrontEnd/src/js/**/*.js'] 
     },
 
     uglify: {
       build: {
         files: {
-          'BackEnd/src/main/resources/public/dist/js/app.min.js': ['BackEnd/src/main/resources/public/src/js/**/*.js', 'BackEnd/src/main/resources/public/src/js/*.js']
+          'FrontEnd/dist/js/app.min.js': ['FrontEnd/src/js/**/*.js', 'FrontEnd/src/js/*.js']
         }
       }
     },
@@ -19,7 +19,7 @@ module.exports = function(grunt) {
     less: {
       build: {
         files: {
-          'BackEnd/src/main/resources/public/dist/css/style.css': 'BackEnd/src/main/resources/public/src/css/style.less'
+          'FrontEnd/dist/css/style.css': 'FrontEnd/src/css/style.less'
         }
       }
     },
@@ -27,7 +27,7 @@ module.exports = function(grunt) {
     cssmin: {
       build: {
         files: {
-          'BackEnd/src/main/resources/public/dist/css/style.min.css': 'BackEnd/src/main/resources/public/dist/css/style.css'
+          'FrontEnd/dist/css/style.min.css': 'FrontEnd/dist/css/style.css'
         }
       }
     },
@@ -35,11 +35,11 @@ module.exports = function(grunt) {
     // COOL TASKS ==============================================================
     watch: {
       css: {
-        files: ['BackEnd/src/main/resources/public/src/css/**/*.less'],
+        files: ['FrontEnd/src/css/**/*.less'],
         tasks: ['less', 'cssmin']
       },
       js: {
-        files: ['BackEnd/src/main/resources/public/src/js/**/*.js'],
+        files: ['FrontEnd/src/js/**/*.js'],
         tasks: ['jshint', 'uglify']
       }
     },
