@@ -49,7 +49,7 @@ public class Sorting{
 		quickSort(a, j+1, hi);
 	}
 
-	private static void quickSort3way(){
+	private static void quickSort3way(Comparable[] a, int lo, int hi){
 		if (hi <= lo) return;
 		int lt = lo, gt = hi;
 		Comparable v = a[lo];
