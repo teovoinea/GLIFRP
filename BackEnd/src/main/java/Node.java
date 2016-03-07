@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-class Node{
+public abstract class Node{
 	private ArrayList<Node> adjacent;
 	private int adjacentCount;
 	private final int id;

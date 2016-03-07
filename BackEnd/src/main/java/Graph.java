@@ -3,7 +3,7 @@ import java.util.Queue;
 import java.util.Stack;
 import java.util.LinkedList;
 
-class Graph implements Searchable{
+abstract class Graph implements Searchable{
 	private ArrayList<Node> nodes;
 	private ArrayList<MST> spanningTrees;
 
@@ -84,33 +84,6 @@ class Graph implements Searchable{
 		if (!i.hasNeighbour(j) || !j.hasNeighbour(i)){
 			i.addAdjacent(j);
 			j.addAdjacent(i);
-		}
-	}
-
-	/* SEARCHABLE */
-	public void BFS(Node n){
-		Queue<Node> nQ = new LinkedList<Node>();
-		n.setMarked(true);
-		nQ.add(n);
-		while (!nQ.isEmpty()){
-			Node current = nQ.remove();
-			System.out.println(current);
-			for(Node w : current.getAdjacent()){
-				if (!w.isMarked()){
-					w.setMarked(true);
-					nQ.add(w);
-				}
-			}
-		}
-	}
-
-	public void DFS(Node n){
-		n.setMarked(true);
-		System.out.println(n);
-		for(Node w : n.getAdjacent()){
-			if (!w.isMarked()){
-				DFS(w);
-			}
 		}
 	}
 

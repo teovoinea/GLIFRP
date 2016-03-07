@@ -1,6 +1,6 @@
 import com.google.gson.annotations.SerializedName;
 
-public class City extends Node implements Comparable<City>{
+public class City implements Comparable<City>{
 	private static OpenStreetMapWrapper mapwrap = new OpenStreetMapWrapper();
 	
 	//Pirvate Variables
@@ -22,8 +22,7 @@ public class City extends Node implements Comparable<City>{
 	private String name;
 	
 	//Constructors (lat + long) OR zip code
-	public City(int id, String[] ll){
-		super(id);
+	public City(String[] ll){
 		lat = ll[0];
 		lon = ll[1];
 		mapwrap.buildByLatLong(ll);
@@ -32,8 +31,7 @@ public class City extends Node implements Comparable<City>{
 		state = mapwrap.getState();
 	}
 	
-	public City(int id, String zip_code){
-		super(id);
+	public City(String zip_code){
 		zip = zip_code;
 		mapwrap.buildByZip(zip);
 		lat = mapwrap.getLat();
@@ -43,7 +41,6 @@ public class City extends Node implements Comparable<City>{
 	}
 
 	public City(int id, String city_name, String city_state){
-		super(id);
 		name = city_name;
 		state = city_state;
 		mapwrap.buildByCityState(city_name, city_state);

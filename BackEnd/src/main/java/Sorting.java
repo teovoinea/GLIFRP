@@ -1,5 +1,5 @@
 public class Sorting{
-
+	/*
 	/**
 	 * Sorts the comparable array by any of the following attributes
 	 * 0.
@@ -12,6 +12,7 @@ public class Sorting{
 	 * @param attribute ^read description
 	 * @param a comparable array
 	 */
+	/*
 	public static void SortByType(int attribute, Comparable[] a){
 		if (attribute == 0){
 			Comparable[] aux = new Comparable[a.length];
@@ -148,4 +149,5 @@ public class Sorting{
 			else a[k] = aux[i++];
 		}
 	}
+	*/
 }

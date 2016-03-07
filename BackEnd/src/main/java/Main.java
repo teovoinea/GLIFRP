@@ -2,11 +2,10 @@ import static spark.Spark.*;
 import com.google.gson.*;
 
 public class Main {
-	private static int currentId = 0;
-    private static Graph graph; 
+    private static Usa usa; 
     private Gson gson = new Gson();
     public static void main(String[] args) {
-        graph = new Graph();
+        usa = new Usa();
         staticFileLocation("/public");
         get("/", (req, res) -> {
         	res.redirect("/index.html");
@@ -27,17 +26,16 @@ public class Main {
 	        	JsonObject jobject = new JsonParser().parse(request.body()).getAsJsonObject();
 	        	City rec = null;
 	        	if (jobject.has("zip")){
-	        		rec = new City(currentId, jobject.get("zip").getAsString());
+	        		rec = new City(jobject.get("zip").getAsString());
 	        	}
 	        	if (jobject.has("lat") && jobject.has("lon")){
 	        		String[] ll = {jobject.get("lat").getAsString(), jobject.get("lon").getAsString()};
-	        		rec = new City(currentId, ll);
+	        		rec = new City(ll);
 	        	}
 	        	if (jobject.has("city") && jobject.has("state")){
 	        		//rec = new City(currentId,jobject.get("city").getAsString(), jobject.get("state").getAsString());
 	        	}
-                graph.addNode(rec);
-                currentId++;
+                usa.addCity(rec);
 
 	        	Gson return_object= new GsonBuilder().create();
         		response.type("application/javascript");
