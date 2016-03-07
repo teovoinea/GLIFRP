@@ -1,6 +1,9 @@
 import java.util.Random;
 
 /**
+ * 
+ * TODO: USE ArrayLists instead of Arrays
+ * 
  * Searching 
  */
 
@@ -21,7 +24,7 @@ public class Searching {
 		int middle;
 		//System.out.println("low: " + low + " high: " + high);
 		if (low==high){
-			System.out.println("Coud not find: " + key + " ,lower: " + low);
+			//System.out.println("Coud not find: " + key + " ,lower: " + low);
 			return low;
 		}
 		middle = (low + high)/2;
@@ -32,7 +35,7 @@ public class Searching {
 		}else if (a[middle].compareTo(key) > 0){
 			return BinarySearch(a,low,middle,key);
 		}
-		System.out.println(" found middle at: " + middle );
+		//System.out.println(" found middle at: " + middle );
 		return middle;
 	}
 	
@@ -46,11 +49,11 @@ public class Searching {
 	private static int LinearSearch(Comparable[] a , Comparable key){
 		for (int i = 0; i < a.length; i++){
 			if (a[i] == key){
-				System.out.println( key +" found at: " + i); 
+				//System.out.println( key +" found at: " + i); 
 				return i;
 			}
 		}
-		System.out.println(key + " Not Found");
+		//System.out.println(key + " Not Found");
 		return -1;
 	}
 	
