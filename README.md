@@ -42,3 +42,25 @@ ________________________________________________________________________________
 * Baboon
 * Caterpillar
 * Dragon
+* Electric Catfish
+* Fossa
+* Guppy
+* Hoatzin
+* Iguana
+* Javelina
+* Kakapo
+* Lynx
+* Molly
+* Nautilus
+* Okapi
+* Pademelon
+* Quokka
+* Ragdoll
+* Sponge
+* Toucan
+* Umbrellabird
+* Vaquita
+* Wombat
+* Xenopus
+* Yak
+* Zorse
