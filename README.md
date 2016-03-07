@@ -16,6 +16,9 @@ To use this sign up for a Trello account
 	cd FrontEnd
 	grunt server
 	```
+	
+# TODO:
+* Update OpenStreetMapAPIWrapper so that when you pass in city+state as a JSON object, it overwrites the inputted "state" value with the value from the return JSON object
 
 ___________________________________________________________________________________________
 # "Major" update history
