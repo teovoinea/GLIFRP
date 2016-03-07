@@ -69,7 +69,7 @@ public class OpenStreetMapWrapper {
 
 	public void buildByCityState(String city_name, String city_state){
 		try{
-			String query = String.format("city=%s&state=%s&limit=1&addressdetails=1&format=json&country=us", URLEncoder.encode(city_name, charset), URLEncoder(city_state, charset));
+			String query = String.format("city=%s&state=%s&limit=1&addressdetails=1&format=json&country=us", URLEncoder.encode(city_name, charset), URLEncoder.encode(city_state, charset));
 			URLConnection connection = new URL(search_url + "?" + query).openConnection();
 			connection.setRequestProperty("Accepted-Charset", charset);
 			InputStream response = connection.getInputStream();

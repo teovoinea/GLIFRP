@@ -22,11 +22,10 @@ public class City extends Node implements Comparable<City>{
 	private String name;
 	
 	//Constructors (lat + long) OR zip code
-	public City(int id, String lati, String longi){
+	public City(int id, String[] ll){
 		super(id);
-		lat = lati;
-		lon = longi;
-		String[] ll = {lat, lon};
+		lat = ll[0];
+		lon = ll[1];
 		mapwrap.buildByLatLong(ll);
 		zip = mapwrap.getZip();
 		name = mapwrap.getName();

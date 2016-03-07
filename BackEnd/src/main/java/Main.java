@@ -30,7 +30,11 @@ public class Main {
 	        		rec = new City(currentId, jobject.get("zip").getAsString());
 	        	}
 	        	if (jobject.has("lat") && jobject.has("lon")){
-	        		rec = new City(currentId,jobject.get("lat").getAsString(), jobject.get("lon").getAsString());
+	        		String[] ll = {jobject.get("lat").getAsString(), jobject.get("lon").getAsString()};
+	        		rec = new City(currentId, ll);
+	        	}
+	        	if (jobject.has("city") && jobject.has("state")){
+	        		//rec = new City(currentId,jobject.get("city").getAsString(), jobject.get("state").getAsString());
 	        	}
                 graph.addNode(rec);
                 currentId++;
