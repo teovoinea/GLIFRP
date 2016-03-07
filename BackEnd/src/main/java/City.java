@@ -16,6 +16,10 @@ public class City extends Node implements Comparable<City>{
 	private double price;
 	@SerializedName("score")
 	private double score;
+	@SerializedName("state")
+	private String state;
+	@SerializedName("name")
+	private String name;
 	
 	//Constructors (lat + long) OR zip code
 	public City(int id, String lati, String longi){
@@ -23,15 +27,30 @@ public class City extends Node implements Comparable<City>{
 		lat = lati;
 		lon = longi;
 		String[] ll = {lat, lon};
-		zip = mapwrap.getZipCode(ll);
+		mapwrap.buildByLatLong(ll);
+		zip = mapwrap.getZip();
+		name = mapwrap.getName();
+		state = mapwrap.getState();
 	}
 	
 	public City(int id, String zip_code){
 		super(id);
 		zip = zip_code;
-		String[] ll = mapwrap.getLatLong(zip);
-		lat = ll[0];
-		lon = ll[1];
+		mapwrap.buildByZip(zip);
+		lat = mapwrap.getLat();
+		lon = mapwrap.getLon();
+		name = mapwrap.getName();
+		state = mapwrap.getState();
+	}
+
+	public City(int id, String city_name, String city_state){
+		super(id);
+		name = city_name;
+		state = city_state;
+		mapwrap.buildByCityState(city_name, city_state);
+		// zip = mapwrap.getZip();
+		lat = mapwrap.getLat();
+		lon = mapwrap.getLon();
 	}
 	
 	/////////////////////////////////////GETTERS//////////////////////////////////////
@@ -58,6 +77,14 @@ public class City extends Node implements Comparable<City>{
 	public double getScore(){
 		return score;
 	}
+
+	public String getName(){
+		return name;
+	}
+
+	public String getState(){
+		return state;
+	}
 	
 	///////////////////////////////////SETTERS////////////////////////////////////////
 	public void setCrime(double d){
@@ -66,10 +93,6 @@ public class City extends Node implements Comparable<City>{
 	
 	public void setPrice(double d){
 		price = d;
-	}
-	
-	public void fillMissingZipOrLatLong(){
-		
 	}
 	
 	///////////////////////////////////PRIVATE FUNCTIONS//////////////////////////////
