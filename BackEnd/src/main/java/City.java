@@ -40,13 +40,13 @@ public class City implements Comparable<City>{
 		state = mapwrap.getState();
 	}
 
-	public City(int id, String city_name, String city_state){
-		name = city_name;
-		state = city_state;
+	public City(String city_name, String city_state){
 		mapwrap.buildByCityState(city_name, city_state);
 		// zip = mapwrap.getZip();
 		lat = mapwrap.getLat();
 		lon = mapwrap.getLon();
+		name = mapwrap.getName();
+		state = mapwrap.getState();
 	}
 	
 	/////////////////////////////////////GETTERS//////////////////////////////////////
