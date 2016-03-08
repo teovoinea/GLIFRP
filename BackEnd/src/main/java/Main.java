@@ -33,7 +33,7 @@ public class Main {
 	        		rec = new City(ll);
 	        	}
 	        	if (jobject.has("city") && jobject.has("state")){
-	        		//rec = new City(currentId,jobject.get("city").getAsString(), jobject.get("state").getAsString());
+	        		rec = new City(jobject.get("city").getAsString(), jobject.get("state").getAsString());
 	        	}
                 usa.addCity(rec);
 
