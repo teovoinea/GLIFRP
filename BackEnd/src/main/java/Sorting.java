@@ -1,19 +1,20 @@
 public class Sorting{
-	/*
 	/**
 	 * Sorts the comparable array by any of the following attributes
-	 * 0.
-	 * 1.
-	 * 2.
-	 * 3.
-	 * .
-	 * .
-	 * .
+	 * 0. Lat
+	 * 1. Long
+	 * 2. Zip
+	 * 3. Crime
+	 * 4. Price
+	 * 5. Score
+	 * 6. Name
+	 * 7. State
 	 * @param attribute ^read description
 	 * @param a comparable array
 	 */
-	/*
+	private int sortBy = 0;
 	public static void SortByType(int attribute, Comparable[] a){
+		sortBy = attribute;
 		if (attribute == 0){
 			Comparable[] aux = new Comparable[a.length];
 			mergeSort(a, aux, 0, a.length);
@@ -56,7 +57,7 @@ public class Sorting{
 		Comparable v = a[lo];
 		int i = lo;
 		while (i <= gt){
-			int cmp = a[i].compareTo(v);
+			int cmp = a[i].compareTo(v, sortBy);
 			if (cmp < 0) exch(a, lt++, i++);
 			else if (cmp > 0) exch(a, i, gt--);
 			else i++;
@@ -132,7 +133,7 @@ public class Sorting{
 	}
 
 	private static void less(Comparable v, Comparable w){
-		return v.compareTo(w) < 0;
+		return v.compareTo(w, sortBy) < 0;
 	}
 
 
@@ -149,5 +150,4 @@ public class Sorting{
 			else a[k] = aux[i++];
 		}
 	}
-	*/
 }
