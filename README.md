@@ -19,6 +19,7 @@ To use this sign up for a Trello account
 	
 ___________________________________________________________________________________________
 # "Major" update history
+* Mar 10 - T - Added compareTo and Sort by attribute
 * Mar 9 - C - Changed Searching Algorithms to use ArrayList instead of Arrays
 * Mar 7 - C - Basic Searching Algorithms
 * Mar 3 - P - Added databases
