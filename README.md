@@ -19,6 +19,7 @@ To use this sign up for a Trello account
 	
 ___________________________________________________________________________________________
 # "Major" update history
+* Mar 9 - C - Changed Searching Algorithms to use ArrayList instead of Arrays
 * Mar 7 - C - Basic Searching Algorithms
 * Mar 3 - P - Added databases
 * Mar 3 - T - Added all the possible sorting algorithms we will use
