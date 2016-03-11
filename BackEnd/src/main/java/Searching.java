@@ -59,7 +59,7 @@ public class Searching {
 		
 		//If the key we are looking for is not In Our ArrayList
 		if (low==high){
-			System.out.println("Coud not find: " + key + " ,lower: " + low);
+			System.out.println("Coud not find: " + key + " ,lower: " + low + " ,Attribute: ");
 			return low;
 		}
 		
@@ -72,7 +72,7 @@ public class Searching {
 		}else if (a.get(middle).compareTo(key, attribute) > 0){
 			return BinarySearch(a,low,middle,key, attribute);
 		}
-		System.out.println(" found " + key + " at: " + middle );
+		System.out.println(" found " + key + " at: " + middle + " ,Attribute: " );
 		return middle;											 	// Return answer
 	}
 	
