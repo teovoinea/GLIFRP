@@ -1,3 +1,4 @@
+package backend;
 import java.util.ArrayList;
 
 public class State extends Node {
@@ -44,5 +45,17 @@ public class State extends Node {
 			c.add(cities.get(i));
 		}
 		return c;
+	}
+	
+	public boolean equalsName(State node){
+		return (this.getName().equals(node.getName()));
+	}
+	
+	public void setName(String name){
+		this.name = name;
+	}
+	
+	public String getName(){
+		return this.name;
 	}
 }

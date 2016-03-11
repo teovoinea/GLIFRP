@@ -1,3 +1,4 @@
+package backend;
 import java.util.ArrayList;
 
 public abstract class Node{
@@ -101,6 +102,7 @@ public abstract class Node{
 	public boolean equals(Node node){
 		return (this.getId() == node.getId());
 	}
+	
 	public boolean hasNeighbour(Node node){
 		for (int i = 0; i < adjacent.size();i++){
 			if (adjacent.get(i).equals(node)){

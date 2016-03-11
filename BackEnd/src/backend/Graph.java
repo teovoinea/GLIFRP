@@ -1,11 +1,13 @@
+package backend;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.LinkedList;
 
 abstract class Graph implements Searchable{
-	private ArrayList<Node> nodes;
-	private ArrayList<MST> spanningTrees;
+	protected ArrayList<Node> nodes;
 
 	/**
 	 * Constructor for the graph object.
@@ -86,7 +88,7 @@ abstract class Graph implements Searchable{
 			j.addAdjacent(i);
 		}
 	}
-
+/*
 	private void generateMST(int root){
 		ArrayList<Node[]> sets = new ArrayList<>();
 		HashMap<Node,Node> parent = new HashMap<>();
@@ -105,8 +107,8 @@ abstract class Graph implements Searchable{
 				sets.add(new Node[]{u,parent.get(u)});
 			}
 			for(Node v: u.getAdjacent()){
-				if(q.contains(v) /**& edge weight < key[u]**/){
-					key.put(v,0/**should be weight**/);
+				if(q.contains(v) & edge weight < key[u]){
+					key.put(v,0);
 					parent.put(v,u);
 				}
 			}
@@ -123,5 +125,5 @@ abstract class Graph implements Searchable{
     }
     return min;
 	}
-
+*/
 }

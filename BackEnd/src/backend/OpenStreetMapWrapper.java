@@ -1,3 +1,4 @@
+package backend;
 import java.io.InputStream;
 import java.net.URL.*;
 import java.net.URL;
@@ -74,6 +75,7 @@ public class OpenStreetMapWrapper {
 			connection.setRequestProperty("Accepted-Charset", charset);
 			InputStream response = connection.getInputStream();
 			String in  = IOUtils.toString(response);
+			System.out.println(in);
 			JsonArray jarray = (JsonArray) new JsonParser().parse(in);
 			JsonObject jobject = jarray.get(0).getAsJsonObject();
 			lat = jobject.get("lat").getAsString();
