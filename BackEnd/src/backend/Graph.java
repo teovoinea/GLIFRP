@@ -1,4 +1,4 @@
-package main.java;
+package backend;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -89,7 +89,7 @@ abstract class Graph implements Searchable{
 			j.addAdjacent(i);
 		}
 	}
-
+/*
 	private void generateMST(int root){
 		ArrayList<Node[]> sets = new ArrayList<>();
 		HashMap<Node,Node> parent = new HashMap<>();
@@ -108,8 +108,8 @@ abstract class Graph implements Searchable{
 				sets.add(new Node[]{u,parent.get(u)});
 			}
 			for(Node v: u.getAdjacent()){
-				if(q.contains(v) /**& edge weight < key[u]**/){
-					key.put(v,0/**should be weight**/);
+				if(q.contains(v) & edge weight < key[u]){
+					key.put(v,0);
 					parent.put(v,u);
 				}
 			}
@@ -126,5 +126,5 @@ abstract class Graph implements Searchable{
     }
     return min;
 	}
-
+*/
 }

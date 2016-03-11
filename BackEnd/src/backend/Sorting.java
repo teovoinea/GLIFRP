@@ -1,3 +1,4 @@
+package backend;
 public class Sorting{
 	/**
 	 * Sorts the comparable array by any of the following attributes
@@ -12,6 +13,7 @@ public class Sorting{
 	 * @param attribute ^read description
 	 * @param a comparable array
 	 */
+	/*
 	private int sortBy = 0;
 	public static void SortByType(int attribute, Comparable[] a){
 		sortBy = attribute;
@@ -150,4 +152,5 @@ public class Sorting{
 			else a[k] = aux[i++];
 		}
 	}
+	*/
 }
