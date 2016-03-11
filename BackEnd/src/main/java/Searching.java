@@ -3,10 +3,19 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
+ *  Searching 
  * 
  * TODO: Search Based on Attribute
- * 
- * Searching 
+ * Sorts the comparable array by any of the following attributes
+ * 0. Lat
+ *  1. Long
+ *  2. Zip
+ *  3. Crime
+ *  4. Price
+ *  5. Score
+ *  6. Name
+ *  7. State 
+ *
  */
 
 public class Searching {
@@ -23,7 +32,7 @@ public class Searching {
 		return BinarySearch(a, 0, a.size(), key);
 	}
 	
-	//called by public method BinarySearch( , )
+	//called by public method BinarySearch( , ) Above ^ 
 	private static int BinarySearch(ArrayList<Comparable> a, int low, int high, Comparable key){
 		
 		int middle;
