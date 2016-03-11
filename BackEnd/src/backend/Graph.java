@@ -92,7 +92,7 @@ abstract class Graph implements Searchable{
 		}
 	}
 
-	private void generateMST(int root){
+	private void generateMST(int source){
 		ArrayList<Node[]> sets = new ArrayList<>();
 		HashMap<Node,Node> parent = new HashMap<>();
 		HashMap<Node,Integer> key = new HashMap<>();
