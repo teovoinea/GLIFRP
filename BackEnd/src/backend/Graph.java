@@ -7,8 +7,7 @@ import java.util.Stack;
 import java.util.LinkedList;
 
 abstract class Graph implements Searchable{
-	private ArrayList<Node> nodes;
-	private ArrayList<MST> spanningTrees;
+	protected ArrayList<Node> nodes;
 
 	/**
 	 * Constructor for the graph object.

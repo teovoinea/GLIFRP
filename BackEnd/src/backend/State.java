@@ -46,4 +46,16 @@ public class State extends Node {
 		}
 		return c;
 	}
+	
+	public boolean equalsName(State node){
+		return (this.getName().equals(node.getName()));
+	}
+	
+	public void setName(String name){
+		this.name = name;
+	}
+	
+	public String getName(){
+		return this.name;
+	}
 }

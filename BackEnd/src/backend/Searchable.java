@@ -1,5 +1,5 @@
 package backend;
 public interface Searchable {
-	public void DFS(Node n);
-	public void BFS(Node n);
+	public void DFS(Node n,int flag);
+	public void BFS(Node n,int flag);
 }

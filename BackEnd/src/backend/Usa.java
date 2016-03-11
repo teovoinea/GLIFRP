@@ -4,6 +4,11 @@ import java.util.Queue;
 
 public class Usa extends Graph {
 	private static int currentId = 0;
+	public static final int FIND_STATE_BY_STATE_FLAG = 1;
+	public static final int FIND_STATE_BY_CITY_FLAG = 2;
+	public static final int FIND_LOWEST_CRIME_RATE_FLAG = 3;
+	public static final int ADD_CITY_FLAG = 4;
+	
 	
 	public Usa(){
 		super();
@@ -26,10 +31,25 @@ public class Usa extends Graph {
 	
 	public void addCity(City c){
 		// DFS/BFS then if state.compareState(c), state.insertCity(c), if state not found addNode(new State(currentId,c.getName())); then add city
+		
+	}
+	
+	public void addState(State c){
+		assert !this.contains(c);
+		addNode(c);
+	}
+	
+	public boolean contains(State state){
+		for (int i = 0; i < nodes.size(); i ++){
+			if ( ((State) nodes.get(i)).equalsName(state)){
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	/* SEARCHABLE */
-	public void BFS(Node n){
+	public void BFS(Node n, int flag){
 		Queue<Node> nQ = new LinkedList<Node>();
 		n.setMarked(true);
 		nQ.add(n);
@@ -45,12 +65,15 @@ public class Usa extends Graph {
 		}
 	}
 
-	public void DFS(Node n){
+	public void DFS(Node n,int flag){
 		n.setMarked(true);
-		System.out.println(n);
 		for(Node w : n.getAdjacent()){
 			if (!w.isMarked()){
-				DFS(w);
+				switch (flag){
+					case ADD_CITY_FLAG:
+						break;
+				}	
+				DFS(w,flag);
 			}
 		}
 	}
