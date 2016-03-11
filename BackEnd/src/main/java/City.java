@@ -156,7 +156,7 @@ public class City implements Comparable<City>{
 	}
 
 	@Override
-	public int compareTo(City arg0) {
+	public int compareTo(City o) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
