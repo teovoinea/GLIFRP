@@ -1,3 +1,5 @@
+package main.java;
+
 import com.google.gson.annotations.SerializedName;
 
 public class City implements Comparable<City>{
@@ -110,72 +112,52 @@ public class City implements Comparable<City>{
 	 * @param City to compare
 	 * @param Int attribute to compare by ^ look above
 	 */
-	@Override
-	public int compareTo(City o, int attribute){
+	public int compareTo(Comparable o, int attribute){
 		if (attribute == 0){
-			if (this.lat > o.getLat())
-				return 1;
-			else if (this.lat == o.getLat())
-				return 0;
-			else
-				return -1;
+			return this.lat.compareTo(((City)o).getLat());
 		}
 		if (attribute == 1){
-			if (this.lon > o.getLong())
-				return 1;
-			else if (this.lon == o.getLong())
-				return 0;
-			else
-				return -1;
+			return this.lon.compareTo(((City)o).getLong());
 		}
 		if (attribute == 2){
-			if (this.zip > o.getZip())
-				return 1;
-			else if (this.zip == o.getZip())
-				return 0;
-			else
-				return -1;
+			return this.zip.compareTo(((City)o).getZip());
 		}
 		if (attribute == 3){
-			if (this.crime > o.getCrime())
+			if (this.crime > ((City)o).getCrime())
 				return 1;
-			else if (this.crime == o.getCrime())
+			else if (this.crime == ((City)o).getCrime())
 				return 0;
 			else
 				return -1;
 		}
 		if (attribute == 4){
-			if (this.price > o.getPrice())
+			if (this.price > ((City)o).getPrice())
 				return 1;
-			else if (this.price == o.getPrice())
+			else if (this.price == ((City)o).getPrice())
 				return 0;
 			else
 				return -1;
 		}
 		if (attribute == 5){
-			if (this.score > o.getScore())
+			if (this.score > ((City)o).getScore())
 				return 1;
-			else if (this.score == o.getScore())
+			else if (this.score == ((City)o).getScore())
 				return 0;
 			else
 				return -1;
 		}
 		if (attribute == 6){
-			if (this.name > o.getName())
-				return 1;
-			else if (this.name == o.getName())
-				return 0;
-			else
-				return -1;
+			return this.name.compareTo(((City)o).getName());
 		}
 		if (attribute == 7){
-			if (this.state > o.getState())
-				return 1;
-			else if (this.state == o.getState())
-				return 0;
-			else
-				return -1;
+			return this.state.compareTo(((City)o).getState());
 		}
 		throw new IllegalArgumentException("Invalid attribute argument");
+	}
+
+	@Override
+	public int compareTo(City arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
