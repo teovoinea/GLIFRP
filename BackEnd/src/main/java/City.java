@@ -1,4 +1,3 @@
-package main.java;
 
 import com.google.gson.annotations.SerializedName;
 
