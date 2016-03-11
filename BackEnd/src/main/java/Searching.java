@@ -6,15 +6,6 @@ import java.util.Random;
  *  Searching 
  * 
  * TODO: Search Based on Attribute
- * Sorts the comparable array by any of the following attributes
- * 0. Lat
- *  1. Long
- *  2. Zip
- *  3. Crime
- *  4. Price
- *  5. Score
- *  6. Name
- *  7. State 
  *
  */
 
@@ -22,18 +13,46 @@ public class Searching {
 	
 	/**
 	 * Binary Search     
+	 * Searches the comparable ArrayList by any of the following attributes:
+	 * 0. Lat
+	 * 1. Long
+	 * 2. Zip
+	 * 3. Crime
+	 * 4. Price
+	 * 5. Score
+	 * 6. Name
+	 * 7. State 
 	 * 
 	 * This is a recursive implementation of binary search
 	 * @param a - the input, an ArrayList<Comparable>
 	 * @param key - what you are searching for
 	 * @return - return the index of where the key is
 	 */
-	public static int BinarySearch(ArrayList<Comparable> a, Comparable key){
-		return BinarySearch(a, 0, a.size(), key);
+	public static int BinarySearch(ArrayList<Comparable> a, Comparable key, int attribute){
+		return BinarySearch(a, 0, a.size(), key, attribute);
 	}
 	
 	//called by public method BinarySearch( , ) Above ^ 
-	private static int BinarySearch(ArrayList<Comparable> a, int low, int high, Comparable key){
+	/**
+	 * Private Binary Search 
+	 * Searches the comparable ArrayList by any of the following attributes:
+	 * 0. Lat
+	 * 1. Long
+	 * 2. Zip
+	 * 3. Crime
+	 * 4. Price
+	 * 5. Score
+	 * 6. Name
+	 * 7. State 
+	 * 
+	 * @param a - the input ArrayList
+	 * @param low - the lower bound (starts at 0)
+	 * @param high - the upper bound (starts at the end of arraylist)
+	 * @param key -  what we are searching for 
+	 * @param attribute -searching by attribute
+	 * @return
+	 */
+	private static int BinarySearch(ArrayList<Comparable> a, int low, int high, Comparable key, int attribute){
 		
 		int middle;
 		//System.out.println("low: " + low + " high: " + high);
@@ -47,14 +66,14 @@ public class Searching {
 		middle = (low + high)/2;									//the new Middle
 		
 		//key > a[middle]
-		if (a.get(middle).compareTo(key) < 0){
-			return BinarySearch(a, middle+1,high,key);
+		if (a.get(middle).compareTo(key, attribute) < 0){
+			return BinarySearch(a, middle+1,high,key, attribute);
 		//key < a[middle]
-		}else if (a.get(middle).compareTo(key) > 0){
-			return BinarySearch(a,low,middle,key);
+		}else if (a.get(middle).compareTo(key, attribute) > 0){
+			return BinarySearch(a,low,middle,key, attribute);
 		}
 		System.out.println(" found " + key + " at: " + middle );
-		return middle;
+		return middle;											 	// Return answer
 	}
 	
 	/**
