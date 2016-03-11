@@ -8,6 +8,7 @@ import java.util.LinkedList;
 
 abstract class Graph implements Searchable{
 	protected ArrayList<Node> nodes;
+	protected ArrayList<Edge> edges;
 
 	/**
 	 * Constructor for the graph object.
@@ -19,6 +20,7 @@ abstract class Graph implements Searchable{
 	 */
 	public Graph(ArrayList<Node> nodes){
 		this.nodes = nodes;
+		edges = new ArrayList<>();
 	}
 
 	/**
@@ -82,13 +84,14 @@ abstract class Graph implements Searchable{
 	 * @param node to connect
 	 * @param node to connect
 	 */
-	public void connectNodes(Node i, Node j){
+	public void connectNodes(int weight, Node i, Node j){
 		if (!i.hasNeighbour(j) || !j.hasNeighbour(i)){
 			i.addAdjacent(j);
 			j.addAdjacent(i);
+			edges.add(new Edge(weight,i,j));
 		}
 	}
-/*
+
 	private void generateMST(int root){
 		ArrayList<Node[]> sets = new ArrayList<>();
 		HashMap<Node,Node> parent = new HashMap<>();
@@ -107,12 +110,22 @@ abstract class Graph implements Searchable{
 				sets.add(new Node[]{u,parent.get(u)});
 			}
 			for(Node v: u.getAdjacent()){
-				if(q.contains(v) & edge weight < key[u]){
-					key.put(v,0);
+				Edge edge = edgeWith(u,v);
+				if(q.contains(v) && edge.getWeight() < key[u]){
+					key.put(v,edge.getWeight());
 					parent.put(v,u);
 				}
 			}
 		}
+	}
+
+	private Edge edgeWith(Node v1, Node v2){
+		for(Edge e : edges){
+			if(e.hasVertex(v1) && e.hasVertex(v2)){
+				return e;
+			}
+		}
+		return null;
 	}
 
 	private Node minkey(ArrayList<Node> q, HashMap<Node,Integer> key){
@@ -125,5 +138,5 @@ abstract class Graph implements Searchable{
     }
     return min;
 	}
-*/
+
 }
