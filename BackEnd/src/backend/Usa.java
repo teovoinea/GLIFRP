@@ -65,7 +65,7 @@ public class Usa extends Graph {
 				w.setMarked(true);
 				switch(flag){
 					case FIND_STATE_BY_STATE_FLAG:
-						if (((State) w).equals((State) target)){
+						if (((State) w).equalsName((State) target)){
 							return target;
 						}
 						break;

@@ -226,7 +226,7 @@ public class City implements Comparable<City>{
 	@Deprecated
 	public int compareTo(City o) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Don't use this");
+		//throw new UnsupportedOperationException("Don't use this");
 		return 0;
 	}
 }
