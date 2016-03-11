@@ -66,10 +66,10 @@ public class Searching {
 		middle = (low + high)/2;									//the new Middle
 		
 		//key > a[middle]
-		if (a.get(middle).compareTo(key, attribute) < 0){
+		if (((City)a.get(middle)).compareTo(key, attribute) < 0){
 			return BinarySearch(a, middle+1,high,key, attribute);
 		//key < a[middle]
-		}else if (a.get(middle).compareTo(key, attribute) > 0){
+		}else if (((City)a.get(middle)).compareTo(key, attribute) > 0){
 			return BinarySearch(a,low,middle,key, attribute);
 		}
 		System.out.println(" found " + key + " at: " + middle + " ,Attribute: " );
