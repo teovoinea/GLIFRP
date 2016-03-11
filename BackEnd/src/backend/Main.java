@@ -11,9 +11,6 @@ public class Main {
         staticFileLocation("/public");
         get("/", (req, res) -> {
         	res.redirect("/index.html");
-        	//dunno why index.html has GoWrench page title
-        	//*ahem* Roberto *ahem*
-        	//but it routes properly
         	return "";
         });
         

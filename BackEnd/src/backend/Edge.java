@@ -1,3 +1,5 @@
+package backend;
+
 public class Edge{
   Node v1, v2;
   int weight;

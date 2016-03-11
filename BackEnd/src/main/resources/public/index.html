@@ -2,21 +2,26 @@
 <html lang="en">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"charset="UTF-8">
-        <title>GoWrench Auto</title>
+        <title>GLIFRP</title>
         <base href="/">
          <!-- CSS -->
-        <link rel="stylesheet" type="text/css" href="libs/bootstrap/dist/css/bootstrap.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
         <!-- JS -->
+        <script src="libs/jquery/dist/jquery.min.js"></script>
+        <script src="libs/jquery-ui/jquery-ui.min.js"></script>
         <script src="libs/angular/angular.min.js"></script>
         <script src="libs/angular-route/angular-route.min.js"></script>
-
+     	<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
         <!-- CSS CUSTOM -->
         <link rel="stylesheet" type="text/css" href="dist/css/style.min.css">
+        <link rel="stylesheet" type="text/css" href="dist/css/jquery-ui.min.css">
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
         <!-- ANGULAR CUSTOM -->
         <script type="text/javascript" src="dist/js/app.min.js"></script>
+        <script type="text/javascript" src="dist/js/main.js"></script>
     </head>
     <body ng-app="GLIFRP">
-        <h1>Bruh</h1>
       <div ng-view></div>
+      <div ng-controller="mapController" id="map"></div>
     </body>
 </html>

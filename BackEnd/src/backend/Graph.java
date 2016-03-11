@@ -92,7 +92,7 @@ abstract class Graph implements Searchable{
 		}
 	}
 
-	private void generateMST(int source){
+	private void generateMST(Node source){
 		ArrayList<Node[]> sets = new ArrayList<>();
 		HashMap<Node,Node> parent = new HashMap<>();
 		HashMap<Node,Integer> key = new HashMap<>();
@@ -102,7 +102,7 @@ abstract class Graph implements Searchable{
     	parent.put(nodes.get(i), null);
 			q.add(nodes.get(i));
     }
-		key[source] = 0;
+		key.put(source,0);
 		while(!q.isEmpty()){
 			Node u = minkey(q,key);
 			q.remove(u);
@@ -111,7 +111,7 @@ abstract class Graph implements Searchable{
 			}
 			for(Node v: u.getAdjacent()){
 				Edge edge = edgeWith(u,v);
-				if(q.contains(v) && edge.getWeight() < key[u]){
+				if(q.contains(v) && edge.getWeight() < key.get(u)){
 					key.put(v,edge.getWeight());
 					parent.put(v,u);
 				}
@@ -130,7 +130,7 @@ abstract class Graph implements Searchable{
 
 	private Node minkey(ArrayList<Node> q, HashMap<Node,Integer> key){
 		if(q.size() == 1) return q.get(0);
-		Node min = key.get(q.get(0));
+		Node min = q.get(0);
 		for(Node i : q){
       if(key.get(i) < key.get(min)){
 				min = i;

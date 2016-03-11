@@ -10,7 +10,7 @@ module.exports = function(grunt) {
     uglify: {
       build: {
         files: {
-          'BackEnd/src/main/resources/public/dist/js/app.min.js': ['BackEnd/src/main/resources/public/src/js/**/*.js', 'BackEnd/src/main/resources/public/src/js/*.js']
+          'BackEnd/src/main/resources/public/dist/js/app.min.js': ['BackEnd/src/main/resources/public/src/js/controllers/*.js','BackEnd/src/main/resources/public/src/js/services/*.js', 'BackEnd/src/main/resources/public/src/js/*.js']
         }
       }
     },

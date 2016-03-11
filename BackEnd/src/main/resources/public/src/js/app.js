@@ -1,6 +1,8 @@
 (function(){
   var app = angular.module('GLIFRP', [
-    'ngRoute'
+    'ngRoute',
+    'mainCtrl',
+    'mapCtrl'
   ]);
   app.config(['$httpProvider','$routeProvider','$locationProvider',function($httpProvider,$routeProvider,$locationProvider) {
 
