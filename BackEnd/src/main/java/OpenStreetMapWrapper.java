@@ -74,9 +74,13 @@ public class OpenStreetMapWrapper {
 			connection.setRequestProperty("Accepted-Charset", charset);
 			InputStream response = connection.getInputStream();
 			String in  = IOUtils.toString(response);
-			JsonObject jobect = new JsonParser().parse(in).getAsJsonObject();
-			lat = jobect.get("lat").getAsString();
-			lon = jobect.get("lon").getAsString();
+			JsonArray jarray = (JsonArray) new JsonParser().parse(in);
+			JsonObject jobject = jarray.get(0).getAsJsonObject();
+			lat = jobject.get("lat").getAsString();
+			lon = jobject.get("lon").getAsString();
+			JsonObject address = jobject.getAsJsonObject("address");
+			name = address.get("city").getAsString();
+			state = address.get("state").getAsString();
 		}
 		catch (Exception e){
 			e.printStackTrace();

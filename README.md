@@ -17,11 +17,10 @@ To use this sign up for a Trello account
 	grunt server
 	```
 	
-# TODO:
-* Update OpenStreetMapAPIWrapper so that when you pass in city+state as a JSON object, it overwrites the inputted "state" value with the value from the return JSON object
-
 ___________________________________________________________________________________________
 # "Major" update history
+* Mar 10 - T - Added compareTo and Sort by attribute
+* Mar 9 - C - Changed Searching Algorithms to use ArrayList instead of Arrays
 * Mar 7 - C - Basic Searching Algorithms
 * Mar 3 - P - Added databases
 * Mar 3 - T - Added all the possible sorting algorithms we will use
