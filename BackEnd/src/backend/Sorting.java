@@ -1,5 +1,6 @@
 package backend;
 public class Sorting{
+	private int sortBy = 0; //attribute by which to work
 	/**
 	 * Sorts the comparable array by any of the following attributes
 	 * 0. Lat
@@ -13,8 +14,6 @@ public class Sorting{
 	 * @param attribute ^read description
 	 * @param a comparable array
 	 */
-	/*
-	private int sortBy = 0;
 	public static void SortByType(int attribute, Comparable[] a){
 		sortBy = attribute;
 		if (attribute == 0){
@@ -37,6 +36,13 @@ public class Sorting{
 		}
 	}
 
+	/**
+	 * Merge sort
+	 * @param a   Array to sort
+	 * @param aux Temporary copy array
+	 * @param lo  low index
+	 * @param hi  high index
+	 */
 	private static void mergeSort(Comparable[] a, Comparable[] aux, int lo, int hi){
 		if (hi <= lo) return;
 		int mid = lo + (hi - lo) / 2;
@@ -45,14 +51,25 @@ public class Sorting{
 		merge(a, aux, lo, mid, hi);
 	}
 
-
-	private static void quickSort(Comparable a, int lo, int hi){
+	/**
+	 * Quick sort
+	 * @param a  Array to quicksort
+	 * @param lo low index
+	 * @param hi high index
+	 */
+	private static void quickSort(Comparable[] a, int lo, int hi){
 		if (hi <= lo) return;
 		int j = partition(a, lo, hi);
 		quickSort(a, lo, j-1);
 		quickSort(a, j+1, hi);
 	}
 
+	/**
+	 * 3-way quicksort
+	 * @param a  Array to sort
+	 * @param lo low index
+	 * @param hi high index
+	 */
 	private static void quickSort3way(Comparable[] a, int lo, int hi){
 		if (hi <= lo) return;
 		int lt = lo, gt = hi;
@@ -69,6 +86,10 @@ public class Sorting{
 		quickSort3way(a, gt+1, hi);
 	}
 
+	/**
+	 * Shell Sort
+	 * @param a Array to sort
+	 */
 	private static void shellSort(Comparable[] a){
 		int N = a.length;
 		int h = 1;
@@ -82,6 +103,10 @@ public class Sorting{
 		}
 	}
 
+	/**
+	 * Heap Sort
+	 * @param pq Array to sort
+	 */
 	private static void heapSort(Comparable[] pq){
 		int N = pq.length;
 		for(int k = N/2; k >= 1; k--)
@@ -152,5 +177,4 @@ public class Sorting{
 			else a[k] = aux[i++];
 		}
 	}
-	*/
 }
