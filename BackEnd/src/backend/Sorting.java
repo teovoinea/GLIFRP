@@ -1,6 +1,6 @@
 package backend;
 public class Sorting{
-	private int sortBy = 0; //attribute by which to work
+	private static int sortBy = 0; //attribute by which to work
 	/**
 	 * Sorts the comparable array by any of the following attributes
 	 * 0. Lat
@@ -21,18 +21,36 @@ public class Sorting{
 			mergeSort(a, aux, 0, a.length);
 		}
 		if (attribute == 1){
-			StdRandom.shuffle(a);
-			quickSort(a, 0, a.length - 1);
+			Comparable[] aux = new Comparable[a.length];
+			mergeSort(a, aux, 0, a.length);
+			//StdRandom.shuffle(a);
+			//quickSort(a, 0, a.length - 1);
 		}
 		if (attribute == 2){
+			Comparable[] aux = new Comparable[a.length];
+			mergeSort(a, aux, 0, a.length);
+		}
+		if (attribute == 3){
+			StdRandom.shuffle(a);
+			quickSort3way(a, 0, a.length - 1);
+			//shellSort(a);
+		}
+		if (attribute == 4){
+			StdRandom.shuffle(a);
+			quickSort3way(a, 0, a.length - 1);
+			//heapSort(a);
+		}
+		if (attribute == 5){
 			StdRandom.shuffle(a);
 			quickSort3way(a, 0, a.length - 1);
 		}
-		if (attribute == 3){
-			shellSort(a);
+		if (attribute == 6){
+			StdRandom.shuffle(a);
+			quickSort3way(a, 0, a.length - 1);
 		}
-		if (attribute == 4){
-			heapSort(a);
+		if (attribute == 7){
+			StdRandom.shuffle(a);
+			quickSort3way(a, 0, a.length - 1);
 		}
 	}
 
@@ -76,7 +94,7 @@ public class Sorting{
 		Comparable v = a[lo];
 		int i = lo;
 		while (i <= gt){
-			int cmp = a[i].compareTo(v, sortBy);
+			int cmp = ((City)a[i]).compareTo(v, sortBy);
 			if (cmp < 0) exch(a, lt++, i++);
 			else if (cmp > 0) exch(a, i, gt--);
 			else i++;
@@ -159,17 +177,21 @@ public class Sorting{
 		return j;
 	}
 
-	private static void less(Comparable v, Comparable w){
-		return v.compareTo(w, sortBy) < 0;
+	private static boolean less(Comparable v, Comparable w){
+		return ((City)v).compareTo(w, sortBy) < 0;
 	}
 
+	private static boolean less(Comparable[] pq, int i, int j){
+		return ((City)pq[i-1]).compareTo(pq[j-1], sortBy) < 0;
+	}
 
 	private static void merge(Comparable[] a, Comparable[] aux, int lo, int mid, int hi){
 		for(int k = lo; k <= hi; k++){
 			aux[k] = a[k];
 		}
 
-		int i = lo; j = mid+1;
+		int i = lo; 
+		int j = mid+1;
 		for(int k = lo; k<= hi; k++){
 			if (i > mid) a[k] = aux[j++];
 			else if (j > hi) a[k] = aux[i++];
