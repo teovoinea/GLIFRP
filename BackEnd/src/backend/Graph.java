@@ -20,7 +20,7 @@ abstract class Graph implements Searchable{
 	 */
 	public Graph(ArrayList<Node> nodes){
 		this.nodes = nodes;
-		edges = new ArrayList<>();
+		edges = new ArrayList<Edge>();
 	}
 
 	/**
@@ -33,6 +33,7 @@ abstract class Graph implements Searchable{
 	 */
 	public Graph(){
 		nodes = new ArrayList<Node>();
+		edges = new ArrayList<Edge>();
 	}
 
 	/**
@@ -85,7 +86,7 @@ abstract class Graph implements Searchable{
 	 * @param node to connect
 	 */
 	public void connectNodes(int weight, Node i, Node j){
-		if (!i.hasNeighbour(j) || !j.hasNeighbour(i)){
+		if (this.edgeWith(i, j) == null){
 			i.addAdjacent(j);
 			j.addAdjacent(i);
 			edges.add(new Edge(weight,i,j));
@@ -120,6 +121,10 @@ abstract class Graph implements Searchable{
 	}
 
 	private Edge edgeWith(Node v1, Node v2){
+		if (edges.size() == 0){
+			return null;
+		}
+		
 		for(Edge e : edges){
 			if(e.hasVertex(v1) && e.hasVertex(v2)){
 				return e;
@@ -137,6 +142,25 @@ abstract class Graph implements Searchable{
       }
     }
     return min;
+	}
+	
+	protected void resetMarked(){
+		for (int i= 0; i < this.getNodeCount();i++){
+			this.getNode(i).setMarked(false);
+		}
+	}
+	
+	public boolean contains(Node state){
+		for (int i = 0; i < nodes.size(); i ++){
+			if ( nodes.get(i).equals(state)){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean isEmpty(){
+		return this.getNodeCount() == 0;
 	}
 
 }

@@ -45,7 +45,7 @@ public class Main {
 	        	}
 	        	
 	        	/*Fix Me Robaeto*/
-	        	//State s = usa.findStateByCity(rec);
+	        	State s = usa.findStateByCity(rec);
 	        	//ArrayList<City> lc = s.findLowestCrimeRate(10);
 
 	        	Gson return_object= new GsonBuilder().create();

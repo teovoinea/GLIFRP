@@ -58,4 +58,13 @@ public class State extends Node {
 	public String getName(){
 		return this.name;
 	}
+	
+	public String toString(){
+		String message =this.getId() + ": " +  this.getName() + "\n\t";
+		ArrayList<Node> adjacents = this.getAdjacent();
+		for (int i =0; i < adjacents.size(); i++){
+			message += ((State) adjacents.get(i)).getName() + " ";
+		}
+		return message;
+	}
 }
