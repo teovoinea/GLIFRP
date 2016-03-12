@@ -153,11 +153,35 @@ public class City implements Comparable<City>{
 	///////////////////////////////////PRIVATE FUNCTIONS//////////////////////////////
 	
 	/**
-	 * Top Secret Score Calculating Algorithm
-	 * @return Score
+	 * Generate a Score for a city. *(Simple version rn)*    
+	 * 
+	 * @param city - the city that is going to get a score
+	 * @param crimeRate - the crime in a city  *(percentage ?????, not sure what crime rate Stats are going to be like)*
+	 * @param housingPriceIndex -the inflation rate/ housing prices of the city, where the HSI is a percentage, from the Housing Price Index(HSI) data set
 	 */
-	private double calculateScore(){
-		return 0.0;
+	private double calculateScore(double crimeWeight, double priceWeight){
+		//temporary "weights"
+		//Sig(weights) should = 1 
+		crimeWeight = 0.6;
+		priceWeight = 0.4;
+		
+		//crime rates can range from (0 to 100 )?
+		double crimeRate = this.getCrime();
+		
+		//housing prices, (0 to 100)?
+		//although the inflation rate can go over 100% it is highly unlikely,... if we take the inflation between last year and this year. 
+		//inflation could easily go over 100% if we decide to take inflation into account for a longer period of time ie (over 5 years of inflation) 
+		//for testing purposes I will assume a range of 0 to 100% of inflation rate
+		double housingPrices = this.getPrice();
+		
+		//In the Future we may want to include when calculating scores:
+		// a more indepth crime statistics ( violent crime, rape, murder)?
+		
+		
+		double calcScore = crimeWeight*crimeRate + priceWeight*housingPrices;
+		
+		//score = calcScore;
+		return calcScore;
 	}
 	
 	//////////////////////////////////IMPLEMENTED FUNCTIONS////////////////////////////
@@ -229,4 +253,7 @@ public class City implements Comparable<City>{
 		//throw new UnsupportedOperationException("Don't use this");
 		return 0;
 	}
+	
+
+	
 }
