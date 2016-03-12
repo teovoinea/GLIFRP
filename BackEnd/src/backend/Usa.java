@@ -41,12 +41,19 @@ public class Usa extends Graph {
 	}
 
 	public State findStateByCity(City c) {
-		assert !this.isEmpty();
-		State state = (State) nodes.get(0);
-		State result = (State) rDFS(c, state, FIND_STATE_BY_CITY_FLAG);
-		if (result != null) {
-			this.resetMarked();
-			return result;
+		if (this.isEmpty()){
+			System.out.println("Your list is empty");
+			return null;
+		}
+		for (int i =0; i < this.getNodeCount(); i++){
+			State state = (State) this.getNode(i);
+			if (!state.isMarked()){
+				State result = (State) rDFS(c, state, FIND_STATE_BY_CITY_FLAG);
+				if (result != null) {
+					this.resetMarked();
+					return result;
+				}
+			}
 		}
 		this.resetMarked();
 		return null;
@@ -59,7 +66,11 @@ public class Usa extends Graph {
 	}
 
 	public void addCity(City c) {
-		assert !this.isEmpty();
+		if (this.isEmpty()){
+			System.out.println("Your list is empty");
+			return;
+		}
+		
 		State state = (State) nodes.get(0);
 		DFS(c, state, ADD_CITY_FLAG);
 		this.resetMarked();
@@ -134,7 +145,6 @@ public class Usa extends Graph {
 	 */
 	private void generateStates() {
 		ArrayList<String> fileLines = new ArrayList<String>();
-		// read file, put into arraylist of state names
 		String curLine;
 		State[] newStates;
 		String fileName = "Data/StatePairs.txt";
@@ -147,7 +157,6 @@ public class Usa extends Graph {
             while((curLine = bufferedReader.readLine()) != null) {
     			newStates = getStateFromStateCode(curLine);
     			
-    			//System.out.println(curLine);
     			if (this.containsState(newStates[0])) {
     				newStates[0] = this.findStateByState(newStates[0]);
     			} else {
@@ -161,8 +170,6 @@ public class Usa extends Graph {
     			}
 
     			this.connectNodes(0, newStates[0], newStates[1]);
-    			
-    			//this.printUSA();
             }   
 
             // Always close files.

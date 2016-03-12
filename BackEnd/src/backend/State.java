@@ -9,11 +9,13 @@ public class State extends Node {
 	public State(int id, String name){
 		super(id);
 		this.name = name;
+		cities =new ArrayList<City>();
 	}
 	
 	public State(int id, ArrayList<Node> adjacencyList,String name){
 		super(id,adjacencyList);
 		this.name = name;
+		cities =new ArrayList<City>();
 	}
 	
 	public void insertCity(City c){
@@ -65,6 +67,11 @@ public class State extends Node {
 		for (int i =0; i < adjacents.size(); i++){
 			message += ((State) adjacents.get(i)).getName() + " ";
 		}
+		message += "\n";
+		for (int i =0; i < cities.size(); i++){
+			message += cities.get(i).getName();
+		}
+		
 		return message;
 	}
 }
