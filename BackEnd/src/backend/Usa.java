@@ -18,7 +18,7 @@ public class Usa extends Graph {
 	public Usa() {
 		super();
 		generateStates();
-		this.printUSA();
+		//this.printUSA();
 	}
 
 	public State findStateByState(State s) {
@@ -120,16 +120,16 @@ public class Usa extends Graph {
 	@Override
 	public void DFS(Object target, Node n, int flag) {
 		n.setMarked(true);
+		if (flag == ADD_CITY_FLAG) {
+			if (((State) n).compareState((City) target)) {
+				((State) n).insertCity((City) target);
+				System.out.println("Added city: " + ((City)target).getName());
+				return;
+			}
+		}
 		for (Node sub : n.getAdjacent()) {
 			if (!sub.isMarked()) {
 				sub.setMarked(true);
-				if (flag == ADD_CITY_FLAG) {
-					if (((State) sub).compareState((City) target)) {
-						((State) sub).insertCity((City) target);
-						System.out.println("Added city: " + ((City)target).getName());
-						return;
-					}
-				}
 				DFS(target, sub, flag);
 			}
 		}
@@ -318,5 +318,6 @@ public class Usa extends Graph {
 	
 	public static void main(String[] args){
 		Usa usa = new Usa();
+		
 	}
 }

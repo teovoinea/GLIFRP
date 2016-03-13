@@ -67,7 +67,7 @@ public class State extends Node {
 		for (int i =0; i < adjacents.size(); i++){
 			message += ((State) adjacents.get(i)).getName() + " ";
 		}
-		message += "\n";
+		message += "\n\t";
 		for (int i =0; i < cities.size(); i++){
 			message += cities.get(i).getName();
 		}

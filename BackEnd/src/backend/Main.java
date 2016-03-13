@@ -48,12 +48,8 @@ public class Main {
 	        	}
 	        	
 	        	/*Fix Me Robaeto*/
-	        	State s;
-	        	s = usa.findStateByCity(rec);
-	        	if (s == null){
-	        		usa.addCity(rec);
-	        		s = usa.findStateByCity(rec);
-	        	}
+	        	usa.addCity(rec);
+	        	usa.printUSA();
 	        	//ArrayList<City> lc = s.findLowestCrimeRate(1);
 	        	
 	        	

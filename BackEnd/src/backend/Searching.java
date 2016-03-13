@@ -284,7 +284,7 @@ public class Searching {
 		System.out.print(c.getName()+ " , ");
 		System.out.println(c.getState());
 		System.out.println("Crime: " + c.getCrime() + " , Price:" + c.getPrice());
-		c.calculateScore(6, 4);
+		//c.calculateScore(6, 4);
 		System.out.println(c.getScore());
 		System.out.println(" ------------ ");
 		System.out.println();
