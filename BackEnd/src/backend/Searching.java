@@ -75,6 +75,39 @@ public class Searching {
 		System.out.println(" found " + key + " at index : " + middle + " ,Attribute: " + attribute );
 		return middle;											 	// Return answer
 	}
+
+	
+	/**
+	 * getLowestCrime
+	 * Returns the cities with the lowest crime rates. Requires an already sorted ArrayList(based on crime).
+	 * 
+	 * @param cities - an already sorted ArrayList(based on crimes) of cities
+	 * @param amountLowest - how many of the lowest do you want? (lowest 3 cities, lowest 5 cities based on crime)
+	 * @return - an ArrayList of the cities with the lowest crime rate
+	 */
+	public ArrayList<Comparable> getLowestCrime(ArrayList<Comparable> cities, int amountLowest){
+		ArrayList<Comparable> retArray = new ArrayList<Comparable>();
+		for (int i = 0; i < amountLowest; i++){
+			retArray.add(cities.get(i));
+		}
+		return retArray;
+	}
+	
+	/**
+	 * getLowestHousing
+	 * Returns the cities with the lowest housing Inflation. Requires an already sorted ArrayList(based on HSI).
+	 * 
+	 * @param cities - an already sorted ArrayList(based on housing inflation) of cities
+	 * @param amountLowest - how many of the lowest you want (lowest 3 cities, lowest 5 cities)
+	 * @return - an ArrayList of the cities with the lowest housing inflation
+	 */
+	public ArrayList<Comparable> getLowestHousing(ArrayList<Comparable> cities, int amountLowest){
+		ArrayList<Comparable> retArray = new ArrayList<Comparable>();
+		for (int i = 0; i < amountLowest; i++){
+			retArray.add(cities.get(i));
+		}
+		return retArray;
+	}
 	
 	/**
 	 * Linear Search     
@@ -146,6 +179,7 @@ public class Searching {
 	 	
 		////////////////////      Test Searching By Name      ///////////////////////
 		//BinarySearch(ArrayList<Comparable> a, Comparable key, int attribute){
+		/*
 		System.out.println("TEST Searching by Name ");
 		ArrayList<Comparable> cities = new ArrayList<Comparable>();
 		cities.add(a);
@@ -166,9 +200,10 @@ public class Searching {
 		City lookin4City5 = new City ("Centre", "ALABAMA");
 		BinarySearch(cities, lookin4City5, 6);
 		
+		
 		//Shouldn't
 		//Search for something that is not in ArrayList
-		/* 
+		 
 		//Getting ERRORS //
 		City lookin4City6 = new City ("Boston", "ALABAMA");
 		BinarySearch(cities, lookin4City6, 6);
@@ -238,6 +273,8 @@ public class Searching {
 		BinarySearch(b, 0,b.size(), 20);	
 		*/
 	}
+	
+	//////////////////////             Methods Used for Testing               //////////////////////////
 	
 	// shows city information
 	private static void showCityInfo(City c){
