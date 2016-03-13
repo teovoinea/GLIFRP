@@ -3,9 +3,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *  Searching 
+ *  Searching Algorithm
  * 
- * TODO: Search Based on Attribute
+ * TODO: ?? Make Linear Searching Algorithm that searches lowest CrimesRates/housing inflation with an Unsorted ArrayList. (May be More efficient?)??
+ * 
+ * DONE: Search for cities with Lowest crime rates/housing inflation. (already Sorted ArrayList Required)
+ * DONE: Search Based on Attribute
  *
  */
 
