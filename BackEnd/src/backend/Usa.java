@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -18,6 +19,15 @@ public class Usa extends Graph {
 	public Usa() {
 		super();
 		generateStates();
+		City orlando = new City("Orlando","Florida");
+		orlando.setCrime(5);
+		City nyc = new City("NYC","New York");
+		nyc.setCrime(10);
+		this.addCity(nyc);
+		this.addCity(orlando);
+		ArrayList<City> lcm = this.findLowestCrimeRate(2);
+		System.out.println(lcm.get(0).getName());
+		System.out.println(lcm.get(1).getName());
 		//this.printUSA();
 	}
 
@@ -59,10 +69,36 @@ public class Usa extends Graph {
 		return null;
 	}
 
-	public City findLowestCrimeRate() {
-		// DFS/BFS, int min, state.findLowestCrimeRate() if lower then min, set
-		// as new min, return min
-		return null;
+	public ArrayList<City> findLowestCrimeRate(int length) {
+		if (this.isEmpty()){
+			System.out.println("Your list is empty");
+			return null;
+		}
+		State state = (State) this.getNode(0);
+		ArrayList<City> lcmCities = new ArrayList<City>();
+		lcmHelper(lcmCities, length, state);
+		this.resetMarked();
+		
+		City[] cities2 = lcmCities.toArray(new City[lcmCities.size()]);
+		Sorting.SortByType(3, cities2);
+		
+		lcmCities =new ArrayList<City>(Arrays.asList(cities2));	
+		
+		return new ArrayList<City>(lcmCities.subList(0, length));
+	}
+	
+	public void lcmHelper(ArrayList<City> cities, int length, State state){
+		state.setMarked(true);
+		ArrayList<City> c = state.findLowestCrimeRate(length);
+		if (c != null){
+			cities.addAll(c);
+		}
+		for (Node sub : state.getAdjacent()) {
+			if (!sub.isMarked()) {
+				sub.setMarked(true);
+				lcmHelper(cities,length,(State) sub);
+			}
+		}
 	}
 
 	public void addCity(City c) {
@@ -317,7 +353,6 @@ public class Usa extends Graph {
 	}
 	
 	public static void main(String[] args){
-		Usa usa = new Usa();
-		
+		Usa usa = new Usa();	
 	}
 }

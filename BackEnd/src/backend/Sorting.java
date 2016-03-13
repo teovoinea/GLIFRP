@@ -199,4 +199,9 @@ public class Sorting{
 			else a[k] = aux[i++];
 		}
 	}
+	
+	public static void exch(Object[] arr,Object elem, int pos){
+		arr[pos]=elem;
+	}
+	
 }
