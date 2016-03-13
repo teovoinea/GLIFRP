@@ -19,7 +19,7 @@ To use this sign up for a Trello account
 	
 ___________________________________________________________________________________________
 # "Major" update history
-* Mar 23 - C - Made Simple Scoring Algorithm (for prototype)
+* Mar 13 - C - Made Simple Scoring Algorithm (for prototype)
 * Mar 11 - C - Edited compareTo and Search by Attribute
 * Mar 10 - T - Added compareTo and Sort by attribute
 * Mar 9 - C - Changed Searching Algorithms to use ArrayList instead of Arrays
