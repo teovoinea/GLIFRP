@@ -59,7 +59,7 @@ public class Searching {
 		
 		//If the key we are looking for is not In Our ArrayList
 		if (low==high){
-			System.out.println("Coud not find: " + key + " ,lower: " + low + " ,Attribute: ");
+			System.out.println("Coud not find: " + key + " ,lower: " + low + " ,Attribute: " + attribute);
 			return low;
 		}
 		
@@ -72,7 +72,7 @@ public class Searching {
 		}else if (((City)a.get(middle)).compareTo(key, attribute) > 0){
 			return BinarySearch(a,low,middle,key, attribute);
 		}
-		System.out.println(" found " + key + " at: " + middle + " ,Attribute: " );
+		System.out.println(" found " + key + " at index : " + middle + " ,Attribute: " + attribute );
 		return middle;											 	// Return answer
 	}
 	
@@ -96,6 +96,111 @@ public class Searching {
 	
 	
 	public static void main(String[] args){
+		
+		/////// Make Cities + testing/seeing the scoring algorithm ////////////////
+		City a = new City("Ashville", "ALABAMA");
+		a.setCrime(15.4);
+		a.setPrice(9);
+		//showCityInfo(a);
+		
+		/*  //Error When I make this City For Some Reason??
+		City b = new City("Bear Creek", "ALABAMA");
+		b.setCrime(30.2);
+		b.setPrice(2);
+		showCityInfo(b);
+		*/
+		
+		City b = new City("Brent", "ALABAMA");
+		b.setCrime(30.2);
+		b.setPrice(2);
+		//showCityInfo(b);
+		
+		City c = new City("Brewton", "ALABAMA");
+		c.setCrime(5.2);
+		c.setPrice(20);
+		//showCityInfo(c);
+		
+		City d = new City("Centre", "ALABAMA");
+		d.setCrime(25.2);
+		d.setPrice(10);
+		//showCityInfo(d);
+		
+		///////////    Testing compareTo for cities     ////////////////////////////////////
+		/*
+		//attribute 3 - crime
+		System.out.println("TEST compareTo Attribute 3 ");
+		System.out.println(a.compareTo(b , 3));  //should ret -1
+		System.out.println(b.compareTo(a , 3));  //should ret 1
+		
+		
+		//attribute 4 - price (housing inflation)
+		System.out.println("TEST compareTo Attribute 4 ");
+		System.out.println(a.compareTo(b , 3));  //should ret -1
+		System.out.println(b.compareTo(a , 3));  //should ret 1
+		
+		//attribute 6 - Name 
+		System.out.println("TEST compareTo Attribute 6 ");
+		System.out.println(a.compareTo(b , 3));  //should ret -1
+		System.out.println(b.compareTo(a , 3));  //should ret 1
+		*/
+	 	
+		////////////////////      Test Searching By Name      ///////////////////////
+		//BinarySearch(ArrayList<Comparable> a, Comparable key, int attribute){
+		System.out.println("TEST Searching by Name ");
+		ArrayList<Comparable> cities = new ArrayList<Comparable>();
+		cities.add(a);
+		cities.add(b);
+		cities.add(c);
+		cities.add(d);
+		
+		//Should find these cities in ArrayList
+		City lookin4City1 = new City ("Ashville", "ALABAMA");
+		BinarySearch(cities, lookin4City1, 6);
+		City lookin4City2 = new City ("aSHVILLE", "ALABAMA");
+		BinarySearch(cities, lookin4City2, 6);
+		
+		City lookin4City3 = new City ("Brent", "ALABAMA");
+		BinarySearch(cities, lookin4City3, 6);
+		City lookin4City4 = new City ("Brewton", "ALABAMA");
+		BinarySearch(cities, lookin4City4, 6);
+		City lookin4City5 = new City ("Centre", "ALABAMA");
+		BinarySearch(cities, lookin4City5, 6);
+		
+		//Shouldn't
+		//Search for something that is not in ArrayList
+		/* 
+		//Getting ERRORS //
+		City lookin4City6 = new City ("Boston", "ALABAMA");
+		BinarySearch(cities, lookin4City6, 6);
+		
+		City lookin4City7 = new City ("", "ALABAMA");
+		BinarySearch(cities, lookin4City7, 6);
+		*/
+		
+		/////////////////// Test Search by Crime   ////////////////////////////
+		/*
+		System.out.println("TEST Searching by Crime ");
+		ArrayList<Comparable> crimes = new ArrayList<Comparable>();
+		crimes.add(c);
+		crimes.add(a);
+		crimes.add(d);
+		crimes.add(b);
+		
+		City crmCity1 = new City ("Abbeville", "ALABAMA");
+		crmCity1.setCrime(25.2);
+		BinarySearch(crimes, crmCity1, 3);			
+		
+		City crmCity2 = new City ("Abbeville", "ALABAMA");
+		crmCity2.setCrime(15.4);
+		BinarySearch(crimes, crmCity2, 3);		
+		
+		//should find this
+		//City crmCity6 = new City ("SweetHome", "ALABAMA");
+		//crmCity6.setCrime(25.2);
+		//BinarySearch(crimes, crmCity6, 3);
+		*/
+		
+		///////////// Testing the Binary Searching     /////////////////////////////////////////
 		/*
 		Random rand = null;
 		ArrayList<Comparable> a = new ArrayList<Comparable>();
@@ -132,6 +237,17 @@ public class Searching {
 		BinarySearch(b, 0, b.size(), 2);
 		BinarySearch(b, 0,b.size(), 20);	
 		*/
+	}
+	
+	// shows city information
+	private static void showCityInfo(City c){
+		System.out.print(c.getName()+ " , ");
+		System.out.println(c.getState());
+		System.out.println("Crime: " + c.getCrime() + " , Price:" + c.getPrice());
+		c.calculateScore(6, 4);
+		System.out.println(c.getScore());
+		System.out.println(" ------------ ");
+		System.out.println();
 	}
 	
 	//prints out array onto console
