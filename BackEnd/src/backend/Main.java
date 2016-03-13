@@ -1,6 +1,9 @@
 package backend;
 
 import static spark.Spark.*;
+
+import java.util.ArrayList;
+
 import com.google.gson.*;
 
 public class Main {
@@ -45,9 +48,15 @@ public class Main {
 	        	}
 	        	
 	        	/*Fix Me Robaeto*/
-	        	State s = usa.findStateByCity(rec);
-	        	//ArrayList<City> lc = s.findLowestCrimeRate(10);
-
+	        	State s;
+	        	s = usa.findStateByCity(rec);
+	        	if (s == null){
+	        		usa.addCity(rec);
+	        		s = usa.findStateByCity(rec);
+	        	}
+	        	//ArrayList<City> lc = s.findLowestCrimeRate(1);
+	        	
+	        	
 	        	Gson return_object= new GsonBuilder().create();
         		response.type("application/javascript");
         		response.status(200);

@@ -126,6 +126,7 @@ public class Usa extends Graph {
 				if (flag == ADD_CITY_FLAG) {
 					if (((State) sub).compareState((City) target)) {
 						((State) sub).insertCity((City) target);
+						System.out.println("Added city: " + ((City)target).getName());
 						return;
 					}
 				}
