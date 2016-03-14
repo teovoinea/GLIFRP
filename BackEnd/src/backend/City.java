@@ -154,8 +154,15 @@ public class City implements Comparable<City>{
 	 * Set the Score of the City
 	 */
 	public void setScore(){
-		//for prototype we will have this weighting of Crime and housing
-		calculateScore(6,4);
+		//for prototype we will have this weighting of Crime and housing ?
+		
+		// if crime and Price have values
+		if ((getCrime() != 0.0) && (getPrice() != 0.0 )){
+			calculateScore(6,4);
+		}else {
+			System.out.println(" Either Crime or Housing Prices have to be set ");
+		}
+		
 	}
 	
 	///////////////////////////////////PRIVATE FUNCTIONS//////////////////////////////
