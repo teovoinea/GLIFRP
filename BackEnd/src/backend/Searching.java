@@ -134,17 +134,23 @@ public class Searching {
 	public static void main(String[] args){
 		
 		/////// Make Cities + testing/seeing the scoring algorithm ////////////////
+		/*
 		City a = new City("Ashville", "ALABAMA");
+		//System.out.println(a.getCrime());
+		a.setScore(); 
+		
 		a.setCrime(15.4);
 		a.setPrice(9);
 		//showCityInfo(a);
+		a.setScore(); 
+		System.out.println(a.getScore());
 		
-		/*  //Error When I make this City For Some Reason??
+		  //Error When I make this City For Some Reason??
 		City b = new City("Bear Creek", "ALABAMA");
 		b.setCrime(30.2);
 		b.setPrice(2);
 		showCityInfo(b);
-		*/
+		
 		
 		City b = new City("Brent", "ALABAMA");
 		b.setCrime(30.2);
@@ -160,6 +166,9 @@ public class Searching {
 		d.setCrime(25.2);
 		d.setPrice(10);
 		//showCityInfo(d);
+		*/
+		
+		
 		
 		///////////    Testing compareTo for cities     ////////////////////////////////////
 		/*
