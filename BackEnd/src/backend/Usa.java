@@ -26,8 +26,11 @@ public class Usa extends Graph {
 		this.addCity(nyc);
 		this.addCity(orlando);
 		ArrayList<City> lcm = this.findLowestCrimeRate(2);
-		System.out.println(lcm.get(0).getName());
-		System.out.println(lcm.get(1).getName());
+		//System.out.println(lcm.get(0).getName());
+		//System.out.println(lcm.get(1).getName());
+		//State newYork = this.findStateByCity(nyc);
+		//System.out.println(newYork.findLowestCrimeRate().getCrime());
+		//System.out.println(newYork.findLowestCrimeRate(1).get(0).getName());
 		//this.printUSA();
 	}
 
