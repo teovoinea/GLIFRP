@@ -36,28 +36,32 @@ public class Main {
 	        	Gson receive_object = new GsonBuilder().create();
 	        	JsonObject jobject = new JsonParser().parse(request.body()).getAsJsonObject();
 	        	City rec = null;
-	        	if (jobject.has("zip")){
-	        		rec = new City(jobject.get("zip").getAsString());
-	        	}
-	        	if (jobject.has("lat") && jobject.has("lon")){
-	        		String[] ll = {jobject.get("lat").getAsString(), jobject.get("lon").getAsString()};
-	        		rec = new City(ll);
-	        	}
+	        	int distance = 0;
+	        	// if (jobject.has("zip")){
+	        	// 	rec = new City(jobject.get("zip").getAsString());
+	        	// }
+	        	// if (jobject.has("lat") && jobject.has("lon")){
+	        	// 	String[] ll = {jobject.get("lat").getAsString(), jobject.get("lon").getAsString()};
+	        	// 	rec = new City(ll);
+	        	// }
 	        	if (jobject.has("city") && jobject.has("state")){
 	        		rec = new City(jobject.get("city").getAsString(), jobject.get("state").getAsString());
+	        		distance = jobject.get("dist").getAsInteger();
 	        	}
-	        	
-	        	/*Fix Me Robaeto*/
-	        	usa.addCity(rec);
+	        	ArrayList<State> states = usa.getNeighbouringStates(usa.findStateByCity(rec), distance);
+	        	City min = new City("");
+	        	for(int i = 0; i < states.size(); i++){
+	        		if (min.compareTo(3, states.get(i).findLowestCrimeRate())){
+	        			min = states.get(i);
+	        		}
+	        	}
 	        	usa.printUSA();
-	        	//ArrayList<City> lc = s.findLowestCrimeRate(1);
 	        	
 	        	
 	        	Gson return_object= new GsonBuilder().create();
         		response.type("application/javascript");
         		response.status(200);
-        		//return return_object.toJson(lc);
-        		return return_object.toJson(rec);
+        		return return_object.toJson(min);
         	}
         	catch (Exception e){
         		response.type("text/plain");
