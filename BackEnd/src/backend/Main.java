@@ -46,13 +46,13 @@ public class Main {
 	        	// }
 	        	if (jobject.has("city") && jobject.has("state")){
 	        		rec = new City(jobject.get("city").getAsString(), jobject.get("state").getAsString());
-	        		distance = jobject.get("dist").getAsInteger();
+	        		distance = jobject.get("dist").getAsInt();
 	        	}
 	        	ArrayList<State> states = usa.getNeighbouringStates(usa.findStateByCity(rec), distance);
 	        	City min = new City("");
 	        	for(int i = 0; i < states.size(); i++){
-	        		if (min.compareTo(3, states.get(i).findLowestCrimeRate())){
-	        			min = states.get(i);
+	        		if (min.compareTo(states.get(i).findLowestCrimeRate(), 3) > 0){
+	        			min = states.get(i).findLowestCrimeRate();
 	        		}
 	        	}
 	        	usa.printUSA();
