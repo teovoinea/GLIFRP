@@ -71,6 +71,42 @@ public class Usa extends Graph {
 		this.resetMarked();
 		return null;
 	}
+	
+	public ArrayList<State> getNeighbouringStates(State state, int distance){
+		ArrayList<State> result = limitedBFSSearch(state,distance);
+		this.resetMarked();
+		return result;
+	}
+	
+	public ArrayList<State> limitedBFSSearch(State state, int distance){
+		ArrayList<State> states = new ArrayList<State>();
+	    Queue<State> queue = new LinkedList<State>();
+	    int outerCount = 0;
+	    int innerCount = 0;
+	    int curAdjacencySize = 1;
+	    queue.add(state);
+	    states.add(state);
+	    state.setMarked(true);
+	    
+	    while(!queue.isEmpty() && outerCount < distance) {
+	        State node = queue.remove();
+	        innerCount++;
+	        for (Node s : node.getAdjacent()){
+	        	s.setMarked(true);
+	        	states.add((State) s);
+	        	queue.add((State) s);
+	        }
+	        if (innerCount == curAdjacencySize){
+	        	outerCount++;
+	        	innerCount = 0;
+	        	curAdjacencySize = queue.size();
+	        }
+	        if (queue.isEmpty() && outerCount < distance){
+	        	return states;
+	        }
+	    }
+	    return states;
+	}
 
 	public ArrayList<City> findLowestCrimeRate(int length) {
 		if (this.isEmpty()){
@@ -156,7 +192,7 @@ public class Usa extends Graph {
 		return null;
 	}
 
-	@Override
+	
 	public void DFS(Object target, Node n, int flag) {
 		n.setMarked(true);
 		if (flag == ADD_CITY_FLAG) {
