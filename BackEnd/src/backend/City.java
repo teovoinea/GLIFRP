@@ -150,6 +150,14 @@ public class City implements Comparable<City>{
 		price = d;
 	}
 	
+	/**
+	 * Set the Score of the City
+	 */
+	public void setScore(){
+		//for prototype we will have this weighting of Crime and housing
+		calculateScore(6,4);
+	}
+	
 	///////////////////////////////////PRIVATE FUNCTIONS//////////////////////////////
 	
 	/**
@@ -159,11 +167,11 @@ public class City implements Comparable<City>{
 	 * @param crimeRate - the crime in a city  *(percentage ?????, not sure what crime rate Stats are going to be like)*
 	 * @param housingPriceIndex -the inflation rate/ housing prices of the city, where the HSI is a percentage, from the Housing Price Index(HSI) data set
 	 */
-	private double calculateScore(double crimeWeight, double priceWeight){
+	private void calculateScore(double crimeWeight, double priceWeight){
 		//temporary "weights"
-		//Sig(weights) should = 1 
-		crimeWeight = 0.6;
-		priceWeight = 0.4;
+		//Sig(weights) should = 10 
+		//crimeWeight = 6;
+		//priceWeight = 4;
 		
 		//crime rates can range from (0 to 100 )?
 		double crimeRate = this.getCrime();
@@ -175,13 +183,12 @@ public class City implements Comparable<City>{
 		double housingPrices = this.getPrice();
 		
 		//In the Future we may want to include when calculating scores:
-		// a more indepth crime statistics ( violent crime, rape, murder)?
-		
+		// a more in depth crime statistics ( violent crime, rape, murder)?
 		
 		double calcScore = crimeWeight*crimeRate + priceWeight*housingPrices;
 		
-		//score = calcScore;
-		return calcScore;
+		score = calcScore;
+		//return calcScore;
 	}
 	
 	//////////////////////////////////IMPLEMENTED FUNCTIONS////////////////////////////
