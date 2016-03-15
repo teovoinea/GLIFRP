@@ -1,3 +1,4 @@
+var main_marker = L.marker([0,0]);
 (function(){
   var app = angular.module('GLIFRP', [
     'ngRoute',
@@ -13,8 +14,6 @@
     //$locationProvider.html5Mode(true);
   }]);
   app.run(function(){
-
-    var main_marker = L.marker([0,0]);
 
     function detectType(input){
       if(input.match(/[a-z]/i)){
@@ -35,7 +34,7 @@
           }).done(function(res){
             var obj = JSON.parse(res);
             var map = L.map('map').setView([obj.lat,obj.lon],13);
-            var content = "<h3>"+obj.city + "," + obj.state + "</h3>";
+            var content = "<h3 style='color:black'>"+obj.city + ", " + obj.state + "</h3>";
             content = content + "<br/><strong>Crime Rate:</strong>"+obj.crime;
             main_marker.setLatLng([obj.lat,obj.lon]).addTo(map).bindPopup(content).openPopup();
             setData("#stat-bar",obj.crime);
