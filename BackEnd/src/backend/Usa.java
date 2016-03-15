@@ -15,13 +15,19 @@ public class Usa extends Graph {
 	public static final int FIND_STATE_BY_CITY_FLAG = 2;
 	public static final int FIND_LOWEST_CRIME_RATE_FLAG = 3;
 	public static final int ADD_CITY_FLAG = 4;
+	public static final int FIND_STATE_BY_STATE_NAME_FLAG = 5;
 	private Query q;
 
 	public Usa() {
 		super();
 		q = new Query();
 		generateStates();
-		this.printUSA();
+		//this.printUSA();
+    	//ArrayList<Crime> c= findLowestCrimeRate(5);
+    	//for (int i =0; i < c.size();i++){
+    	//	System.out.println(c.get(i).getCity() +"," + c.get(i).getState() + ": " + c.get(i).getViolentCrime());
+    	//}
+		
 		//ArrayList<City> lcm = this.findLowestCrimeRate(2);
 		//System.out.println(lcm);
 		//System.out.println(lcm.get(0).getName());
@@ -48,6 +54,20 @@ public class Usa extends Graph {
 			}
 		}
 		this.resetMarked();
+		return null;
+	}
+	
+	public State findStateByStateName(String s) {
+		if (this.isEmpty()){
+			System.out.println("Your list is empty");
+			return null;
+		}
+		
+		for (int i =0; i < this.nodes.size();i++){
+			if (((State)this.nodes.get(i)).equalsName(s)){
+				return ((State) this.nodes.get(i));
+			}	
+		}
 		return null;
 	}
 
@@ -106,28 +126,28 @@ public class Usa extends Graph {
 	    return states;
 	}
 
-	public ArrayList<City> findLowestCrimeRate(int length) {
+	public ArrayList<Crime> findLowestCrimeRate(int length) {
 		if (this.isEmpty()){
 			System.out.println("Your list is empty");
 			return null;
 		}
 		State state = (State) this.getNode(0);
-		ArrayList<City> lcmCities = new ArrayList<City>();
+		ArrayList<Crime> lcmCities = new ArrayList<Crime>();
 		lcmHelper(lcmCities, length, state);
 		this.resetMarked();
 		
 		
-		City[] cities2 = lcmCities.toArray(new City[lcmCities.size()]);
+		Crime[] cities2 = lcmCities.toArray(new Crime[lcmCities.size()]);
 		Sorting.SortByType(3, cities2);
 		
-		lcmCities =new ArrayList<City>(Arrays.asList(cities2));	
+		lcmCities =new ArrayList<Crime>(Arrays.asList(cities2));	
 		
-		return new ArrayList<City>(lcmCities.subList(0, length-1));
+		return new ArrayList<Crime>(lcmCities.subList(0, length));
 	}
 	
-	public void lcmHelper(ArrayList<City> cities, int length, State state){
+	public void lcmHelper(ArrayList<Crime> cities, int length, State state){
 		state.setMarked(true);
-		ArrayList<City> c = state.findLowestCrimeRate(length);
+		ArrayList<Crime> c = state.findLowestCrimeRate(length);
 		if (c != null){
 			cities.addAll(c);
 		}
@@ -139,7 +159,7 @@ public class Usa extends Graph {
 		}
 	}
 
-	public void addCity(City c) {
+	public void addCity(String c) {
 		if (this.isEmpty()){
 			System.out.println("Your list is empty");
 			return;
@@ -178,6 +198,10 @@ public class Usa extends Graph {
 				if (((State) curNode).compareState((City) target)) {
 					return curNode;
 				}
+			case FIND_STATE_BY_STATE_NAME_FLAG:
+				if (((State) curNode).equalsName((State) target)) {
+					return curNode;
+				}
 		}
 		for (Node w : curNode.getAdjacent()) {
 			if (!w.isMarked()) {
@@ -196,8 +220,7 @@ public class Usa extends Graph {
 		n.setMarked(true);
 		if (flag == ADD_CITY_FLAG) {
 			if (((State) n).compareState((City) target)) {
-				((State) n).insertCity((City) target);
-				System.out.println("Added city: " + ((City)target).getName());
+				((State) n).insertCity((String) target);
 				return;
 			}
 		}
@@ -207,11 +230,6 @@ public class Usa extends Graph {
 				DFS(target, sub, flag);
 			}
 		}
-		//if (flag == ADD_CITY_FLAG && !this.containsState((State) n)) {
-		//	this.addState(new State(currentId, ((City) target).getState()));
-		//	((State) this.getNode(this.getNodeCount())).insertCity((City) target);
-		//	return;
-		//}
 	}
 
 	/**
@@ -237,18 +255,7 @@ public class Usa extends Graph {
     				newStates[0] = this.findStateByState(newStates[0]);
     			} else {
     				queriedCities = q.getCityNames(newStates[0].getCode());
-    				cityObjs = new ArrayList<City>();
-    				City curCity;
-    				for (int i =0; i < queriedCities.size();i++){
-    					if (queriedCities.get(i) != null){
-    						curCity = new City(queriedCities.get(i),newStates[0].getName());
-	    					//curCity.setCrime(q.getCrimeData(queriedCities.get(i)).violentCrime);
-	    					curCity.setLat(Double.toString(q.getCityData(queriedCities.get(i)).getLat()));
-	    					curCity.setLong(Double.toString(q.getCityData(queriedCities.get(i)).getLng()));
-	    					cityObjs.add(curCity);
-    					}
-    				}
-    				newStates[0].insertCity(cityObjs);
+    				newStates[0].insertCity(queriedCities);
     				this.addState(newStates[0]);
     			}
 
@@ -256,16 +263,7 @@ public class Usa extends Graph {
     				newStates[1] = this.findStateByState(newStates[1]);
     			} else {
     				queriedCities = q.getCityNames(newStates[1].getCode());
-    				cityObjs = new ArrayList<City>();
-    				City curCity;
-    				for (int i =0; i < queriedCities.size();i++){
-    					curCity = new City(queriedCities.get(i),newStates[1].getName());
-    					curCity.setCrime(q.getCrimeData(queriedCities.get(i)).violentCrime);
-    					curCity.setLat(Double.toString(q.getCityData(queriedCities.get(i)).getLat()));
-    					curCity.setLong(Double.toString(q.getCityData(queriedCities.get(i)).getLng()));
-    					cityObjs.add(curCity);
-    				}
-    				newStates[1].insertCity(cityObjs);
+    				newStates[1].insertCity(queriedCities);
     				this.addState(newStates[1]);
     			}
 

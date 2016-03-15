@@ -15,6 +15,7 @@ public class Query
 	
 	private ArrayList<String> stateNames = new ArrayList();
 	private ArrayList<String> cityNames = new ArrayList();
+	private ArrayList<Crime> lowestCrime = new ArrayList();
 	
 	public CityData getCityData(String city) 
 	{
@@ -32,6 +33,17 @@ public class Query
 		return pi;
 	}
 
+	public ArrayList<Crime> getLowestCrime(String state, int n)
+	{
+		lowestCrime.clear();
+		queryCrimeData = "SELECT * FROM Crime WHERE state=\'" + state.toUpperCase() + "\' ORDER BY Violent_crime LIMIT " + Integer.toString(n) + ";";
+		String x = "LowestCrime";
+		runQuery(dbc,queryCrimeData,x);
+		
+		return lowestCrime;
+	}
+	
+	
 	public Crime getCrimeData(String city) 
 	{
 		queryCrimeData = "SELECT * FROM Crime WHERE city=\'" + city + "\';";
@@ -138,6 +150,27 @@ public class Query
 				{
 					String cityName = rs.getString("city");
 					cityNames.add(cityName);
+				}
+				if(type.equals("LowestCrime"))
+				{
+					int id = rs.getInt("id");
+					String state = rs.getString("State");
+					String city = rs.getString("City");
+					int population = rs.getInt("Population");
+					int violent_Crime = rs.getInt("Violent_Crime");
+					int murder = rs.getInt("Murder_and_nonnegligent_manslaughter");
+					int rape = rs.getInt("Rape");
+					int robbery = rs.getInt("Robbery");
+					int assault = rs.getInt("Aggravated_assault");
+					int property = rs.getInt("Property_crime");
+					int burglary = rs.getInt("Burglary");
+					int larceny = rs.getInt("Larceny_theft");
+					int motor = rs.getInt("Motor_vehicle_theft");
+					int arson = rs.getInt("Arson");
+
+					d = new Crime(id, state, city, population, violent_Crime, murder, rape, robbery, assault, property, burglary, larceny, motor, arson);
+				
+					lowestCrime.add(d);
 				}
 			}
 

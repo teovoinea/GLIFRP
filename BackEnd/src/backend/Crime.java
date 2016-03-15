@@ -1,6 +1,6 @@
 package backend;
 
-public class Crime 
+public class Crime implements Comparable
 {
 	//Class used to hold data from the fbi crime database queries
 	public String state, city;
@@ -80,5 +80,25 @@ public class Crime
 		this.larceny = larceny;
 		this.motor = motor;
 		this.arson = arson;
+	}
+
+	public int compareTo(Object o) 
+	{
+		if(((Crime)o).getMurder() > this.murder)
+			return -1;
+		else if(((Crime)o).getMurder() < this.murder)
+			return 1;
+		return 0;
+	}
+	
+	public int compareTo(Crime o,int sortBy) 
+	{
+		if (sortBy == 3){
+			if(o.getViolentCrime() > this.violentCrime)
+				return -1;
+			else if(o.getViolentCrime() < this.violentCrime)
+				return 1;
+		}
+		return 0;
 	}
 }
