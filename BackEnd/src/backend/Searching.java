@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  *  Searching Algorithm
  * 
- * TODO: ?? Make Linear Searching Algorithm that searches lowest CrimesRates/housing inflation with an Unsorted ArrayList. (May be More efficient?)??
+ * TODO: 
  * 
  * DONE: Search for cities with Lowest crime rates/housing inflation. (already Sorted ArrayList Required)
  * DONE: Search Based on Attribute
@@ -25,6 +25,7 @@ public class Searching {
 	 * 5. Score
 	 * 6. Name
 	 * 7. State 
+	 * 
 	 * 
 	 * This is a recursive implementation of binary search
 	 * @param a - the input, an ArrayList<Comparable>
@@ -63,7 +64,7 @@ public class Searching {
 		//If the key we are looking for is not In Our ArrayList
 		if (low==high){
 			System.out.println("Coud not find: " + key + " ,lower: " + low + " ,Attribute: " + attribute);
-			return low;
+			return (Integer) null;
 		}
 		
 		middle = (low + high)/2;									//the new Middle
