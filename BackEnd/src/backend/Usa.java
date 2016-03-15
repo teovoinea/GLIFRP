@@ -15,17 +15,16 @@ public class Usa extends Graph {
 	public static final int FIND_STATE_BY_CITY_FLAG = 2;
 	public static final int FIND_LOWEST_CRIME_RATE_FLAG = 3;
 	public static final int ADD_CITY_FLAG = 4;
+	private Query q;
 
 	public Usa() {
 		super();
+		//q = new Query();
 		generateStates();
-		City orlando = new City("Orlando","Florida");
-		orlando.setCrime(5);
-		City nyc = new City("NYC","New York");
-		nyc.setCrime(10);
-		this.addCity(nyc);
-		this.addCity(orlando);
-		ArrayList<City> lcm = this.findLowestCrimeRate(2);
+		
+		//this.printUSA();
+		//ArrayList<City> lcm = this.findLowestCrimeRate(2);
+		//System.out.println(lcm);
 		//System.out.println(lcm.get(0).getName());
 		//System.out.println(lcm.get(1).getName());
 		//State newYork = this.findStateByCity(nyc);
@@ -118,12 +117,13 @@ public class Usa extends Graph {
 		lcmHelper(lcmCities, length, state);
 		this.resetMarked();
 		
+		
 		City[] cities2 = lcmCities.toArray(new City[lcmCities.size()]);
 		Sorting.SortByType(3, cities2);
 		
 		lcmCities =new ArrayList<City>(Arrays.asList(cities2));	
 		
-		return new ArrayList<City>(lcmCities.subList(0, length));
+		return new ArrayList<City>(lcmCities.subList(0, length-1));
 	}
 	
 	public void lcmHelper(ArrayList<City> cities, int length, State state){
@@ -221,6 +221,7 @@ public class Usa extends Graph {
 	 */
 	private void generateStates() {
 		ArrayList<String> fileLines = new ArrayList<String>();
+		ArrayList<String> queriedCities;
 		String curLine;
 		State[] newStates;
 		String fileName = "Data/StatePairs.txt";
@@ -236,13 +237,17 @@ public class Usa extends Graph {
     			if (this.containsState(newStates[0])) {
     				newStates[0] = this.findStateByState(newStates[0]);
     			} else {
+    				//queriedCities = q.getCityNames(newStates[0].getName());
     				this.addState(newStates[0]);
     			}
 
     			if (this.containsState(newStates[1])) {
     				newStates[1] = this.findStateByState(newStates[1]);
     			} else {
+    				
+    				
     				this.addState(newStates[1]);
+    				
     			}
 
     			this.connectNodes(0, newStates[0], newStates[1]);
