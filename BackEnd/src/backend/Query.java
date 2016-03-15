@@ -51,7 +51,7 @@ public class Query
 	public ArrayList<String> getCityNames(String state)
 	{
 		cityNames.clear();
-		this.queryNames = "SELECT city FROM Cities";
+		this.queryNames = "SELECT city FROM cities WHERE state=\'" + state + "\';";
 		runQuery(dbh, queryNames, "cityNames");
 		
 		return cityNames;

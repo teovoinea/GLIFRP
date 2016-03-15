@@ -63,8 +63,8 @@ public class City implements Comparable{
 //		// zip = mapwrap.getZip();
 //		lat = mapwrap.getLat();
 //		lon = mapwrap.getLon();
-//		name = mapwrap.getName();
-//		state = mapwrap.getState();
+		name = city_name;
+		state = city_state;
 	}
 	
 	/////////////////////////////////////GETTERS//////////////////////////////////////
@@ -163,6 +163,14 @@ public class City implements Comparable{
 			System.out.println(" Either Crime or Housing Prices have to be set ");
 		}
 		
+	}
+	
+	public void setLat(String lat){
+		this.lat = lat;
+	}
+	
+	public void setLong(String longe){
+		this.lon = longe;
 	}
 	
 	///////////////////////////////////PRIVATE FUNCTIONS//////////////////////////////
@@ -266,7 +274,9 @@ public class City implements Comparable{
 		return 0;
 	}
 
-	
+	public boolean equals(City c){
+		return (this.name.equals(c.getName()) && this.state.equals(c.getState()));
+	}
 
 	
 }

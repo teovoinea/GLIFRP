@@ -5,15 +5,17 @@ import java.util.Arrays;
 public class State extends Node {
 	
 	private String name;
+	private String code;
 	private ArrayList<City> cities;
 	private Sorting s;
 	private Query q;
 	
-	public State(int id, String name)
+	public State(int id, String name, String code)
 	{
 		super(id);
 		q = new Query();
 		this.name = name;
+		this.code = code;
 		cities =new ArrayList<City>();
 		s = new Sorting();
 	}
@@ -30,13 +32,26 @@ public class State extends Node {
 		cities.add(c);
 	}
 	
+	public void insertCity(ArrayList<City> c){
+		//for (int i = 0; i < c.size();i++){
+		//	if (this.compareState(c.get(i)) && !this.contains(c.get(i))){
+		//		System.out.println(c.get(i).getName());
+		cities.addAll(c);
+		//	}
+		//}
+	}
+	
 	public boolean compareState(City c){
 		return name.equals(c.getState());
 	}
 	
 	public boolean contains(City c){
-		// use carlos's search find whether state contains city
-		return true;
+		for (int i = 0; i < cities.size();i++){
+			if (cities.get(i).equals(c)){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public City findLowestCrimeRate(){
@@ -68,12 +83,24 @@ public class State extends Node {
 		return (this.getName().equals(node.getName()));
 	}
 	
+	public boolean equalsCode(State node){
+		return (this.getCode().equals(node.getCode()));
+	}
+	
 	public void setName(String name){
 		this.name = name;
 	}
 	
 	public String getName(){
 		return this.name;
+	}
+	
+	public void setCode(String code){
+		this.code = code;
+	}
+	
+	public String getCode(){
+		return this.code;
 	}
 	
 	public String toString(){

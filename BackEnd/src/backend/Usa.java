@@ -21,8 +21,7 @@ public class Usa extends Graph {
 		super();
 		q = new Query();
 		generateStates();
-		
-		//this.printUSA();
+		this.printUSA();
 		//ArrayList<City> lcm = this.findLowestCrimeRate(2);
 		//System.out.println(lcm);
 		//System.out.println(lcm.get(0).getName());
@@ -208,11 +207,11 @@ public class Usa extends Graph {
 				DFS(target, sub, flag);
 			}
 		}
-		if (flag == ADD_CITY_FLAG && !this.containsState((State) n)) {
-			this.addState(new State(currentId, ((City) target).getState()));
-			((State) this.getNode(this.getNodeCount())).insertCity((City) target);
-			return;
-		}
+		//if (flag == ADD_CITY_FLAG && !this.containsState((State) n)) {
+		//	this.addState(new State(currentId, ((City) target).getState()));
+		//	((State) this.getNode(this.getNodeCount())).insertCity((City) target);
+		//	return;
+		//}
 	}
 
 	/**
@@ -222,10 +221,10 @@ public class Usa extends Graph {
 	private void generateStates() {
 		ArrayList<String> fileLines = new ArrayList<String>();
 		ArrayList<String> queriedCities;
+		ArrayList<City> cityObjs;
 		String curLine;
 		State[] newStates;
 		String fileName = "Data/StatePairs.txt";
-		
 		try {
             FileReader fileReader =  new FileReader(fileName);
 
@@ -237,17 +236,37 @@ public class Usa extends Graph {
     			if (this.containsState(newStates[0])) {
     				newStates[0] = this.findStateByState(newStates[0]);
     			} else {
-    				queriedCities = q.getCityNames(newStates[0].getName());
+    				queriedCities = q.getCityNames(newStates[0].getCode());
+    				cityObjs = new ArrayList<City>();
+    				City curCity;
+    				for (int i =0; i < queriedCities.size();i++){
+    					if (queriedCities.get(i) != null){
+    						curCity = new City(queriedCities.get(i),newStates[0].getName());
+	    					//curCity.setCrime(q.getCrimeData(queriedCities.get(i)).violentCrime);
+	    					curCity.setLat(Double.toString(q.getCityData(queriedCities.get(i)).getLat()));
+	    					curCity.setLong(Double.toString(q.getCityData(queriedCities.get(i)).getLng()));
+	    					cityObjs.add(curCity);
+    					}
+    				}
+    				newStates[0].insertCity(cityObjs);
     				this.addState(newStates[0]);
     			}
 
     			if (this.containsState(newStates[1])) {
     				newStates[1] = this.findStateByState(newStates[1]);
     			} else {
-    				
-    				
+    				queriedCities = q.getCityNames(newStates[1].getCode());
+    				cityObjs = new ArrayList<City>();
+    				City curCity;
+    				for (int i =0; i < queriedCities.size();i++){
+    					curCity = new City(queriedCities.get(i),newStates[1].getName());
+    					curCity.setCrime(q.getCrimeData(queriedCities.get(i)).violentCrime);
+    					curCity.setLat(Double.toString(q.getCityData(queriedCities.get(i)).getLat()));
+    					curCity.setLong(Double.toString(q.getCityData(queriedCities.get(i)).getLng()));
+    					cityObjs.add(curCity);
+    				}
+    				newStates[1].insertCity(cityObjs);
     				this.addState(newStates[1]);
-    				
     			}
 
     			this.connectNodes(0, newStates[0], newStates[1]);
@@ -276,107 +295,107 @@ public class Usa extends Graph {
 		// I'm sorry
 		for (int i =0; i < newStates.length; i++){
 			if (newStates[i].equals("AK"))
-				result[i] = new State(currentId,"Alaska");
+				result[i] = new State(currentId,"Alaska","AK");
 			else if (newStates[i].equals("AR"))
-				result[i] = new State(currentId, "Arkansas");
+				result[i] = new State(currentId, "Arkansas","AR");
 			else if (newStates[i].equals("AL"))
-				result[i] = new State(currentId,"Alabama");
+				result[i] = new State(currentId,"Alabama","AL");
 			else if (newStates[i].equals("AZ"))
-				result[i] = new State(currentId,"Arizona");
+				result[i] = new State(currentId,"Arizona","AZ");
 			else if (newStates[i].equals("CA"))
-				result[i] = new State(currentId,"California");
+				result[i] = new State(currentId,"California","CA");
 			else if (newStates[i].equals("CO"))
-				result[i] = new State(currentId,"Colorado");
+				result[i] = new State(currentId,"Colorado","CO");
 			else if (newStates[i].equals("CT"))
-				result[i] = new State(currentId,"Connecticut");
+				result[i] = new State(currentId,"Connecticut","CT");
 			else if (newStates[i].equals("DC"))
-				result[i] = new State(currentId,"District of Columbia");
+				result[i] = new State(currentId,"District of Columbia","DC");
 			else if (newStates[i].equals("DE"))
-				result[i] = new State(currentId,"Delaware");
+				result[i] = new State(currentId,"Delaware","DE");
 			else if (newStates[i].equals("FL"))
-				result[i] = new State(currentId,"Florida");
+				result[i] = new State(currentId,"Florida","FL");
 			else if (newStates[i].equals("GA"))
-				result[i] = new State(currentId,"Georgia");
+				result[i] = new State(currentId,"Georgia","GA");
 			else if (newStates[i].equals("HI"))
-				result[i] = new State(currentId,"Hawaii");
+				result[i] = new State(currentId,"Hawaii","HI");
 			else if (newStates[i].equals("IA"))
-				result[i] = new State(currentId,"Iowa");
+				result[i] = new State(currentId,"Iowa","IA");
 			else if (newStates[i].equals("ID"))
-				result[i] = new State(currentId,"Idaho");
+				result[i] = new State(currentId,"Idaho","ID");
 			else if (newStates[i].equals("IL"))
-				result[i] = new State(currentId,"Illinois");
+				result[i] = new State(currentId,"Illinois","IL");
 			else if (newStates[i].equals("IN"))
-				result[i] = new State(currentId,"Indiana");
+				result[i] = new State(currentId,"Indiana","IN");
 			else if (newStates[i].equals("KS"))
-				result[i] = new State(currentId,"Kansas");
+				result[i] = new State(currentId,"Kansas","KS");
 			else if (newStates[i].equals("KY"))
-				result[i] = new State(currentId,"Kentucky");
+				result[i] = new State(currentId,"Kentucky","KY");
 			else if (newStates[i].equals("LA"))
-				result[i] = new State(currentId,"Louisiana");
+				result[i] = new State(currentId,"Louisiana","LA");
 			else if (newStates[i].equals("MA"))
-				result[i] = new State(currentId,"Massachusetts");
+				result[i] = new State(currentId,"Massachusetts","MA");
 			else if (newStates[i].equals("MD"))
-				result[i] = new State(currentId,"MaryLand");
+				result[i] = new State(currentId,"MaryLand","MD");
 			else if (newStates[i].equals("ME"))
-				result[i] = new State(currentId,"Maine");
+				result[i] = new State(currentId,"Maine","ME");
 			else if (newStates[i].equals("MI"))
-				result[i] = new State(currentId,"Michigan");
+				result[i] = new State(currentId,"Michigan","MI");
 			else if (newStates[i].equals("MN"))
-				result[i] = new State(currentId,"Minnesota");
+				result[i] = new State(currentId,"Minnesota","MN");
 			else if (newStates[i].equals("MO"))
-				result[i] = new State(currentId,"Missouri");
+				result[i] = new State(currentId,"Missouri","MO");
 			else if (newStates[i].equals("MS"))
-				result[i] = new State(currentId,"Mississippi");
+				result[i] = new State(currentId,"Mississippi","MS");
 			else if (newStates[i].equals("MT"))
-				result[i] = new State(currentId,"Montana");
+				result[i] = new State(currentId,"Montana","MT");
 			else if (newStates[i].equals("NC"))
-				result[i] = new State(currentId,"North Carolina");
+				result[i] = new State(currentId,"North Carolina","NC");
 			else if (newStates[i].equals("ND"))
-				result[i] = new State(currentId,"North Dakota");
+				result[i] = new State(currentId,"North Dakota","ND");
 			else if (newStates[i].equals("NE"))
-				result[i] = new State(currentId,"Nebraska");
+				result[i] = new State(currentId,"Nebraska","NE");
 			else if (newStates[i].equals("NH"))
-				result[i] = new State(currentId,"New Hampshire");
+				result[i] = new State(currentId,"New Hampshire","NH");
 			else if (newStates[i].equals("NJ"))
-				result[i] = new State(currentId,"New Jersey");
+				result[i] = new State(currentId,"New Jersey","NJ");
 			else if (newStates[i].equals("NM"))
-				result[i] = new State(currentId,"New Mexico");
+				result[i] = new State(currentId,"New Mexico","NM");
 			else if (newStates[i].equals("NV"))
-				result[i] = new State(currentId,"Nevada");
+				result[i] = new State(currentId,"Nevada","NV");
 			else if (newStates[i].equals("NY"))
-				result[i] = new State(currentId,"New York");
+				result[i] = new State(currentId,"New York","NY");
 			else if (newStates[i].equals("OH"))
-				result[i] = new State(currentId,"Ohio");
+				result[i] = new State(currentId,"Ohio","OH");
 			else if (newStates[i].equals("OK"))
-				result[i] = new State(currentId,"Oklahoma");
+				result[i] = new State(currentId,"Oklahoma","OK");
 			else if (newStates[i].equals("OR"))
-				result[i] = new State(currentId,"Oregon");
+				result[i] = new State(currentId,"Oregon","OR");
 			else if (newStates[i].equals("PA"))
-				result[i] = new State(currentId,"Pennsylvania");
+				result[i] = new State(currentId,"Pennsylvania","PA");
 			else if (newStates[i].equals("RI"))
-				result[i] = new State(currentId,"Rhode Island");
+				result[i] = new State(currentId,"Rhode Island","RI");
 			else if (newStates[i].equals("SC"))
-				result[i] = new State(currentId,"South Carolina");
+				result[i] = new State(currentId,"South Carolina","SC");
 			else if (newStates[i].equals("SD"))
-				result[i] = new State(currentId,"South Dakota");
+				result[i] = new State(currentId,"South Dakota","SD");
 			else if (newStates[i].equals("TN"))
-				result[i] = new State(currentId,"Tennessee");
+				result[i] = new State(currentId,"Tennessee","TN");
 			else if (newStates[i].equals("TX"))
-				result[i] = new State(currentId,"Texas");
+				result[i] = new State(currentId,"Texas","TX");
 			else if (newStates[i].equals("UT"))
-				result[i] = new State(currentId,"Utah");
+				result[i] = new State(currentId,"Utah","UT");
 			else if (newStates[i].equals("VA"))
-				result[i] = new State(currentId,"Virginia");
+				result[i] = new State(currentId,"Virginia","VA");
 			else if (newStates[i].equals("VT"))
-				result[i] = new State(currentId,"Vermont");
+				result[i] = new State(currentId,"Vermont","VT");
 			else if (newStates[i].equals("WA"))
-				result[i] = new State(currentId,"Washington");
+				result[i] = new State(currentId,"Washington","WA");
 			else if (newStates[i].equals("WI"))
-				result[i] = new State(currentId,"Wisconsin");
+				result[i] = new State(currentId,"Wisconsin","WI");
 			else if (newStates[i].equals("WV"))
-				result[i] = new State(currentId,"West Virginia");
+				result[i] = new State(currentId,"West Virginia","WV");
 			else if (newStates[i].equals("WY"))
-				result[i] = new State(currentId,"Wyoming");
+				result[i] = new State(currentId,"Wyoming","WY");
 			else{
 				result[i] = null;
 				System.out.println(newStates[i]);
