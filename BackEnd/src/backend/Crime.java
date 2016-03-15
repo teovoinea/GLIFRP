@@ -4,6 +4,8 @@ public class Crime implements Comparable
 {
 	//Class used to hold data from the fbi crime database queries
 	public String state, city;
+	private String lat = "";
+	private String lon = "";
 	public String getState() {
 		return state;
 	}
@@ -57,7 +59,23 @@ public class Crime implements Comparable
 	}
 
 	public int getArson() {
-		return arson;
+		 return arson;
+	}
+
+	public String getLat(){
+		return lat;
+	}
+
+	public String getLon(){
+		return lon;
+	}
+
+	public void SetLat(String s){
+		lat = s;
+	}
+
+	public void SetLon(String s){
+		lon = s;
 	}
 
 	public int id, population, violentCrime, murder, rape, 

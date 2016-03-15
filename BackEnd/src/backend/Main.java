@@ -10,6 +10,7 @@ import com.google.gson.*;
 public class Main {
     private static Usa usa; 
     private Gson gson = new Gson();
+    private OpenStreetMapWrapper mapwrap = new OpenStreetMapWrapper();
     
     public static void main(String[] args) {
         usa = new Usa();
@@ -20,7 +21,7 @@ public class Main {
         	res.redirect("/index.html");
         	return "";
         });
-        
+    
         get("/dankmeme", (req, res) -> 
         	"<img src='/img/2.PNG'/>"
         );
@@ -67,7 +68,12 @@ public class Main {
 	        	//}
 	        	//usa.printUSA();
 	        	
-	        	ArrayList<Crime> c= usa.findLowestCrimeRate(count);	        	
+	        	ArrayList<Crime> c= usa.findLowestCrimeRate(count);
+                for (int i = 0; i < c.size(); i++){
+                    mapwrap.buildByCityState(c.getCity(), c.getState());
+                    c.setLat(mapwrap.getLat());
+                    c.setLon(mapwrap.getLon());
+                }        	
 	        	
 	        	Gson return_object= new GsonBuilder().create();
         		response.type("application/javascript");
