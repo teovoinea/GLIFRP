@@ -14,6 +14,8 @@
   }]);
   app.run(function(){
 
+    var main_marker = L.marker([0,0]);
+
     function detectType(input){
       if(input.match(/[a-z]/i)){
         return "CITY_STATE";
@@ -31,7 +33,11 @@
             type: "POST",
             data: '{"city":"'+info[0]+'", "state":"'+info[1]+'"}'
           }).done(function(res){
-            console.log(res);
+            var obj = JSON.parse(res);
+            var map = L.map('map').setView([obj.lat,obj.lon],13);
+            var content = "<h3>"+obj.city + "," + obj.state + "</h3>";
+            content = content + "<br/><strong>Crime Rate:</strong>"+obj.crime;
+            main_marker.setLatLng([obj.lat,obj.lon]).addTo(map).bindPopup(content).openPopup();
           });
         }else{
           $.ajax({
