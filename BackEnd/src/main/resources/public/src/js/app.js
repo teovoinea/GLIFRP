@@ -31,13 +31,14 @@
           $.ajax({
             url: "/search",
             type: "POST",
-            data: '{"city":"'+info[0]+'", "state":"'+info[1]+'"}'
+            data: '{"city":"'+info[0]+'", "state":"'+info[1]+'","dist":1}'
           }).done(function(res){
             var obj = JSON.parse(res);
             var map = L.map('map').setView([obj.lat,obj.lon],13);
             var content = "<h3>"+obj.city + "," + obj.state + "</h3>";
             content = content + "<br/><strong>Crime Rate:</strong>"+obj.crime;
             main_marker.setLatLng([obj.lat,obj.lon]).addTo(map).bindPopup(content).openPopup();
+            setData("#stat-bar",obj.crime);
           });
         }else{
           $.ajax({
