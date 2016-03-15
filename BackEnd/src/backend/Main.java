@@ -70,9 +70,9 @@ public class Main {
 	        	
 	        	ArrayList<Crime> c= usa.findLowestCrimeRate(count);
                 for (int i = 0; i < c.size(); i++){
-                    mapwrap.buildByCityState(c.getCity(), c.getState());
-                    c.setLat(mapwrap.getLat());
-                    c.setLon(mapwrap.getLon());
+                    mapwrap.buildByCityState(c.get(i).getCity(), c..get(i)getState());
+                    c.get(i).setLat(mapwrap.getLat());
+                    c.get(i).setLon(mapwrap.getLon());
                 }        	
 	        	
 	        	Gson return_object= new GsonBuilder().create();
