@@ -35,7 +35,7 @@ public class Query
 	public Crime getCrimeData(String city) 
 	{
 		queryCrimeData = "SELECT * FROM Crime WHERE city=\'" + city + "\';";
-		
+		runQuery(dbc, queryCrimeData, "Crime");
 		return d;
 	}
 

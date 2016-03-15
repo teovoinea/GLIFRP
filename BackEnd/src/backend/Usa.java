@@ -19,7 +19,7 @@ public class Usa extends Graph {
 
 	public Usa() {
 		super();
-		//q = new Query();
+		q = new Query();
 		generateStates();
 		
 		//this.printUSA();
@@ -237,7 +237,7 @@ public class Usa extends Graph {
     			if (this.containsState(newStates[0])) {
     				newStates[0] = this.findStateByState(newStates[0]);
     			} else {
-    				//queriedCities = q.getCityNames(newStates[0].getName());
+    				queriedCities = q.getCityNames(newStates[0].getName());
     				this.addState(newStates[0]);
     			}
 
