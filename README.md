@@ -19,6 +19,7 @@ To use this sign up for a Trello account
 	
 ___________________________________________________________________________________________
 # "Major" update history
+* Mar 15 - CRTNP - Prototype
 * Mar 13 - R - Search by Crime Rate is completed
 * Mar 13 - C - Made Simple Scoring Algorithm (for prototype)
 * Mar 11 - C - Edited compareTo and Search by Attribute
