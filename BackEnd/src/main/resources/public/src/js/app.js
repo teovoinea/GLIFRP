@@ -1,12 +1,11 @@
-var main_marker = L.marker([0,0]);
 (function(){
+  var main_markers = new L.featureGroup();
   var app = angular.module('GLIFRP', [
     'ngRoute',
     'mainCtrl',
     'mapCtrl'
   ]);
-  app.config(['$httpProvider','$routeProvider','$locationProvider',function($httpProvider,$routeProvider,$locationProvider) {
-
+  app.config(['$httpProvider','$routeProvider','$locationProvider',function($httpProvider,$routeProvider,$locationProvider,$scope) {
     //$routeProvider
     //.when('/', {templateUrl: 'views/main.html', controller: 'mainController'})
     //.otherwise({redirectTo: '/'});
@@ -14,21 +13,22 @@ var main_marker = L.marker([0,0]);
     //$locationProvider.html5Mode(true);
   }]);
   app.run(function(){
-
+    var currentMarker = null;
     function detectType(input){
       if(input.match(/[a-z]/i)){
-        return "CITY_STATE";
+        return "STATE";
       }else{
-        return "LONG_LAT";
+        return "NUMBER";
       }
     }
 
     $("#search-box").keyup(function(event){
       if(event.keyCode == 13){
+        $("#menu").slideUp(40).css({'tab-index':-1});
         var info = $("#search-box").val().split(",");
-        if(detectType($("#search-box").val()) == "CITY_STATE"){
+        /**if(detectType($("#search-box").val()) == "CITY_STATE"){
           $.ajax({
-            url: "/search",
+            url: "search",
             type: "POST",
             data: '{"city":"'+info[0]+'", "state":"'+info[1]+'","dist":1}'
           }).done(function(res){
@@ -41,12 +41,61 @@ var main_marker = L.marker([0,0]);
           });
         }else{
           $.ajax({
-            url: "/search",
+            url: "search",
             type: "POST",
             data: {"lat":info[0], "lon":info[1]}
           }).done(function(res){
             console.log(res);
           });
+        }*/
+
+        var marker_click = function(event){
+          var obj = event.target.obj;
+          setData("#stat-bar",obj.crime);
+          var content = "<h3 style='color:black'>"+obj.city+", "+obj.state+"</h3><strong>Population:</strong>"+obj.population;
+          content = content + "<br/><strong>Longitude:</strong>"+obj.lon;
+          content = content + "<br/><strong>Lattitude:</strong>"+obj.lat;
+          $("#info-popup-content").html(content);
+        };
+
+        var display = function(res){
+          var arr = JSON.parse(res);
+          for(var i = 0; i < arr.length;i++){
+            var obj = arr[i];
+            //map.setView([obj.lat,obj.lon],13);
+            obj.crime = obj.violentCrime/100;
+            var content = "<h3 style='color:black'>"+obj.city + ", " + obj.state + "</h3>";
+            content = content + "<br/><strong>Violent Crime:</strong>"+parseInt(obj.violentCrime);
+            content = content + "<br/><strong>Burglary:</strong>"+parseInt(obj.burglary);
+            content = content + "<br/><strong>Larceny:</strong>"+parseInt(obj.larceny);
+            content = content + "<br/><strong>Rape:</strong>"+parseInt(obj.rape);
+            content = content + "<br/><strong>Motor:</strong>"+parseInt(obj.motor);
+            content = content + "<br/><strong>Arson:</strong>"+parseInt(obj.arson);
+            var mark = L.marker([obj.lat,obj.lon]).bindPopup(content).addTo(map);
+            mark.obj = obj;
+            mark.on('click',marker_click);
+            main_markers.addLayer(mark);
+          }
+          map.fitBounds(main_markers.getBounds().pad(0.5));
+        };
+        main_markers.eachLayer(function(layer){
+          map.removeLayer(layer);
+        });
+        main_markers.clearLayers();
+        var content = "<h3 style='color:black'></h3><strong>No Info</strong>";
+        $("#info-popup-content").html(content);
+        if(detectType($("#search-box").val()) == "NUMBER"){
+          $.ajax({
+            url:"/search",
+            type:"POST",
+            data: '{"count":'+info[0]+'}'
+          }).done(function(res){display(res);});
+        }else{
+          $.ajax({
+            url:"/searchLCMByState",
+            type:"POST",
+            data: '{"count":'+info[0]+',"state":"'+info[1].trim()+'"}'
+          }).done(function(res){console.log(res);display(res);});
         }
       }
     });

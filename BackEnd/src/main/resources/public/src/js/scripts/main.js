@@ -1,5 +1,5 @@
 var map;
-function setData(selector,percent){
+function setData(selector,percent){  
   var transform_styles = ['-webkit-transform',
                         '-ms-transform',
                         'transform'];
@@ -10,7 +10,7 @@ function setData(selector,percent){
   $(selector + " .fill, "+selector+" .mask.full").css(transform_styles[i],"rotate("+fill_rotation+"deg)");
   $(selector+" .fill.fix").css(transform_styles[i],"rotate("+fix_rotation+"deg)");
  }
- $(selector + " .stat-title span").html(percent * 100+"%");
+ $(selector + " .stat-title span").html(parseInt(percent * 100)+"%");
 }
 
 function explore(){
@@ -98,7 +98,7 @@ $(document).ready(function(){
   });
   $("#amount-price").html("$5000");
   $("#info-popup").animate({"opacity":0},0).css({"display":"none","pointer-events":"none"});
-  setData("#stat-bar",0.6);
+  setData("#stat-bar",0.0);
 });
 
 /**L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {

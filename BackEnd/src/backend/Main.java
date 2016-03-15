@@ -106,7 +106,13 @@ public class Main {
         		return return_object.toJson(null);
         	}
         	
-        	ArrayList<Crime> c= usa.findStateByStateName(state).findLowestCrimeRate(count);	
+        	ArrayList<Crime> c= usa.findStateByStateName(state).findLowestCrimeRate(count);
+        	for (int i = 0; i < c.size(); i++){
+        		System.out.println(c.get(i).getCity());
+                mapwrap.buildByCityState(c.get(i).getCity(), c.get(i).getState());
+                c.get(i).SetLat(mapwrap.getLat());
+                c.get(i).SetLon(mapwrap.getLon());
+            }
         	Crime[] cities2 = c.toArray(new Crime[c.size()]);
     		Sorting.SortByType(3, cities2);
     		
