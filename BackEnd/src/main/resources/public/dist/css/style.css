@@ -74,7 +74,7 @@ h3 {
   display: none;
   background-color: white;
   z-index: 105;
-  width: calc(70vw);
+  width: calc(79.1vw);
   box-shadow: 0 4px 3px rgba(0, 0, 0, 0.5);
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -95,7 +95,7 @@ h3 {
   position: absolute;
   left: 30%;
   top: 130px;
-  height: calc(-105%);
+  bottom: 100px;
   width: 50%;
   border-radius: 10px;
   background-color: #D8D8D8;
@@ -105,6 +105,10 @@ h3 {
 }
 #info-popup p {
   padding: 0 10px;
+  overflow: scroll;
+}
+#info-popup p strong {
+  padding-right: 30px;
 }
 #info-close {
   cursor: pointer;
@@ -182,7 +186,7 @@ h3 {
 #side-items {
   position: absolute;
   left: -40px;
-  bottom: 40px;
+  top: 200px;
   width: 250px;
   height: 200px;
 }

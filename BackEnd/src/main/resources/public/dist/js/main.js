@@ -1,3 +1,4 @@
+var map;
 function setData(selector,percent){
   var transform_styles = ['-webkit-transform',
                         '-ms-transform',
@@ -31,7 +32,7 @@ function closeinfo(){
 }
 
 $(document).ready(function(){
-  var map = L.map('map').setView([40.7127, -74.0059], 13);
+  map = L.map('map').setView([40.7127, -74.0059], 13);
 
   L.tileLayer('https://{s}.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -41,7 +42,7 @@ $(document).ready(function(){
     accessToken: 'pk.eyJ1IjoiZnV0dXJlcHJvZyIsImEiOiJjaWxkeHh2cjIwZWVzdnJtMHBnd2FkZmR3In0.IZfUd7-WTktf4Jz6ViDM_A'
   }).addTo(map);
 
-  var popup = L.popup();
+  /*var popup = L.popup();
   var circle= L.circle([0,0],0,{
     color: "red",
     fillColor: "#FF0600",
@@ -54,7 +55,7 @@ $(document).ready(function(){
     circle.setRadius(400);
     circle.addTo(map);
   }
-  map.on('click',onMapClick);
+  map.on('click',onMapClick);*/
 
   function onInputFocus(){
     var left = $("#top-bar h1").outerWidth() + 3;
