@@ -2,9 +2,9 @@ package backend;
 
 import com.google.gson.annotations.SerializedName;
 
-public class City implements Comparable<City>{
+public class City implements Comparable{
 	//web wrapper for open street map, allows for easy access
-	private static OpenStreetMapWrapper mapwrap = new OpenStreetMapWrapper();
+//	private static OpenStreetMapWrapper mapwrap = new OpenStreetMapWrapper();
 	
 	//Private Variables
 	@SerializedName("lat")
@@ -32,10 +32,10 @@ public class City implements Comparable<City>{
 	public City(String[] ll){
 		lat = ll[0];
 		lon = ll[1];
-		mapwrap.buildByLatLong(ll);
-		zip = mapwrap.getZip();
-		name = mapwrap.getName();
-		state = mapwrap.getState();
+//		mapwrap.buildByLatLong(ll);
+//		zip = mapwrap.getZip();
+//		name = mapwrap.getName();
+//		state = mapwrap.getState();
 	}
 	
 	/**
@@ -45,11 +45,11 @@ public class City implements Comparable<City>{
 	 */
 	public City(String zip_code){
 		zip = zip_code;
-		mapwrap.buildByZip(zip);
-		lat = mapwrap.getLat();
-		lon = mapwrap.getLon();
-		name = mapwrap.getName();
-		state = mapwrap.getState();
+//		mapwrap.buildByZip(zip);
+//		lat = mapwrap.getLat();
+//		lon = mapwrap.getLon();
+//		name = mapwrap.getName();
+//		state = mapwrap.getState();
 	}
 
 	/**
@@ -59,12 +59,12 @@ public class City implements Comparable<City>{
 	 * @return            City
 	 */
 	public City(String city_name, String city_state){
-		mapwrap.buildByCityState(city_name, city_state);
-		// zip = mapwrap.getZip();
-		lat = mapwrap.getLat();
-		lon = mapwrap.getLon();
-		name = mapwrap.getName();
-		state = mapwrap.getState();
+//		mapwrap.buildByCityState(city_name, city_state);
+//		// zip = mapwrap.getZip();
+//		lat = mapwrap.getLat();
+//		lon = mapwrap.getLon();
+//		name = mapwrap.getName();
+//		state = mapwrap.getState();
 	}
 	
 	/////////////////////////////////////GETTERS//////////////////////////////////////
@@ -255,18 +255,17 @@ public class City implements Comparable<City>{
 		throw new IllegalArgumentException("Invalid attribute argument");
 	}
 
-	@Override
+
 	/**
 	 * Overridden compareTo <br> <b>Deprecated DO NOT USE</b>
 	 * @param  o Object to compare to
 	 * @return   -1, 0, 1
 	 */
-	@Deprecated
-	public int compareTo(City o) {
+	public int compareTo(Object arg0) {
 		// TODO Auto-generated method stub
-		//throw new UnsupportedOperationException("Don't use this");
 		return 0;
 	}
+
 	
 
 	

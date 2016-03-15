@@ -7,9 +7,12 @@ public class State extends Node {
 	private String name;
 	private ArrayList<City> cities;
 	private Sorting s;
+	private Query q;
 	
-	public State(int id, String name){
+	public State(int id, String name)
+	{
 		super(id);
+		q = new Query();
 		this.name = name;
 		cities =new ArrayList<City>();
 		s = new Sorting();
