@@ -13,7 +13,8 @@ public class Query
 	private PriceIndex pi;
 	private CityData cd;
 	
-	private ArrayList<String> stateNames, cityNames;
+	private ArrayList<String> stateNames = new ArrayList();
+	private ArrayList<String> cityNames = new ArrayList();
 	
 	public CityData getCityData(String city) 
 	{
@@ -38,15 +39,28 @@ public class Query
 		return d;
 	}
 
+	public ArrayList<String> getStateNames()
+	{
+		stateNames.clear();
+		this.queryNames = "SELECT DISTINCT state FROM Cities";
+		runQuery(dbh, queryNames, "stateNames");
+		
+		return stateNames;
+	}
+	
+	public ArrayList<String> getCityNames(String state)
+	{
+		cityNames.clear();
+		this.queryNames = "SELECT city FROM Cities";
+		runQuery(dbh, queryNames, "cityNames");
+		
+		return cityNames;
+	}
+	
 	public Query()
 	{
 		this.dbc = "jdbc:sqlite:" + "us_crime.db";
-		this.dbh = "jdbc:sqlite:" + "housing.db";
-		
-		this.queryNames = "SELECT DISTINCT state, city FROM Cities";
-		
-		//Populate state, and city names
-		runQuery(dbh, queryNames, "names");
+		this.dbh = "jdbc:sqlite:" + "housing.db";		
 	}
 	
 	public void runQuery(String conn, String query, String type)
@@ -114,11 +128,14 @@ public class Query
 					//cityData.add(cd);
 				}
 				
-				if(type.equals("names"))
+				if(type.equals("stateNames"))
 				{
 					String stateName = rs.getString("state");
 					stateNames.add(stateName);
-					
+				}
+				
+				if(type.equals("cityNames"))
+				{
 					String cityName = rs.getString("city");
 					cityNames.add(cityName);
 				}
