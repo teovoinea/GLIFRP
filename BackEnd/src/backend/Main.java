@@ -10,7 +10,7 @@ import com.google.gson.*;
 public class Main {
     private static Usa usa; 
     private Gson gson = new Gson();
-    private OpenStreetMapWrapper mapwrap = new OpenStreetMapWrapper();
+    private static OpenStreetMapWrapper mapwrap = new OpenStreetMapWrapper();
     
     public static void main(String[] args) {
         usa = new Usa();
@@ -70,9 +70,9 @@ public class Main {
 	        	
 	        	ArrayList<Crime> c= usa.findLowestCrimeRate(count);
                 for (int i = 0; i < c.size(); i++){
-                    mapwrap.buildByCityState(c.get(i).getCity(), c..get(i)getState());
-                    c.get(i).setLat(mapwrap.getLat());
-                    c.get(i).setLon(mapwrap.getLon());
+                    mapwrap.buildByCityState(c.get(i).getCity(), c.get(i).getState());
+                    c.get(i).SetLat(mapwrap.getLat());
+                    c.get(i).SetLon(mapwrap.getLon());
                 }        	
 	        	
 	        	Gson return_object= new GsonBuilder().create();
