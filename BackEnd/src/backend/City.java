@@ -2,6 +2,8 @@ package backend;
 
 import com.google.gson.annotations.SerializedName;
 
+import backend.Crime;
+
 public class City implements Comparable{
 	//web wrapper for open street map, allows for easy access
 //	private static OpenStreetMapWrapper mapwrap = new OpenStreetMapWrapper();
@@ -158,7 +160,7 @@ public class City implements Comparable{
 		
 		// if crime and Price have values
 		if ((getCrime() != 0.0) && (getPrice() != 0.0 )){
-			calculateScore(6,4);
+			//calculateScore(6,4);
 		}else {
 			System.out.println(" Either Crime or Housing Prices have to be set ");
 		}
@@ -175,36 +177,71 @@ public class City implements Comparable{
 	
 	///////////////////////////////////PRIVATE FUNCTIONS//////////////////////////////
 	
+	
+	//Not sure where to put these functions, CityData.java ?
 	/**
-	 * Generate a Score for a city. *(Simple version rn)*    
-	 * 
-	 * @param city - the city that is going to get a score
-	 * @param crimeRate - the crime in a city  *(percentage ?????, not sure what crime rate Stats are going to be like)*
-	 * @param housingPriceIndex -the inflation rate/ housing prices of the city, where the HSI is a percentage, from the Housing Price Index(HSI) data set
+	 * Generate a Score for a city. *(Still need to take into account Housing)*  
+	 * @param crimes
+	 * @return - score that the City receives based on crimes and housing inflation
 	 */
-	private void calculateScore(double crimeWeight, double priceWeight){
-		//temporary "weights"
-		//Sig(weights) should = 10 
-		//crimeWeight = 6;
-		//priceWeight = 4;
+	public double calculateScore(Crime crimes){
+		//variables
+		double badScore = 0.0;
+		double houseScore = 0.0;
+		double crimeScore = 0.0;
+		double maxScore = 500;
+		double cityScore = 0.0;			//returning Score
 		
-		//crime rates can range from (0 to 100 )?
-		double crimeRate = this.getCrime();
+		//Different types of crimes
+		//arson
+		//assault
+		//burglary
+		//larceny
+		//motor
+		//murder
+		//property
+		//rape
+		//robbery
+		//violentCrime
 		
-		//housing prices, (0 to 100)?
+		//temporary weights
+		int wtArson = 1;
+		int wtAssualt = 1;
+		int wtBurglary = 1;
+		int wtLarceny = 1;
+		int wtMotor =1 ;
+		int wtMurder = 1;
+		int wtProperty = 1;
+		int wtRape = 1;
+		int wtRobbery = 1;
+		int wtViolentCrime = 1;
+		
+		crimeScore += crimes.getArson()*wtArson + crimes.getAssault()*wtAssualt + crimes.getBurglary()*wtBurglary + crimes.getLarceny()*wtLarceny;  
+		crimeScore 	+=  crimes.getMotor()*wtMotor + crimes.getMurder()*wtMurder + crimes.getProperty()*wtProperty + crimes.getRape()*wtRape + crimes.getRobbery()*wtRobbery + crimes.getViolentCrime()*wtViolentCrime;
+		badScore = crimeScore + houseScore;
+		cityScore = maxScore - badScore;
+		
+		return cityScore;
+		
+		//Note
+		//housing prices, range(0 to 100)?
 		//although the inflation rate can go over 100% it is highly unlikely,... if we take the inflation between last year and this year. 
 		//inflation could easily go over 100% if we decide to take inflation into account for a longer period of time ie (over 5 years of inflation) 
-		//for testing purposes I will assume a range of 0 to 100% of inflation rate
-		double housingPrices = this.getPrice();
-		
-		//In the Future we may want to include when calculating scores:
-		// a more in depth crime statistics ( violent crime, rape, murder)?
-		
-		double calcScore = crimeWeight*crimeRate + priceWeight*housingPrices;
-		
-		score = calcScore;
-		//return calcScore;
+		//for testing purposes I will assume a range of 0 to 100% of inflation rate	
 	}
+	
+	public double calculateCrimeRate(Crime crimes){
+		double totalCrime = totalCrime(crimes);
+		double population = crimes.getPopulation();
+		double crimeRate = (totalCrime/population)*100;		//percentage 
+		return crimeRate;
+	}
+	
+	public double totalCrime(Crime crimes){
+		double totalCrime = crimes.getArson() + crimes.getAssault() + crimes.getBurglary() + crimes.getLarceny()  + crimes.getMotor() + crimes.getMurder() + crimes.getProperty() + crimes.getRape() + crimes.getRobbery() + crimes.getViolentCrime();
+		return totalCrime;
+	}
+	
 	
 	//////////////////////////////////IMPLEMENTED FUNCTIONS////////////////////////////
 	/**
