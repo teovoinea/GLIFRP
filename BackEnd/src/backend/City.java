@@ -3,6 +3,7 @@ package backend;
 import com.google.gson.annotations.SerializedName;
 
 import backend.Crime;
+import backend.PriceIndex;
 
 public class City implements Comparable{
 	//web wrapper for open street map, allows for easy access
@@ -184,10 +185,9 @@ public class City implements Comparable{
 	 * @param crimes
 	 * @return - score that the City receives based on crimes and housing inflation
 	 */
-	public double calculateScore(Crime crimes){
+	public double calculateScore(Crime crimes, PriceIndex priceIndex){
 		//variables
-		double badScore = 0.0;
-		double houseScore = 0.0;
+		double houseScore = ((priceIndex.getIndex_nsa() - priceIndex.getIndex_sa())/priceIndex.getIndex_sa()) * 100 ;
 		double crimeScore = 0.0;
 		double maxScore = 500;
 		double cityScore = 0.0;			//returning Score
@@ -215,11 +215,12 @@ public class City implements Comparable{
 		int wtRape = 1;
 		int wtRobbery = 1;
 		int wtViolentCrime = 1;
+		int wtPriceIndex = 1;
 		
 		crimeScore += crimes.getArson()*wtArson + crimes.getAssault()*wtAssualt + crimes.getBurglary()*wtBurglary + crimes.getLarceny()*wtLarceny;  
 		crimeScore 	+=  crimes.getMotor()*wtMotor + crimes.getMurder()*wtMurder + crimes.getProperty()*wtProperty + crimes.getRape()*wtRape + crimes.getRobbery()*wtRobbery + crimes.getViolentCrime()*wtViolentCrime;
-		badScore = crimeScore + houseScore;
-		cityScore = maxScore - badScore;
+		houseScore = houseScore* wtPriceIndex;
+		cityScore = maxScore - crimeScore - houseScore;
 		
 		return cityScore;
 		
@@ -242,6 +243,10 @@ public class City implements Comparable{
 		return totalCrime;
 	}
 	
+	public double priceInflation(PriceIndex priceIndex){
+		double retInflation = ((priceIndex.getIndex_nsa() - priceIndex.getIndex_sa())/priceIndex.getIndex_sa()) * 100;
+		return retInflation;
+	}
 	
 	//////////////////////////////////IMPLEMENTED FUNCTIONS////////////////////////////
 	/**
