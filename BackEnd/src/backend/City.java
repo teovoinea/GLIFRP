@@ -181,8 +181,9 @@ public class City implements Comparable{
 	
 	//Not sure where to put these functions, CityData.java ?
 	/**
-	 * Generate a Score for a city. *(Still need to take into account Housing)*  
-	 * @param crimes
+	 * Generate a Score for a city.  
+	 * @param crimes - holds information on different type of crime.
+	 * @param priceIndex - holds information on the housing market.
 	 * @return - score that the City receives based on crimes and housing inflation
 	 */
 	public double calculateScore(Crime crimes, PriceIndex priceIndex){
@@ -219,7 +220,7 @@ public class City implements Comparable{
 		
 		crimeScore += crimes.getArson()*wtArson + crimes.getAssault()*wtAssualt + crimes.getBurglary()*wtBurglary + crimes.getLarceny()*wtLarceny;  
 		crimeScore 	+=  crimes.getMotor()*wtMotor + crimes.getMurder()*wtMurder + crimes.getProperty()*wtProperty + crimes.getRape()*wtRape + crimes.getRobbery()*wtRobbery + crimes.getViolentCrime()*wtViolentCrime;
-		houseScore = houseScore* wtPriceIndex;
+		houseScore = houseScore * wtPriceIndex;
 		cityScore = maxScore - crimeScore - houseScore;
 		
 		return cityScore;
@@ -231,6 +232,11 @@ public class City implements Comparable{
 		//for testing purposes I will assume a range of 0 to 100% of inflation rate	
 	}
 	
+	/**
+	 * Calculates the crime rate of a city. 
+	 * @param crimes
+	 * @return - Total crimes/population in percent 
+	 */
 	public double calculateCrimeRate(Crime crimes){
 		double totalCrime = totalCrime(crimes);
 		double population = crimes.getPopulation();
@@ -238,11 +244,21 @@ public class City implements Comparable{
 		return crimeRate;
 	}
 	
+	/**
+	 * Gets the Total Crime
+	 * @param crimes
+	 * @return - the sum of all the crimes
+	 */
 	public double totalCrime(Crime crimes){
 		double totalCrime = crimes.getArson() + crimes.getAssault() + crimes.getBurglary() + crimes.getLarceny()  + crimes.getMotor() + crimes.getMurder() + crimes.getProperty() + crimes.getRape() + crimes.getRobbery() + crimes.getViolentCrime();
 		return totalCrime;
 	}
 	
+	/**
+	 * calculates the price inflation given a certain time period.
+	 * @param priceIndex - holds information on housing prices over the years.
+	 * @return -the inflation over a certain period of time
+	 */
 	public double priceInflation(PriceIndex priceIndex){
 		double retInflation = ((priceIndex.getIndex_nsa() - priceIndex.getIndex_sa())/priceIndex.getIndex_sa()) * 100;
 		return retInflation;
