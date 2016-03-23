@@ -23,9 +23,23 @@ public class City implements Comparable{
 	@SerializedName("score")
 	private double score;    //calculated score
 	@SerializedName("state")
-	private String state;    //state of city
+	private String state;    //state of city(abbreviated)
+	@SerializedName("uState")
+	private String uState;
 	@SerializedName("name")
 	private String name;	 //name of city
+	@SerializedName("zip")
+	
+	//Data pulled from a query
+	//Crime
+	private int population, violentCrime, murder, rape, 
+		robbery, assault, property, burglary, larceny, motor, arson;
+	
+	
+	//Price Index
+	private String place_name, place_id;
+	private int period, index_nsa, index_sa, year;
+	
 	
 	/**
 	 * Build City by latitude & longitude
@@ -135,6 +149,127 @@ public class City implements Comparable{
 		return state;
 	}
 	
+	/**
+	 * @return the Unabbreviated state names
+	 */
+	public String getUState() {
+		return uState;
+	}
+
+	/**
+	 * @return the population
+	 */
+	public int getPopulation() {
+		return population;
+	}
+
+	/**
+	 * @return the violentCrime
+	 */
+	public int getViolentCrime() {
+		return violentCrime;
+	}
+
+	/**
+	 * @return the murder
+	 */
+	public int getMurder() {
+		return murder;
+	}
+
+	/**
+	 * @return the rape
+	 */
+	public int getRape() {
+		return rape;
+	}
+
+	/**
+	 * @return the robbery
+	 */
+	public int getRobbery() {
+		return robbery;
+	}
+
+	/**
+	 * @return the assault
+	 */
+	public int getAssault() {
+		return assault;
+	}
+
+	/**
+	 * @return the property
+	 */
+	public int getProperty() {
+		return property;
+	}
+
+	/**
+	 * @return the burglary
+	 */
+	public int getBurglary() {
+		return burglary;
+	}
+
+	/**
+	 * @return the larceny
+	 */
+	public int getLarceny() {
+		return larceny;
+	}
+
+	/**
+	 * @return the motor
+	 */
+	public int getMotor() {
+		return motor;
+	}
+
+	/**
+	 * @return the arson
+	 */
+	public int getArson() {
+		return arson;
+	}
+
+	/**
+	 * @return the place_name
+	 */
+	public String getPlace_name() {
+		return place_name;
+	}
+
+	/**
+	 * @return the place_id
+	 */
+	public String getPlace_id() {
+		return place_id;
+	}
+
+	/**
+	 * @return the index_nsa
+	 */
+	public int getIndex_nsa() {
+		return index_nsa;
+	}
+
+	/**
+	 * @return the index_sa
+	 */
+	public int getIndex_sa() {
+		return index_sa;
+	}
+
+	/**
+	 * @return the year
+	 */
+	public int getYear() {
+		return year;
+	}
+	
+	
+	
 	///////////////////////////////////SETTERS////////////////////////////////////////
 	
 	/**
@@ -143,6 +278,15 @@ public class City implements Comparable{
 	 */
 	public void setCrime(double d){
 		crime = d;
+	}
+	
+	/**
+	 * Set zip code of the city
+	 * @param zip - the new zip code
+	 */
+	public void setZip(String zip)
+	{
+		this.zip = zip;
 	}
 	
 	/**
@@ -175,6 +319,148 @@ public class City implements Comparable{
 	public void setLong(String longe){
 		this.lon = longe;
 	}
+	
+	/**
+	 * @param state the state to set
+	 */
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	/**
+	 * @param uState the uState to set
+	 */
+	public void setUState(String uState) {
+		this.uState = uState;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @param population the population to set
+	 */
+	public void setPopulation(int population) {
+		this.population = population;
+	}
+
+	/**
+	 * @param violentCrime the violentCrime to set
+	 */
+	public void setViolentCrime(int violentCrime) {
+		this.violentCrime = violentCrime;
+	}
+
+	/**
+	 * @param murder the murder to set
+	 */
+	public void setMurder(int murder) {
+		this.murder = murder;
+	}
+
+	/**
+	 * @param rape the rape to set
+	 */
+	public void setRape(int rape) {
+		this.rape = rape;
+	}
+
+	/**
+	 * @param robbery the robbery to set
+	 */
+	public void setRobbery(int robbery) {
+		this.robbery = robbery;
+	}
+
+	/**
+	 * @param assault the assault to set
+	 */
+	public void setAssault(int assault) {
+		this.assault = assault;
+	}
+
+	/**
+	 * @param property the property to set
+	 */
+	public void setProperty(int property) {
+		this.property = property;
+	}
+
+	/**
+	 * @param burglary the burglary to set
+	 */
+	public void setBurglary(int burglary) {
+		this.burglary = burglary;
+	}
+
+	/**
+	 * @param larceny the larceny to set
+	 */
+	public void setLarceny(int larceny) {
+		this.larceny = larceny;
+	}
+
+	/**
+	 * @param motor the motor to set
+	 */
+	public void setMotor(int motor) {
+		this.motor = motor;
+	}
+
+	/**
+	 * @param arson the arson to set
+	 */
+	public void setArson(int arson) {
+		this.arson = arson;
+	}
+
+	/**
+	 * @param place_name the place_name to set
+	 */
+	public void setPlace_name(String place_name) {
+		this.place_name = place_name;
+	}
+
+	/**
+	 * @param place_id the place_id to set
+	 */
+	public void setPlace_id(String place_id) {
+		this.place_id = place_id;
+	}
+
+	/**
+	 * @param period the period to set
+	 */
+	public void setPeriod(int period) {
+		this.period = period;
+	}
+
+	/**
+	 * @param index_nsa the index_nsa to set
+	 */
+	public void setIndexNSA(int index_nsa) {
+		this.index_nsa = index_nsa;
+	}
+
+	/**
+	 * @param index_sa the index_sa to set
+	 */
+	public void setIndexSA(int index_sa) {
+		this.index_sa = index_sa;
+	}
+
+	/**
+	 * @param year the year to set
+	 */
+	public void setYear(int year) {
+		this.year = year;
+	}
+	
+	
 	
 	///////////////////////////////////PRIVATE FUNCTIONS//////////////////////////////
 	
