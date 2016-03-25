@@ -47,6 +47,28 @@ public class Main {
 	        		response.status(200);
 	        		return return_object.toJson(null);
 	        	}
+	        	String city;
+	        	String state;
+	        	double crime;
+	        	double price;
+	        	int distance;
+	        	if (jobject.has("city")){
+	        		city = jobject.get("city").getAsString();
+	        	}
+	        	if (jobject.has("state")){
+	        		city = jobject.get("state").getAsString();	        		
+	        	}
+	        	if (jobject.has("crime")){
+	        		city = jobject.get("crime").getAsDouble();	        		
+	        	}
+	        	if (jobject.has("price")){
+	        		city = jobject.get("price").getAsDouble();	        		
+	        	}
+	        	if (jobject.has("distance")){
+	        		city = jobject.get("distance").getAsInteger();	        		
+	        	}
+
+
 	        	// if (jobject.has("zip")){
 	        	// 	rec = new City(jobject.get("zip").getAsString());
 	        	// }
@@ -106,6 +128,27 @@ public class Main {
         		return return_object.toJson(null);
         	}
         	
+        	String city;
+	       	String state;
+	       	double crime;
+	       	double price;
+	       	double distance;
+	       	if (jobject.has("city")){
+	       		city = jobject.get("city").getAsString();
+	       	}
+	       	if (jobject.has("state")){
+	       		city = jobject.get("state").getAsString();	        		
+	       	}
+	       	if (jobject.has("crime")){
+	       		city = jobject.get("crime").getAsDouble();	        		
+	       	}
+	       	if (jobject.has("price")){
+	       		city = jobject.get("price").getAsDouble();	        		
+	       	}
+	       	if (jobject.has("distance")){
+	        	city = jobject.get("distance").getAsDouble();	        		
+	        }	
+
         	ArrayList<Crime> c= usa.findStateByStateName(state).findLowestCrimeRate(count);
         	for (int i = 0; i < c.size(); i++){
         		System.out.println(c.get(i).getCity());
