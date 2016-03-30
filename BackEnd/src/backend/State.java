@@ -111,6 +111,9 @@ public class State extends Node {
 		message += "\n\t";
 		for (int i =0; i < cities.size(); i++){
 			message += cities.get(i);
+			if (i < cities.size() -1){
+				message += ", ";
+			}
 		}
 		
 		return message;

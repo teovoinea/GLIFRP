@@ -22,19 +22,13 @@ public class Usa extends Graph {
 		super();
 		q = new Query();
 		generateStates();
-		//this.printUSA();
-    	//ArrayList<Crime> c= findLowestCrimeRate(5);
-    	//for (int i =0; i < c.size();i++){
-    	//	System.out.println(c.get(i).getCity() +"," + c.get(i).getState() + ": " + c.get(i).getViolentCrime());
-    	//}
+		State newYork = this.findStateByStateName("New York");
+		ArrayList<State> neighbours = this.getNeighbouringStates(newYork, 2);
+		for (State n : neighbours){
+			System.out.println(n);
+		}
 		
-		//ArrayList<City> lcm = this.findLowestCrimeRate(2);
-		//System.out.println(lcm);
-		//System.out.println(lcm.get(0).getName());
-		//System.out.println(lcm.get(1).getName());
-		//State newYork = this.findStateByCity(nyc);
-		//System.out.println(newYork.findLowestCrimeRate().getCrime());
-		//System.out.println(newYork.findLowestCrimeRate(1).get(0).getName());
+		//System.out.println(newYork.findLowestCrimeRate(1).get(0).getCity());
 		//this.printUSA();
 	}
 
@@ -410,7 +404,7 @@ public class Usa extends Graph {
 		for (int i =0; i < this.getNodeCount(); i++){
 			System.out.println(this.getNode(i));
 		}
-		System.out.println("");
+
 	}
 	
 	public static void main(String[] args){
