@@ -84,6 +84,8 @@ public class City implements Comparable{
 		state = city_state;
 	}
 	
+	public City() {}//emptyconstructor
+	
 	/////////////////////////////////////GETTERS//////////////////////////////////////
 	/**
 	 * Returns latitude
