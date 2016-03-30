@@ -56,16 +56,16 @@ public class Main {
 	        		city = jobject.get("city").getAsString();
 	        	}
 	        	if (jobject.has("state")){
-	        		city = jobject.get("state").getAsString();	        		
+	        		state = jobject.get("state").getAsString();	        		
 	        	}
 	        	if (jobject.has("crime")){
-	        		city = jobject.get("crime").getAsDouble();	        		
+	        		crime = jobject.get("crime").getAsDouble();	        		
 	        	}
 	        	if (jobject.has("price")){
-	        		city = jobject.get("price").getAsDouble();	        		
+	        		price = jobject.get("price").getAsDouble();	        		
 	        	}
 	        	if (jobject.has("distance")){
-	        		city = jobject.get("distance").getAsInteger();	        		
+	        		distance = jobject.get("distance").getAsInteger();	        		
 	        	}
 
 
@@ -137,16 +137,16 @@ public class Main {
 	       		city = jobject.get("city").getAsString();
 	       	}
 	       	if (jobject.has("state")){
-	       		city = jobject.get("state").getAsString();	        		
+	       		state = jobject.get("state").getAsString();	        		
 	       	}
 	       	if (jobject.has("crime")){
-	       		city = jobject.get("crime").getAsDouble();	        		
+	       		crime = jobject.get("crime").getAsDouble();	        		
 	       	}
 	       	if (jobject.has("price")){
-	       		city = jobject.get("price").getAsDouble();	        		
+	       		price = jobject.get("price").getAsDouble();	        		
 	       	}
 	       	if (jobject.has("distance")){
-	        	city = jobject.get("distance").getAsDouble();	        		
+	        	distance = jobject.get("distance").getAsDouble();	        		
 	        }	
 
         	ArrayList<Crime> c= usa.findStateByStateName(state).findLowestCrimeRate(count);
