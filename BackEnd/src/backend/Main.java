@@ -48,10 +48,10 @@ public class Main {
 	        		return return_object.toJson(null);
 	        	}
 	        	String city;
-	        	String state;
+	        	String state = null;
 	        	double crime;
 	        	double price;
-	        	int distance;
+	        	int distance = 0;
 	        	if (jobject.has("city")){
 	        		city = jobject.get("city").getAsString();
 	        	}
@@ -65,7 +65,7 @@ public class Main {
 	        		price = jobject.get("price").getAsDouble();	        		
 	        	}
 	        	if (jobject.has("distance")){
-	        		distance = jobject.get("distance").getAsInteger();	        		
+	        		distance = jobject.get("distance").getAsInt();	        		
 	        	}
 
 
@@ -90,17 +90,25 @@ public class Main {
 	        	//}
 	        	//usa.printUSA();
 	        	
-	        	ArrayList<Crime> c= usa.findLowestCrimeRate(count);
-                for (int i = 0; i < c.size(); i++){
-                    mapwrap.buildByCityState(c.get(i).getCity(), c.get(i).getState());
-                    c.get(i).SetLat(mapwrap.getLat());
-                    c.get(i).SetLon(mapwrap.getLon());
-                }        	
+	        	//ArrayList<City> c= usa.findLowestCrimeRate(count);
+                //for (int i = 0; i < c.size(); i++){
+                //    mapwrap.buildByCityState(c.get(i).getPlace_name(), c.get(i).getState());
+                //    c.get(i).setLat(mapwrap.getLat());
+                //    c.get(i).setLong(mapwrap.getLon());
+                //}        	
 	        	
+         
+                ArrayList<City> hopCities = usa.findLowestCrimeRate(usa.getNeighbouringStates(usa.findStateByStateName(state), distance),count);
+                
+                for (City c : hopCities){
+                	mapwrap.buildByCityState(c.getPlace_name(), c.getState());
+                    c.setLat(mapwrap.getLat());
+                    c.setLong(mapwrap.getLon());
+                }
 	        	Gson return_object= new GsonBuilder().create();
         		response.type("application/javascript");
         		response.status(200);
-        		return return_object.toJson(c);
+        		return return_object.toJson(hopCities);
         	}
         	catch (Exception e){
         		response.type("text/plain");
@@ -129,7 +137,6 @@ public class Main {
         	}
         	
         	String city;
-	       	String state;
 	       	double crime;
 	       	double price;
 	       	double distance;
@@ -149,17 +156,17 @@ public class Main {
 	        	distance = jobject.get("distance").getAsDouble();	        		
 	        }	
 
-        	ArrayList<Crime> c= usa.findStateByStateName(state).findLowestCrimeRate(count);
+        	ArrayList<City> c= usa.findStateByStateName(state).findLowestCrimeRate(count);
         	for (int i = 0; i < c.size(); i++){
-        		System.out.println(c.get(i).getCity());
-                mapwrap.buildByCityState(c.get(i).getCity(), c.get(i).getState());
-                c.get(i).SetLat(mapwrap.getLat());
-                c.get(i).SetLon(mapwrap.getLon());
+        		//System.out.println(c.get(i).getCity());
+                mapwrap.buildByCityState(c.get(i).getPlace_name(), c.get(i).getState());
+                c.get(i).setLat(mapwrap.getLat());
+                c.get(i).setLong(mapwrap.getLon());
             }
-        	Crime[] cities2 = c.toArray(new Crime[c.size()]);
+        	City[] cities2 = c.toArray(new City[c.size()]);
     		Sorting.SortByType(3, cities2);
     		
-    		c =new ArrayList<Crime>(Arrays.asList(cities2));	
+    		c =new ArrayList<City>(Arrays.asList(cities2));	
         	
         	Gson return_object= new GsonBuilder().create();
     		response.type("application/javascript");

@@ -28,7 +28,6 @@ public class City implements Comparable{
 	private String uState;
 	@SerializedName("name")
 	private String name;	 //name of city
-	@SerializedName("zip")
 	
 	//Data pulled from a query
 	//Crime
@@ -82,6 +81,25 @@ public class City implements Comparable{
 //		lon = mapwrap.getLon();
 		name = city_name;
 		state = city_state;
+	}
+	
+	public City(int id, String state, String city, int population, int violentCrime, int murder, int rape, int robbery, int assault, int property, int burglary, int larceny, int motor, int arson)
+	{
+
+		this.place_id = Integer.toString(id);
+		this.state = state; 
+		this.place_name = city;
+		this.population = population;
+		this.violentCrime = violentCrime;
+		this.murder = murder;
+		this.rape = rape;
+		this.robbery = robbery;
+		this.assault = assault;
+		this.property = property;
+		this.burglary = burglary;
+		this.larceny = larceny;
+		this.motor = motor;
+		this.arson = arson;
 	}
 	
 	/////////////////////////////////////GETTERS//////////////////////////////////////

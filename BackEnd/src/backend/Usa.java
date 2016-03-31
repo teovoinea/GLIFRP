@@ -23,10 +23,10 @@ public class Usa extends Graph {
 		q = new Query();
 		generateStates();
 		State newYork = this.findStateByStateName("New York");
-		ArrayList<State> neighbours = this.getNeighbouringStates(newYork, 2);
-		for (State n : neighbours){
-			System.out.println(n);
-		}
+		//ArrayList<State> neighbours = this.getNeighbouringStates(newYork, 2);
+		//for (State n : neighbours){
+		//	System.out.println(n);
+		//}
 		
 		//System.out.println(newYork.findLowestCrimeRate(1).get(0).getCity());
 		//this.printUSA();
@@ -120,28 +120,43 @@ public class Usa extends Graph {
 	    return states;
 	}
 
-	public ArrayList<Crime> findLowestCrimeRate(int length) {
+	public ArrayList<City> findLowestCrimeRate(ArrayList<State> states,int length){
+		ArrayList<City> lcmCities = new ArrayList<City>();
+		for (int i = 0; i < states.size();i++){
+			lcmCities.addAll(states.get(i).findLowestCrimeRate(length));
+		}
+		
+		City[] cities2 = lcmCities.toArray(new City[lcmCities.size()]);
+		Sorting.SortByType(3, cities2);
+		
+		lcmCities =new ArrayList<City>(Arrays.asList(cities2));	
+		
+		return new ArrayList<City>(lcmCities.subList(0, length));
+		
+	}
+	
+	public ArrayList<City> findLowestCrimeRate(int length) {
 		if (this.isEmpty()){
 			System.out.println("Your list is empty");
 			return null;
 		}
 		State state = (State) this.getNode(0);
-		ArrayList<Crime> lcmCities = new ArrayList<Crime>();
+		ArrayList<City> lcmCities = new ArrayList<City>();
 		lcmHelper(lcmCities, length, state);
 		this.resetMarked();
 		
 		
-		Crime[] cities2 = lcmCities.toArray(new Crime[lcmCities.size()]);
+		City[] cities2 = lcmCities.toArray(new City[lcmCities.size()]);
 		Sorting.SortByType(3, cities2);
 		
-		lcmCities =new ArrayList<Crime>(Arrays.asList(cities2));	
+		lcmCities =new ArrayList<City>(Arrays.asList(cities2));	
 		
-		return new ArrayList<Crime>(lcmCities.subList(0, length));
+		return new ArrayList<City>(lcmCities.subList(0, length));
 	}
 	
-	public void lcmHelper(ArrayList<Crime> cities, int length, State state){
+	public void lcmHelper(ArrayList<City> cities, int length, State state){
 		state.setMarked(true);
-		ArrayList<Crime> c = state.findLowestCrimeRate(length);
+		ArrayList<City> c = state.findLowestCrimeRate(length);
 		if (c != null){
 			cities.addAll(c);
 		}

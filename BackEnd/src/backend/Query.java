@@ -10,11 +10,11 @@ public class Query
 {
 	private String dbc, dbh, queryCityData, queryCrimeData, queryHousingData, queryNames;
 	private City city;
-	private Crime d;
+	private City d;
 	
 	private ArrayList<String> stateNames = new ArrayList();
 	private ArrayList<String> cityNames = new ArrayList();
-	private ArrayList<Crime> lowestCrime = new ArrayList();
+	private ArrayList<City> lowestCrime = new ArrayList();
 	
 	public City getCityData(String city) 
 	{
@@ -29,7 +29,7 @@ public class Query
 		return this.city;
 	}
 
-	public ArrayList<Crime> getLowestCrime(String state, int n)
+	public ArrayList<City> getLowestCrime(String state, int n)
 	{
 		lowestCrime.clear();
 		queryCrimeData = "SELECT * FROM Crime WHERE state=\'" + state.toUpperCase() + "\' ORDER BY Violent_crime LIMIT " + Integer.toString(n) + ";";
@@ -179,7 +179,7 @@ public class Query
 					int motor = rs.getInt("Motor_vehicle_theft");
 					int arson = rs.getInt("Arson");
 
-					d = new Crime(id, state, city, population, violent_Crime, murder, rape, robbery, assault, property, burglary, larceny, motor, arson);
+					d = new City(id, state, city, population, violent_Crime, murder, rape, robbery, assault, property, burglary, larceny, motor, arson);
 				
 					lowestCrime.add(d);
 				}

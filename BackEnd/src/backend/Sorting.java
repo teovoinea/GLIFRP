@@ -94,7 +94,7 @@ public class Sorting{
 		Comparable v = a[lo];
 		int i = lo;
 		while (i <= gt){
-			int cmp = ((Crime)a[i]).compareTo((Crime)v, sortBy);
+			int cmp = ((City)a[i]).compareTo((City)v, sortBy);
 			if (cmp < 0) exch(a, lt++, i++);
 			else if (cmp > 0) exch(a, i, gt--);
 			else i++;
