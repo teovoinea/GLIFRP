@@ -11,6 +11,7 @@ public class Main {
     private static Usa usa; 
     private Gson gson = new Gson();
     private static OpenStreetMapWrapper mapwrap = new OpenStreetMapWrapper();
+    public static Query q = new Query();
     
     public static void main(String[] args) {
         usa = new Usa();
@@ -102,10 +103,10 @@ public class Main {
                 
                 ArrayList<City> final_out = new ArrayList<City>();
                 for (City c : hopCities){
-                	mapwrap.buildByCityState(c.getName(), c.getState());
+                	mapwrap.buildByCityState(c.getName(), c.getUState());
                     c.setLat(mapwrap.getLat());
                     c.setLong(mapwrap.getLon());
-                    final_out.add(c);
+                    final_out.add(q.getCityByCrime(c));
                 }
 	        	Gson return_object= new GsonBuilder().create();
         		response.type("application/javascript");

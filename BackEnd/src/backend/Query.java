@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -120,21 +121,24 @@ public class Query
 		queryCrimeData = "SELECT * FROM Crime WHERE state=\'" + state.toUpperCase() + "\' ORDER BY Violent_crime LIMIT " + Integer.toString(n) + ";";
 		runQuery(dbc,queryCrimeData,"Crime", n);
 		
-		//Assuming that n is not 0 for the moment
-		for(int i = 0; i < n; i++)
-		{
-			String name = lowestCrime.get(i).getName();
-			
-			name = name.replace("\'", "\'\'");
-			
-			
-			queryCityData = "SELECT * FROM Cities WHERE city=\'" + name + "\' AND state=\'" + states.get(state.toLowerCase()) + "\';";
-			queryHousingData = "SELECT id, place_name, place_id, period, index_nsa, index_sa, MAX(year) FROM Houses WHERE place_name LIKE \'%" + name + "%" + states.get(state.toLowerCase()) + "%\';";
-			
-			runQuery(dbh, queryCityData, "City", i);//query all three databases
-			runQuery(dbh, queryHousingData, "Housing", i);
-		}
 		return lowestCrime;
+	}
+	
+	public City getCityByCrime(City c)
+	{
+		this.city = c;
+		String name = c.getName();
+		
+		name = name.replace("\'", "\'\'");
+		
+		
+		queryCityData = "SELECT * FROM Cities WHERE city=\'" + name + "\' AND state=\'" + states.get(c.getState()) + "\';";
+		queryHousingData = "SELECT id, place_name, place_id, period, index_nsa, index_sa, MAX(year) FROM Houses WHERE place_name LIKE \'%" + name + "%" + states.get(c.getState()) + "%\';";
+		
+		runQuery(dbh, queryCityData, "City", -1);//query all three databases
+		runQuery(dbh, queryHousingData, "Housing", -1);
+		
+		return this.city;
 	}
 
 	public ArrayList<String> getStateNames()
