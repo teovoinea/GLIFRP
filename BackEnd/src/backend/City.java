@@ -101,6 +101,7 @@ public class City implements Comparable{
 		this.motor = motor;
 		this.arson = arson;
 	}
+
 	
 	/////////////////////////////////////GETTERS//////////////////////////////////////
 	/**
