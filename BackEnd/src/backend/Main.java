@@ -100,15 +100,17 @@ public class Main {
          
                 ArrayList<City> hopCities = usa.findLowestCrimeRate(usa.getNeighbouringStates(usa.findStateByStateName(state), distance),count);
                 
+                ArrayList<City> final_out = new ArrayList<City>();
                 for (City c : hopCities){
-                	mapwrap.buildByCityState(c.getPlace_name(), c.getState());
+                	mapwrap.buildByCityState(c.getName(), c.getState());
                     c.setLat(mapwrap.getLat());
                     c.setLong(mapwrap.getLon());
+                    final_out.add(c);
                 }
 	        	Gson return_object= new GsonBuilder().create();
         		response.type("application/javascript");
         		response.status(200);
-        		return return_object.toJson(hopCities);
+        		return return_object.toJson(final_out);
         	}
         	catch (Exception e){
         		response.type("text/plain");

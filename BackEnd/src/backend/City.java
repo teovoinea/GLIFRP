@@ -83,6 +83,8 @@ public class City implements Comparable{
 		state = city_state;
 	}
 	
+	public City() {}
+	
 	public City(int id, String state, String city, int population, int violentCrime, int murder, int rape, int robbery, int assault, int property, int burglary, int larceny, int motor, int arson)
 	{
 

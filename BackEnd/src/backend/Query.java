@@ -6,20 +6,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Query
 {
 	private String dbc, dbh, queryCityData, queryCrimeData, queryHousingData, queryNames;
 	private City city;
+	private City d;
 	
 	private ArrayList<String> stateNames = new ArrayList<String>();
 	private ArrayList<String> cityNames = new ArrayList<String>();
 	private ArrayList<City> lowestCrime = new ArrayList<City>();
+
+	Map<String, String> states = new HashMap<String, String>();
+	
 	
 	public City getCityData(String city) 
 	{
+		city = city.replace("\'", "\\\'");
+		
 		queryCityData = "SELECT * FROM Cities WHERE city=\'" + city + "\';";
-		queryHousingData = "SELECT id, place_name, placeid, period, index_nsa, index_sa, MAX(year) FROM Houses WHERE place_name LIKE \'%" + city + "\' ;";
+		queryHousingData = "SELECT id, place_name, place_id, period, index_nsa, index_sa, MAX(year) FROM Houses WHERE place_name LIKE \'%" + city + "\' ;";
 		queryCrimeData = "SELECT * FROM Crime WHERE City=\'" + city + "\';";
 		
 		runQuery(dbh, queryCityData, "City", -1);//query all three databases
@@ -28,24 +36,104 @@ public class Query
 		
 		return this.city;
 	}
+	
+	private void getStateCode()
+	{
+		
+		states.put("alabama","AL");
+		states.put("alaska","AK");
+		states.put("alberta","AB");
+		states.put("american Samoa","AS");
+		states.put("arizona","AZ");
+		states.put("arkansas","AR");
+		states.put("armed Forces (AE)","AE");
+		states.put("armed Forces Americas","AA");
+		states.put("armed Forces Pacific","AP");
+		states.put("british Columbia","BC");
+		states.put("california","CA");
+		states.put("colorado","CO");
+		states.put("connecticut","CT");
+		states.put("delaware","DE");
+		states.put("district of columbia","DC");
+		states.put("florida","FL");
+		states.put("georgia","GA");
+		states.put("guam","GU");
+		states.put("hawaii","HI");
+		states.put("idaho","ID");
+		states.put("illinois","IL");
+		states.put("indiana","IN");
+		states.put("iowa","IA");
+		states.put("kansas","KS");
+		states.put("kentucky","KY");
+		states.put("louisiana","LA");
+		states.put("maine","ME");
+		states.put("manitoba","MB");
+		states.put("maryland","MD");
+		states.put("massachusetts","MA");
+		states.put("michigan","MI");
+		states.put("minnesota","MN");
+		states.put("mississippi","MS");
+		states.put("missouri","MO");
+		states.put("montana","MT");
+		states.put("nebraska","NE");
+		states.put("nevada","NV");
+		states.put("new brunswick","NB");
+		states.put("new hampshire","NH");
+		states.put("new jersey","NJ");
+		states.put("new mexico","NM");
+		states.put("new uork","NY");
+		states.put("newfoundland","NF");
+		states.put("north carolina","NC");
+		states.put("north dakota","ND");
+		states.put("northwest nerritories","NT");
+		states.put("nova scotia","NS");
+		states.put("nunavut","NU");
+		states.put("ohio","OH");
+		states.put("oklahoma","OK");
+		states.put("ontario","ON");
+		states.put("oregon","OR");
+		states.put("pennsylvania","PA");
+		states.put("prince edward island","PE");
+		states.put("puerto rico","PR");
+		states.put("quebec","QC");
+		states.put("rhode island","RI");
+		states.put("saskatchewan","SK");
+		states.put("south carolina","SC");
+		states.put("south dakota","SD");
+		states.put("tennessee","TN");
+		states.put("texas","TX");
+		states.put("utah","UT");
+		states.put("vermont","VT");
+		states.put("virgin islands","VI");
+		states.put("virginia","VA");
+		states.put("washington","WA");
+		states.put("west Virginia","WV");
+		states.put("wisconsin","WI");
+		states.put("wyoming","WY");
+		states.put("yukon territory","YT");
+		
+	}
 
 	public ArrayList<City> getLowestCrime(String state, int n)
 	{
 		lowestCrime.clear();
-		
 		queryCrimeData = "SELECT * FROM Crime WHERE state=\'" + state.toUpperCase() + "\' ORDER BY Violent_crime LIMIT " + Integer.toString(n) + ";";
-		runQuery(dbc,queryCrimeData,"LowestCrime", n);
+		runQuery(dbc,queryCrimeData,"Crime", n);
 		
 		//Assuming that n is not 0 for the moment
 		for(int i = 0; i < n; i++)
 		{
-			queryCityData = "SELECT * FROM Cities WHERE city=\'" + lowestCrime.get(i).getName() + "\';";
-			queryHousingData = "SELECT id, place_name, placeid, period, index_nsa, index_sa, MAX(year) FROM Houses WHERE place_name LIKE \'%" + lowestCrime.get(i).getName() + "\' ;";
+			String name = lowestCrime.get(i).getName();
 			
-			runQuery(dbh, queryCityData, "City", n);//query all three databases
-			runQuery(dbh, queryHousingData, "Housing", n);
+			name = name.replace("\'", "\'\'");
+			
+			
+			queryCityData = "SELECT * FROM Cities WHERE city=\'" + name + "\' AND state=\'" + states.get(state.toLowerCase()) + "\';";
+			queryHousingData = "SELECT id, place_name, place_id, period, index_nsa, index_sa, MAX(year) FROM Houses WHERE place_name LIKE \'%" + name + "%" + states.get(state.toLowerCase()) + "%\';";
+			
+			runQuery(dbh, queryCityData, "City", i);//query all three databases
+			runQuery(dbh, queryHousingData, "Housing", i);
 		}
-		
 		return lowestCrime;
 	}
 
@@ -70,7 +158,8 @@ public class Query
 	public Query()
 	{
 		this.dbc = "jdbc:sqlite:" + "us_crime.db";
-		this.dbh = "jdbc:sqlite:" + "housing.db";		
+		this.dbh = "jdbc:sqlite:" + "housing.db";
+		getStateCode();
 	}
 	
 	
@@ -123,7 +212,7 @@ public class Query
 					String cityName = rs.getString("city");
 					cityNames.add(cityName);
 				}
-<<<<<<< HEAD
+/*<<<<<<< HEAD
 				
 				if(type.equals("LowestCrime"))
 				{
@@ -147,7 +236,7 @@ public class Query
 					lowestCrime.add(d);
 				}
 =======
->>>>>>> f3720602f817cdc1521a2a0bdefa7b1db72fe100
+>>>>>>> f3720602f817cdc1521a2a0bdefa7b1db72fe100*/
 			}
 
 			rs.close();
@@ -194,18 +283,18 @@ public class Query
 		int period = rs.getInt("period");
 		int nsa = rs.getInt("index_nsa");
 		int sa = rs.getInt("index_sa");
-		int year = rs.getInt("year");
+		//int year = rs.getInt("year");
 		if(n == -1)
 		{
 			this.city.setIndexNSA(nsa);
 			this.city.setIndexSA(sa);
-			this.city.setYear(year);
+			//this.city.setYear(year);
 		}
 		else
 		{
 			this.lowestCrime.get(n).setIndexNSA(nsa);
 			this.lowestCrime.get(n).setIndexSA(sa);
-			this.lowestCrime.get(n).setYear(year);
+			//this.lowestCrime.get(n).setYear(year);
 		}
 	}
 	
@@ -226,13 +315,11 @@ public class Query
 		int motor = rs.getInt("Motor_vehicle_theft");
 		int arson = rs.getInt("Arson");
 		
-		if(this.city == null)
-		{
-			this.city = new City();
-		}
+		this.city = new City();
 		
 		this.city.setUState(state);
 		this.city.setPopulation(population);
+		this.city.setName(city);
 		
 		this.city.setViolentCrime(violent_Crime);
 		this.city.setMurder(murder);

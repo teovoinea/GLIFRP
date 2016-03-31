@@ -6,7 +6,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 
 public class Usa extends Graph {
@@ -129,7 +131,7 @@ public class Usa extends Graph {
 		City[] cities2 = lcmCities.toArray(new City[lcmCities.size()]);
 		Sorting.SortByType(3, cities2);
 		
-		lcmCities =new ArrayList<City>(Arrays.asList(cities2));	
+		lcmCities =new ArrayList<City>(Arrays.asList(cities2));
 		
 		return new ArrayList<City>(lcmCities.subList(0, length));
 		
