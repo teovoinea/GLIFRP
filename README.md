@@ -19,6 +19,7 @@ To use this sign up for a Trello account
 	
 ___________________________________________________________________________________________
 # "Major" update history
+* April 1 - Teo - Created Unit Testing Branch
 * Mar 15 - CRTNP - Baboon (Prototype)
 * Mar 13 - R - Search by Crime Rate is completed
 * Mar 13 - C - Made Simple Scoring Algorithm (for prototype)
