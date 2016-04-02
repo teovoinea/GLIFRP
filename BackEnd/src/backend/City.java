@@ -34,17 +34,10 @@ public class City implements Comparable{
 	private int population, violentCrime, murder, rape, 
 		robbery, assault, property, burglary, larceny, motor, arson;
 	
-<<<<<<< HEAD
 	//Price Index
 	private String place_name, place_id;
 	private double index_nsa, index_sa, inflation;
 	private int period,year; 
-=======
-	
-	//Price Index
-	private String place_name, place_id;
-	private int period, index_nsa, index_sa, year;
->>>>>>> ccd66c5beefb3a75eca0669d65a29e615ddbfe69
 	
 	
 	/**
@@ -109,6 +102,7 @@ public class City implements Comparable{
 		this.larceny = larceny;
 		this.motor = motor;
 		this.arson = arson;
+		this.score = 10;
 	}
 
 	
@@ -278,22 +272,14 @@ public class City implements Comparable{
 	/**
 	 * @return the index_nsa
 	 */
-<<<<<<< HEAD
 	public double getIndex_nsa() {
-=======
-	public int getIndex_nsa() {
->>>>>>> ccd66c5beefb3a75eca0669d65a29e615ddbfe69
 		return index_nsa;
 	}
 
 	/**
 	 * @return the index_sa
 	 */
-<<<<<<< HEAD
 	public double getIndex_sa() {
-=======
-	public int getIndex_sa() {
->>>>>>> ccd66c5beefb3a75eca0669d65a29e615ddbfe69
 		return index_sa;
 	}
 
@@ -304,7 +290,6 @@ public class City implements Comparable{
 		return year;
 	}
 	
-<<<<<<< HEAD
 	/**
 	 * calculates the price inflation given a certain time period.
 	 * @param priceIndex - holds information on housing prices over the years.
@@ -313,8 +298,6 @@ public class City implements Comparable{
 	public double getpriceInflation(){
 		return inflation;
 	}
-=======
->>>>>>> ccd66c5beefb3a75eca0669d65a29e615ddbfe69
 	
 	
 	///////////////////////////////////SETTERS////////////////////////////////////////
@@ -323,11 +306,11 @@ public class City implements Comparable{
 	 * Set the Inflation, 
 	 */
 	public void setInflation(){
-		if (index_nsa != 0.0 && index_sa !=0.0){
+		//if (index_nsa != 0.0 && index_sa !=0.0){
 			inflation  = (((index_nsa - index_sa)/index_sa) * 100);
-		}else {
-			System.out.println("Indeces have to be set first.");
-		}
+		//}else {
+			//System.out.println("Indeces have to be set first.");
+		//}
 			
 	}
 	
@@ -363,12 +346,13 @@ public class City implements Comparable{
 		//for prototype we will have this weighting of Crime and housing
 		
 		// if crime and Price have values
-		if ((getCrime() != 0.0) && (getPrice() != 0.0 )){
-			calculateScore(6,4);
-		}else {
-			System.out.println(" Either Crime or Housing Prices have to be set ");
-		}
+		//if ((getCrime() != 0.0) && (getPrice() != 0.0 )){
 		
+		//}else {
+		//	System.out.println(" Either Crime or Housing Prices have to be set ");
+		//}
+		
+		this.score  = (int) calculateScore(6,4);
 	}
 	
 	public void setLat(String lat){
@@ -519,12 +503,6 @@ public class City implements Comparable{
 		this.year = year;
 	}
 	
-<<<<<<< HEAD
-=======
-	
-	
-	///////////////////////////////////PRIVATE FUNCTIONS//////////////////////////////
->>>>>>> ccd66c5beefb3a75eca0669d65a29e615ddbfe69
 	
 	
 	///////////////////////////////////PRIVATE FUNCTIONS//////////////////////////////
@@ -532,14 +510,22 @@ public class City implements Comparable{
 	 * Generate a Score for a city. A Score that the City receives based on crimes and housing inflation
 	 * @param crimes - holds information on different type of crime.
 	 * @param priceIndex - holds information on the housing market.
+	 * @return 
 	 */
-	private void calculateScore(int crimeWeight, int indexWeight ){
+	private double calculateScore(int crimeWeight, int indexWeight ){
 		
 		//variables
-		double houseScore = (((index_nsa - index_sa)/index_sa) * 100)*2 ; //the *2 at the end is to make houseScore
+		double houseScore  = 0;
+		if (index_sa != 0){
+			houseScore = (((this.index_nsa - this.index_sa)/this.index_sa) * 100)*indexWeight ;
+		}
 		double crimeScore = 0.0;
 		double maxScore = 500;
 		double cityScore = 0.0;						//returning Score
+		
+		//System.out.println("Index nsa: " + this.index_nsa + " , indes sa: " + this.index_sa);
+	
+		//System.out.println("Crime S: " + crimeScore + " , cityScore: " + cityScore  + " , maxScore:" + maxScore ) ;
 		
 		//Different types of crimes
 		//arson
@@ -554,26 +540,26 @@ public class City implements Comparable{
 		//violentCrime
 		
 		//temporary weights
-		double wtArson = 1.5;
-		double wtAssualt = 1.5;
-		int wtBurglary = 1;
-		double wtLarceny = 1.5;
-		double wtMotor = 1.5 ;
-		int wtMurder = 4;
-		double wtProperty = 1.5;
-		double wtRape = 2.5;
-		int wtRobbery = 1;
-		int wtViolentCrime = 2;
+		double wtArson = 8;
+		double wtAssualt = 8;
+		int wtBurglary = 5;
+		double wtLarceny = 7;
+		double wtMotor = 5 ;
+		int wtMurder = 15;
+		double wtProperty = 7;
+		double wtRape = 10;
+		int wtRobbery = 5;
+		int wtViolentCrime = 15;
 		
-		crimeScore += arson*wtArson + assault*wtAssualt + burglary*wtBurglary + larceny*wtLarceny;  
-		crimeScore 	+=  motor*wtMotor + murder*wtMurder + property*wtProperty + rape*wtRape + robbery*wtRobbery + violentCrime*wtViolentCrime;
-		crimeScore = crimeScore/population;
+		crimeScore = this.arson*wtArson + this.assault*wtAssualt + this.burglary*wtBurglary + this.larceny*wtLarceny +  this.motor*wtMotor + this.murder*wtMurder + this.property*wtProperty + this.rape*wtRape + this.robbery*wtRobbery + this.violentCrime*wtViolentCrime;
+		crimeScore = (crimeScore/this.population) * 100;
 		crimeScore = crimeScore*crimeWeight;
 		
-		houseScore = houseScore * indexWeight;
 		cityScore = maxScore - crimeScore - houseScore;
-		score = cityScore;
-		//return cityScore;
+		//System.out.println("---- DONE CALC ----------");
+		//System.out.println("Crime S: " + crimeScore + " , cityScore: " + cityScore + " , maxScore:" + maxScore ) ;
+		
+		return cityScore;
 	}
 	
 	/**
