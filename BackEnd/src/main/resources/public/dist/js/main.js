@@ -1,4 +1,7 @@
 var map;
+window.distance = 0;
+window.crime = 0;
+window.price = 0;
 function setData(selector,percent){
   var transform_styles = ['-webkit-transform',
                         '-ms-transform',
@@ -10,7 +13,7 @@ function setData(selector,percent){
   $(selector + " .fill, "+selector+" .mask.full").css(transform_styles[i],"rotate("+fill_rotation+"deg)");
   $(selector+" .fill.fix").css(transform_styles[i],"rotate("+fix_rotation+"deg)");
  }
- $(selector + " .stat-title span").html(percent * 100+"%");
+ $(selector + " .stat-title span").html(parseInt(percent * 100)+"%");
 }
 
 function explore(){
@@ -83,9 +86,11 @@ $(document).ready(function(){
     step: 2,
     slide: function(event,ui){
       $("#amount-crime").html(ui.value+"");
+      window.crime = ui.value;
     }
   });
   $("#amount-crime").html(10+"");
+  window.crime=10;
 
   $("#slider-price").slider({
     value: 150000,
@@ -94,11 +99,26 @@ $(document).ready(function(){
     step: 200,
     slide: function(event,ui){
       $("#amount-price").html("$" + ui.value+"");
+      window.price = ui.value;
     }
   });
   $("#amount-price").html("$5000");
+  window.price = 5000;
+    $("#slider-distance").slider({
+        value: 2,
+        min: 0,
+        max: 50,
+        step: 1,
+        slide: function(event,ui){
+            $("#amount-distance").html(ui.value +" states away");
+            window.distance = ui.value;
+        }
+    });
+    $("#amount-distance").html("2 states away");
+    window.distance = 2;
+
   $("#info-popup").animate({"opacity":0},0).css({"display":"none","pointer-events":"none"});
-  setData("#stat-bar",0.6);
+  setData("#stat-bar",0.0);
 });
 
 /**L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
