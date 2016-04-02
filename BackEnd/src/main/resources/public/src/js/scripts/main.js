@@ -1,5 +1,5 @@
 var map;
-function setData(selector,percent){  
+function setData(selector,percent){
   var transform_styles = ['-webkit-transform',
                         '-ms-transform',
                         'transform'];
@@ -97,6 +97,17 @@ $(document).ready(function(){
     }
   });
   $("#amount-price").html("$5000");
+    $("#slider-distance").slider({
+        value: 100,
+        min: 100,
+        max: 4300,
+        step: 100,
+        slide: function(event,ui){
+            $("#amount-distance").html(ui.value +"km");
+        }
+    });
+    $("#amount-distance").html("2 states away");
+
   $("#info-popup").animate({"opacity":0},0).css({"display":"none","pointer-events":"none"});
   setData("#stat-bar",0.0);
 });

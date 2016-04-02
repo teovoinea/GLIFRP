@@ -34,10 +34,17 @@ public class City implements Comparable{
 	private int population, violentCrime, murder, rape, 
 		robbery, assault, property, burglary, larceny, motor, arson;
 	
+<<<<<<< HEAD
 	//Price Index
 	private String place_name, place_id;
 	private double index_nsa, index_sa, inflation;
 	private int period,year; 
+=======
+	
+	//Price Index
+	private String place_name, place_id;
+	private int period, index_nsa, index_sa, year;
+>>>>>>> ccd66c5beefb3a75eca0669d65a29e615ddbfe69
 	
 	
 	/**
@@ -271,14 +278,22 @@ public class City implements Comparable{
 	/**
 	 * @return the index_nsa
 	 */
+<<<<<<< HEAD
 	public double getIndex_nsa() {
+=======
+	public int getIndex_nsa() {
+>>>>>>> ccd66c5beefb3a75eca0669d65a29e615ddbfe69
 		return index_nsa;
 	}
 
 	/**
 	 * @return the index_sa
 	 */
+<<<<<<< HEAD
 	public double getIndex_sa() {
+=======
+	public int getIndex_sa() {
+>>>>>>> ccd66c5beefb3a75eca0669d65a29e615ddbfe69
 		return index_sa;
 	}
 
@@ -289,6 +304,7 @@ public class City implements Comparable{
 		return year;
 	}
 	
+<<<<<<< HEAD
 	/**
 	 * calculates the price inflation given a certain time period.
 	 * @param priceIndex - holds information on housing prices over the years.
@@ -297,6 +313,8 @@ public class City implements Comparable{
 	public double getpriceInflation(){
 		return inflation;
 	}
+=======
+>>>>>>> ccd66c5beefb3a75eca0669d65a29e615ddbfe69
 	
 	
 	///////////////////////////////////SETTERS////////////////////////////////////////
@@ -501,6 +519,12 @@ public class City implements Comparable{
 		this.year = year;
 	}
 	
+<<<<<<< HEAD
+=======
+	
+	
+	///////////////////////////////////PRIVATE FUNCTIONS//////////////////////////////
+>>>>>>> ccd66c5beefb3a75eca0669d65a29e615ddbfe69
 	
 	
 	///////////////////////////////////PRIVATE FUNCTIONS//////////////////////////////

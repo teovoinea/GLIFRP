@@ -55,17 +55,17 @@ public class State extends Node {
 	}
 	
 	public String findLowestCrimeRate(){
-		// sort cities by Crime rate
+		// sort cities by City rate
 		
 		return cities.get(0);
 	}
 	
-	public ArrayList<Crime> findLowestCrimeRate(int length){
+	public ArrayList<City> findLowestCrimeRate(int length){
 		if (cities.size() == 0){
 			return null;
 		}
 
-		ArrayList<Crime> c = q.getLowestCrime(this.getName(),length);
+		ArrayList<City> c = q.getLowestCrime(this.getName(),length);
 		//System.out.println(c);
 		return c;
 	}
@@ -111,6 +111,9 @@ public class State extends Node {
 		message += "\n\t";
 		for (int i =0; i < cities.size(); i++){
 			message += cities.get(i);
+			if (i < cities.size() -1){
+				message += ", ";
+			}
 		}
 		
 		return message;

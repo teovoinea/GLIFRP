@@ -3,10 +3,10 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"charset="UTF-8">
         <title>GLIFRP</title>
-		    <link rel="stylesheet" type="text/css" href="dist/css/jquery-ui.min.css">
+	    <link rel="stylesheet" type="text/css" href="dist/css/jquery-ui.min.css">
         <link rel="stylesheet" type="text/css" href="dist/css/style.min.css">
-		    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
-
+	    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+        <base href="./" />
         <script src="libs/jquery/dist/jquery.min.js"></script>
         <script src="libs/jquery-ui/jquery-ui.min.js"></script>
         <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
@@ -28,7 +28,10 @@
 	            <div class="slider" id="slider-crime"></div>
 	            <br /><br />
 	            Housing Budget: <span type="text" id="amount-price"></span><br /><br />
-	            <div id="slider-price" class="slider"></div><br /><br />
+	            <div id="slider-price" class="slider"></div>
+                <br /><br />
+                Distance: <span type="text" id="amount-distance"></span><br /><br />
+	            <div id="slider-distance" class="slider"></div><br /><br />
 	          </p>
 	        </div>
 	      </div>
@@ -36,7 +39,7 @@
 		        <div id="info-close" onclick="closeinfo()">
 		          <h1>X</h1>
 		        </div>
-		        <p id="info-popup-content">              
+		        <p id="info-popup-content">
 		        </p>
 		      </div>
 		      <div id="components">
@@ -49,7 +52,7 @@
 		            <div class="fill fix"></div>
 		          </div>
 		          <div class="stat-title">
-		            <h3>Crime Rate<br /><span style="width:50%;overlow:hidden;">20%</span></h3>
+		            <h3>Score<br /><span style="width:50%;overlow:hidden;">20%</span></h3>
 		          </div>
 		        </div>
 		        <div id="side-items">

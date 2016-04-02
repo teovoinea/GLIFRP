@@ -115,9 +115,9 @@ public class OpenStreetMapWrapper {
 			JsonObject jobject = jarray.get(0).getAsJsonObject();
 			lat = jobject.get("lat").getAsString(); //store lat
 			lon = jobject.get("lon").getAsString(); //store lon
-			JsonObject address = jobject.getAsJsonObject("address");
-			name = address.get("city").getAsString();//store city
-			state = address.get("state").getAsString();//store state
+			//JsonObject address = jobject.getAsJsonObject("address");
+			//name = address.get("city").getAsString();//store city
+			//state = address.get("state").getAsString();//store state
 		}
 		catch (Exception e){ //catch errors
 			e.printStackTrace();

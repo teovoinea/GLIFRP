@@ -52,7 +52,7 @@
         var marker_click = function(event){
           var obj = event.target.obj;
           setData("#stat-bar",obj.crime);
-          var content = "<h3 style='color:black'>"+obj.city+", "+obj.state+"</h3><strong>Population:</strong>"+obj.population;
+          var content = "<h3 style='color:black'>"+obj.name+", "+obj.uState+"</h3><strong>Population:</strong>"+obj.population;
           content = content + "<br/><strong>Longitude:</strong>"+obj.lon;
           content = content + "<br/><strong>Lattitude:</strong>"+obj.lat;
           $("#info-popup-content").html(content);
@@ -63,8 +63,8 @@
           for(var i = 0; i < arr.length;i++){
             var obj = arr[i];
             //map.setView([obj.lat,obj.lon],13);
-            obj.crime = obj.violentCrime/100;
-            var content = "<h3 style='color:black'>"+obj.city + ", " + obj.state + "</h3>";
+            obj.crime = obj.score;
+            var content = "<h3 style='color:black'>"+obj.name + ", " + obj.uState + "</h3>";
             content = content + "<br/><strong>Violent Crime:</strong>"+parseInt(obj.violentCrime);
             content = content + "<br/><strong>Burglary:</strong>"+parseInt(obj.burglary);
             content = content + "<br/><strong>Larceny:</strong>"+parseInt(obj.larceny);
@@ -83,20 +83,35 @@
         });
         main_markers.clearLayers();
         var content = "<h3 style='color:black'></h3><strong>No Info</strong>";
+        var count;
+        if(info.length == 2){
+            if(detectType(info[1]) == "STATE"){
+                count = 10;
+            }else{
+                $.ajax({
+                  url:"/search",
+                  type:"POST",
+                  data: '{"count":'+info[1].trim()+',"state":"'+info[0].trim()+'","crime":'+window.crime+',"price":'+window.price+',"distance":'+window.distance+'}'
+                }).done(function(res){display(res);});
+                return;
+            }
+        }else{
+            count = info[2];
+        }
         $("#info-popup-content").html(content);
-        if(detectType($("#search-box").val()) == "NUMBER"){
+        //if(detectType($("#search-box").val()) == "NUMBER"){
           $.ajax({
             url:"/search",
             type:"POST",
-            data: '{"count":'+info[0]+'}'
+            data: '{"count":'+count+',"city":"'+info[0].trim()+'","state":"'+info[1].trim()+'","crime":'+window.crime+',"price":'+window.price+',"distance":'+window.distance+'}'
           }).done(function(res){display(res);});
-        }else{
+        /*}else{
           $.ajax({
             url:"/searchLCMByState",
             type:"POST",
             data: '{"count":'+info[0]+',"state":"'+info[1].trim()+'"}'
           }).done(function(res){console.log(res);display(res);});
-        }
+      }*/
       }
     });
   });
