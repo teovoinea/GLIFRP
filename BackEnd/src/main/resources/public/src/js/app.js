@@ -51,10 +51,11 @@
 
         var marker_click = function(event){
           var obj = event.target.obj;
-          setData("#stat-bar",obj.crime);
+          setData("#stat-bar",obj.crime/500.0);
           var content = "<h3 style='color:black'>"+obj.name+", "+obj.uState+"</h3><strong>Population:</strong>"+obj.population;
           content = content + "<br/><strong>Longitude:</strong>"+obj.lon;
           content = content + "<br/><strong>Lattitude:</strong>"+obj.lat;
+          content = content + "<br/><strong>Overall Score:</strong>"+parseInt(obj.score);
           $("#info-popup-content").html(content);
         };
 
@@ -95,6 +96,13 @@
                 }).done(function(res){display(res);});
                 return;
             }
+        }else if(info.length == 1){
+            $.ajax({
+              url:"/search",
+              type:"POST",
+              data: '{"count":10,"state":"'+info[0].trim()+'","crime":'+window.crime+',"price":'+window.price+',"distance":'+window.distance+'}'
+            }).done(function(res){display(res);});
+            return;
         }else{
             count = info[2];
         }
@@ -112,7 +120,9 @@
             data: '{"count":'+info[0]+',"state":"'+info[1].trim()+'"}'
           }).done(function(res){console.log(res);display(res);});
       }*/
-      }
+  }else{
+      window.onInputFocus();
+  }
     });
   });
 

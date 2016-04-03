@@ -2,6 +2,7 @@ var map;
 window.distance = 0;
 window.crime = 0;
 window.price = 0;
+window.menuOpen = false;
 function setData(selector,percent){
   var transform_styles = ['-webkit-transform',
                         '-ms-transform',
@@ -61,16 +62,22 @@ $(document).ready(function(){
   map.on('click',onMapClick);*/
 
   function onInputFocus(){
+      if(window.menuOpen)return;
     var left = $("#top-bar h1").outerWidth() + 3;
     var top = $("#search-box").innerHeight();
     $("#menu").css({"left":"calc("+left+"px + 4vw)","top":top+"px","tab-index":2}).slideDown(20);
+    window.menuOpen = true;
   }
+  window.onInputFocus = onInputFocus;
   var mouseInMenu = false;
   function onInputBlur(){
+    if(!window.menuOpen)return;
     if(!mouseInMenu)$("#menu").slideUp(40).css({'tab-index':-1});
+    window.menuOpen = false;
   }
+  window.onInputBlur = onInputBlur;
   $("#menu").slideUp(0);
-  $("#search-box").on('focus',onInputFocus).on('blur',onInputBlur);
+  $("#search-box").on('focus',onInputFocus).on('blur',onInputBlur).on('click',onInputFocus);
   $("#menu").mouseenter(function(){mouseInMenu = true;});
   $("#menu").mouseleave(function(){
     mouseInMenu = false;
