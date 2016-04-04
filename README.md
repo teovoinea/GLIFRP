@@ -19,6 +19,7 @@ To use this sign up for a Trello account
 	
 ___________________________________________________________________________________________
 # "Major" update history
+* March 29 - C - Fnished Scoring Algorithm 
 * Mar 15 - CRTNP - Baboon (Prototype)
 * Mar 13 - R - Search by Crime Rate is completed
 * Mar 13 - C - Made Simple Scoring Algorithm (for prototype)
