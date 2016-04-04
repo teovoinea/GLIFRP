@@ -35,7 +35,17 @@ function closeinfo(){
   $("#info-popup").animate({"opacity":0},100).css({"display":"none","pointer-events":"none"});
 }
 
+function load_anim(){
+    $($(".loading_bubble")[0]).fadeOut(400).fadeIn(400);
+    $($(".loading_bubble")[1]).delay(400).fadeOut(400).fadeIn(400);
+    $($(".loading_bubble")[2]).delay(800).fadeOut(400).fadeIn(400,function(){
+        load_anim();
+    });
+}
+
 $(document).ready(function(){
+    load_anim();
+    $("#loading").css({"display":"none"});
   map = L.map('map').setView([40.7127, -74.0059], 13);
 
   L.tileLayer('https://{s}.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
