@@ -3,6 +3,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"charset="UTF-8">
         <title>GLIFRP</title>
+        <link rel="icon" type="image/png" href="favicon-64.png" />
 	    <link rel="stylesheet" type="text/css" href="dist/css/jquery-ui.min.css">
         <link rel="stylesheet" type="text/css" href="dist/css/style.min.css">
 	    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
@@ -35,6 +36,11 @@
 	          </p>
 	        </div>
 	      </div>
+          <div id="loading">
+              <div class="loading_bubble"></div>
+              <div class="loading_bubble"></div>
+              <div class="loading_bubble"></div>
+          </div>
 		      <div id="info-popup">
 		        <div id="info-close" onclick="closeinfo()">
 		          <h1>X</h1>
@@ -52,7 +58,7 @@
 		            <div class="fill fix"></div>
 		          </div>
 		          <div class="stat-title">
-		            <h3>Score<br /><span style="width:50%;overlow:hidden;">20%</span></h3>
+		            <h3>Good Life Score<br /><span style="width:50%;overlow:hidden;">20%</span></h3>
 		          </div>
 		        </div>
 		        <div id="side-items">

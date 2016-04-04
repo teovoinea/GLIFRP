@@ -76,6 +76,7 @@
             mark.obj = obj;
             mark.on('click',marker_click);
             main_markers.addLayer(mark);
+            $("#loading").css({"display":"none"});
           }
           map.fitBounds(main_markers.getBounds().pad(0.5));
         };
@@ -85,6 +86,7 @@
         main_markers.clearLayers();
         var content = "<h3 style='color:black'></h3><strong>No Info</strong>";
         var count;
+        $("#loading").css({"display":"flex"});
         if(info.length == 2){
             if(detectType(info[1]) == "STATE"){
                 count = 10;
