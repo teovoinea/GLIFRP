@@ -42,7 +42,7 @@
 	  left: 0;
 	  right: 0;
 	  height: 100px;
-	  background-color: #D8D8D8;
+	  background-color: #263238;
 	  box-shadow: 0 3px 4px rgba(0,0,0,0.5);
 	}
 	#search-box{
@@ -89,6 +89,23 @@
 	}
 	#menu *{
 	  position: relative;
+	}
+
+	/*Loading Bubbles*/
+	#loading{
+		display: flex;
+		z-index: 1000;
+		position: absolute;
+		top: 45%;
+		left: 35%;
+	}
+	.loading_bubble{
+		margin: 20px;
+		position: relative;
+		background-color: white;
+		width: 75px;
+		height: 75px;
+		border-radius: 100%;
 	}
 
 	/*Popup Style*/
