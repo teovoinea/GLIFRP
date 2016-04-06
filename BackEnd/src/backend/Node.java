@@ -7,19 +7,17 @@ public abstract class Node{
 	private final int id;
 	private boolean visited;
 
+	/**
+	 * Constructor for a node just with an id
+	 * @param id - the id of the node
+	 */
 	public Node(int id){
 		adjacent = new ArrayList<Node>();
 		adjacentCount = 0;
 		this.id = id;
 		this.visited = false;
 	}
-
-	public Node(int id,ArrayList<Node> adjacencyList){
-		adjacent = adjacencyList;
-		adjacentCount = 0;
-		this.id = id;
-		this.visited = false;
-	}
+	
 	
 	/**
 	 * Get the Id of a node
@@ -30,10 +28,18 @@ public abstract class Node{
 		return id;
 	}
 
+	/**
+	 * Set this node as marked or not
+	 * @param mark - whether this node should be marked or not
+	 */
 	public void setMarked(boolean mark){
 		this.visited = mark;
 	}
 
+	/**
+	 * check whether this node is marked or not
+	 * @return boolean - whether this node is marked or not
+	 */
 	public boolean isMarked(){
 		return this.visited;
 	}
@@ -85,10 +91,12 @@ public abstract class Node{
 	 * @return The degree of the node
 	 */
 	public int degree(){
-		// make check to see if it touches self
 		return adjacent.size();
 	}
 	
+	/**
+	 * String representation of this node
+	 */
 	public String toString(){
 		return String.valueOf(this.getId());
 	}
@@ -103,6 +111,11 @@ public abstract class Node{
 		return (this.getId() == node.getId());
 	}
 	
+	/**
+	 * Check whether a node has a specific neighbour 
+	 * @param node - the neighbour node
+	 * @return boolean - whether or not this node has the neighbour node
+	 */
 	public boolean hasNeighbour(Node node){
 		for (int i = 0; i < adjacent.size();i++){
 			if (adjacent.get(i).equals(node)){

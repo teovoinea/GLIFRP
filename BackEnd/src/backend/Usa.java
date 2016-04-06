@@ -20,20 +20,20 @@ public class Usa extends Graph {
 	public static final int FIND_STATE_BY_STATE_NAME_FLAG = 5;
 	private Query q;
 
+	/**
+	 * Construct the USA object
+	 */
 	public Usa() {
 		super();
 		q = new Query();
 		generateStates();
-		State newYork = this.findStateByStateName("New York");
-		//ArrayList<State> neighbours = this.getNeighbouringStates(newYork, 2);
-		//for (State n : neighbours){
-		//	System.out.println(n);
-		//}
-		
-		//System.out.println(newYork.findLowestCrimeRate(1).get(0).getCity());
-		//this.printUSA();
 	}
 
+	/**
+	 * Find a State by the state
+	 * @param s - the state object
+	 * @return - the state
+	 */
 	public State findStateByState(State s) {
 		if (this.isEmpty()){
 			System.out.println("Your list is empty");
@@ -53,6 +53,11 @@ public class Usa extends Graph {
 		return null;
 	}
 	
+	/**
+	 * Find state by the name of the state
+	 * @param s - string representation of the states name
+	 * @return - state object
+	 */
 	public State findStateByStateName(String s) {
 		if (this.isEmpty()){
 			System.out.println("Your list is empty");
@@ -67,6 +72,11 @@ public class Usa extends Graph {
 		return null;
 	}
 
+	/**
+	 * Find a state by a city name
+	 * @param c - the city within your state
+	 * @return - the state with that city
+	 */
 	public State findStateByCity(City c) {
 		if (this.isEmpty()){
 			System.out.println("Your list is empty");
@@ -86,12 +96,24 @@ public class Usa extends Graph {
 		return null;
 	}
 	
+	/**
+	 * Get the neighbouring states up to a certain distance from a start state
+	 * @param state - start state
+	 * @param distance - how many states away
+	 * @return ArrayList<State> The states within a certain distance from your state
+	 */
 	public ArrayList<State> getNeighbouringStates(State state, int distance){
 		ArrayList<State> result = limitedBFSSearch(state,distance);
 		this.resetMarked();
 		return result;
 	}
 	
+	/**
+	 * BFS implementation that only searches for a specific distance
+	 * @param state - start state
+	 * @param distance - how many states away you are going to look 
+	 * @return - the states within distance hops from your start state
+	 */
 	public ArrayList<State> limitedBFSSearch(State state, int distance){
 		ArrayList<State> states = new ArrayList<State>();
 	    Queue<State> queue = new LinkedList<State>();
@@ -122,6 +144,12 @@ public class Usa extends Graph {
 	    return states;
 	}
 
+	/**
+	 * Find the lowest crime rate cities in a group of states
+	 * @param states - the states you are looking in
+	 * @param length - the amount of cities you want
+	 * @return ArrayList<City> - the list of Cities
+	 */
 	public ArrayList<City> findLowestCrimeRate(ArrayList<State> states,int length){
 		ArrayList<City> lcmCities = new ArrayList<City>();
 		for (int i = 0; i < states.size();i++){
@@ -137,6 +165,12 @@ public class Usa extends Graph {
 		
 	}
 	
+	/**
+	 * Find the lowest crime rate cities in the USA
+	 * 
+	 * @param length - how many lowest crime rate cities you want to find
+	 * @return ArrayList<City> - list of the lcm cities
+	 */
 	public ArrayList<City> findLowestCrimeRate(int length) {
 		if (this.isEmpty()){
 			System.out.println("Your list is empty");
@@ -156,6 +190,12 @@ public class Usa extends Graph {
 		return new ArrayList<City>(lcmCities.subList(0, length));
 	}
 	
+	/**
+	 * Helper function for the lowest crime rate search
+	 * @param cities - the list of lowest crime rate cities
+	 * @param length - how many cities you are looking for
+	 * @param state - the current state you are in
+	 */
 	public void lcmHelper(ArrayList<City> cities, int length, State state){
 		state.setMarked(true);
 		ArrayList<City> c = state.findLowestCrimeRate(length);
@@ -170,6 +210,10 @@ public class Usa extends Graph {
 		}
 	}
 
+	/**
+	 * Add a City to the state
+	 * @param c - city name that you are adding
+	 */
 	public void addCity(String c) {
 		if (this.isEmpty()){
 			System.out.println("Your list is empty");
@@ -181,6 +225,10 @@ public class Usa extends Graph {
 		this.resetMarked();
 	}
 
+	/**
+	 * Add a state to the Graph
+	 * @param c - the state you are adding
+	 */
 	private void addState(State c) {
 		if (this.containsState(c)) {
 			return;
@@ -188,6 +236,11 @@ public class Usa extends Graph {
 		addNode(c);
 	}
 
+	/**
+	 * Check whether a state is contained within the graph
+	 * @param state - State you are checking for
+	 * @return boolean - whether or not this state is contained
+	 */
 	public boolean containsState(State state) {
 		for (int i = 0; i < nodes.size(); i++) {
 			if (((State) nodes.get(i)).equalsName(state)) {
@@ -197,6 +250,14 @@ public class Usa extends Graph {
 		return false;
 	}
 
+	/**
+	 * Do a DFS with a return object
+	 * 
+	 * @param target - the extra object you are passing in (I.E the city when you are find state by a city)
+	 * @param n - the node you are doing your DFS from
+	 * @param flag - the flag for what action you want to do
+	 * @return Object - whatever the object you are return is (state or city)
+	 */
 	public Object rDFS(Object target, Node curNode, int flag) {
 		curNode.setMarked(true);
 		switch (flag) {
@@ -226,7 +287,13 @@ public class Usa extends Graph {
 		return null;
 	}
 
-	
+	/**
+	 * Run a DFS with a certain flag
+	 * 
+	 * @param target - the extra object you are passing in (I.E the city when you are adding a city)
+	 * @param n - the node you are doing your DFS from
+	 * @param flag - the flag for what action you want to do (The only one for this DFS is adding a city)
+	 */
 	public void DFS(Object target, Node n, int flag) {
 		n.setMarked(true);
 		if (flag == ADD_CITY_FLAG) {
@@ -245,7 +312,7 @@ public class Usa extends Graph {
 
 	/**
      * https://github.com/ubikuity/List-of-neighboring-states-for-each-US-state
-	 * uses information from this link in the form a csv file to determine which states neighbour which
+	 * uses information from this link in the form a csv file to determine which states neighbour which states
 	 */
 	private void generateStates() {
 		ArrayList<String> fileLines = new ArrayList<String>();
@@ -294,6 +361,7 @@ public class Usa extends Graph {
 	}
 
 	/**
+	 * Get State object from the String of the States code
 	 * 
 	 * @param s - String of two pairs of states
 	 * @return the two states as objects
@@ -417,6 +485,9 @@ public class Usa extends Graph {
 		return result;
 	}
 	
+	/**
+	 * Print all the state objects in the country
+	 */
 	public void printUSA(){
 		for (int i =0; i < this.getNodeCount(); i++){
 			System.out.println(this.getNode(i));

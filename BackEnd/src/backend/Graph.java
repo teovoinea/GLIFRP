@@ -93,6 +93,10 @@ abstract class Graph implements Searchable{
 		}
 	}
 
+	/**
+	 * Generate an MST from the Source node
+	 * @param source - node you start from
+	 */
 	private void generateMST(Node source){
 		ArrayList<Node[]> sets = new ArrayList<>();
 		HashMap<Node,Node> parent = new HashMap<>();
@@ -120,6 +124,12 @@ abstract class Graph implements Searchable{
 		}
 	}
 
+	/**
+	 * Check whether two nodes have an edge and return it if they do
+	 * @param v1 - the first node
+	 * @param v2 - the second node
+	 * @return Edge - the edge they have in common, null if they don't
+	 */
 	private Edge edgeWith(Node v1, Node v2){
 		if (edges.size() == 0){
 			return null;
@@ -133,6 +143,13 @@ abstract class Graph implements Searchable{
 		return null;
 	}
 
+	/**
+	 * Get the minimum key from the MST
+	 * 
+	 * @param q - the List of all the nodes
+	 * @param key - the Nodes with their corresponding keys
+	 * @return the minimum key from the MST
+	 */
 	private Node minkey(ArrayList<Node> q, HashMap<Node,Integer> key){
 		if(q.size() == 1) return q.get(0);
 		Node min = q.get(0);
@@ -144,12 +161,20 @@ abstract class Graph implements Searchable{
     return min;
 	}
 	
+	/**
+	 * Reset all the marked nodes to unmarked
+	 */
 	protected void resetMarked(){
 		for (int i= 0; i < this.getNodeCount();i++){
 			this.getNode(i).setMarked(false);
 		}
 	}
 	
+	/**
+	 * Check whether the graph contains a specific node
+	 * @param state - the node you are checking for 
+	 * @return boolean - whether the node is contained or not
+	 */
 	public boolean contains(Node state){
 		for (int i = 0; i < nodes.size(); i ++){
 			if ( nodes.get(i).equals(state)){
@@ -159,6 +184,10 @@ abstract class Graph implements Searchable{
 		return true;
 	}
 	
+	/**
+	 * Get whether or not the graph is empty
+	 * @return boolean - whether there are any nodes or not
+	 */
 	public boolean isEmpty(){
 		return this.getNodeCount() == 0;
 	}
