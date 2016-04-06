@@ -106,6 +106,7 @@ public class Main {
                 	mapwrap.buildByCityState(c.getName(), c.getUState());
                     c.setLat(mapwrap.getLat());
                     c.setLong(mapwrap.getLon());
+                    c.setScore();
                     final_out.add(q.getCityByCrime(c));
                 }
 	        	Gson return_object= new GsonBuilder().create();

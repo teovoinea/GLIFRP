@@ -34,10 +34,10 @@ public class City implements Comparable{
 	private int population, violentCrime, murder, rape, 
 		robbery, assault, property, burglary, larceny, motor, arson;
 	
-	
 	//Price Index
 	private String place_name, place_id;
-	private int period, index_nsa, index_sa, year;
+	private double index_nsa, index_sa, inflation;
+	private int period,year; 
 	
 	
 	/**
@@ -102,6 +102,7 @@ public class City implements Comparable{
 		this.larceny = larceny;
 		this.motor = motor;
 		this.arson = arson;
+		this.score = 10;
 	}
 
 	
@@ -271,14 +272,14 @@ public class City implements Comparable{
 	/**
 	 * @return the index_nsa
 	 */
-	public int getIndex_nsa() {
+	public double getIndex_nsa() {
 		return index_nsa;
 	}
 
 	/**
 	 * @return the index_sa
 	 */
-	public int getIndex_sa() {
+	public double getIndex_sa() {
 		return index_sa;
 	}
 
@@ -289,9 +290,29 @@ public class City implements Comparable{
 		return year;
 	}
 	
+	/**
+	 * calculates the price inflation given a certain time period.
+	 * @param priceIndex - holds information on housing prices over the years.
+	 * @return -the inflation over a certain period of time
+	 */
+	public double getpriceInflation(){
+		return inflation;
+	}
 	
 	
 	///////////////////////////////////SETTERS////////////////////////////////////////
+	
+	/**
+	 * Set the Inflation, 
+	 */
+	public void setInflation(){
+		//if (index_nsa != 0.0 && index_sa !=0.0){
+			inflation  = (((index_nsa - index_sa)/index_sa) * 100);
+		//}else {
+			//System.out.println("Indeces have to be set first.");
+		//}
+			
+	}
 	
 	/**
 	 * Set the Crime rate of the city
@@ -322,15 +343,16 @@ public class City implements Comparable{
 	 * Set the Score of the City
 	 */
 	public void setScore(){
-		//for prototype we will have this weighting of Crime and housing ?
+		//for prototype we will have this weighting of Crime and housing
 		
 		// if crime and Price have values
-		if ((getCrime() != 0.0) && (getPrice() != 0.0 )){
-			//calculateScore(6,4);
-		}else {
-			System.out.println(" Either Crime or Housing Prices have to be set ");
-		}
+		//if ((getCrime() != 0.0) && (getPrice() != 0.0 )){
 		
+		//}else {
+		//	System.out.println(" Either Crime or Housing Prices have to be set ");
+		//}
+		
+		this.score  = (int) calculateScore(6,4);
 	}
 	
 	public void setLat(String lat){
@@ -484,21 +506,26 @@ public class City implements Comparable{
 	
 	
 	///////////////////////////////////PRIVATE FUNCTIONS//////////////////////////////
-	
-	
-	//Not sure where to put these functions, CityData.java ?
 	/**
-	 * Generate a Score for a city.  
+	 * Generate a Score for a city. A Score that the City receives based on crimes and housing inflation
 	 * @param crimes - holds information on different type of crime.
 	 * @param priceIndex - holds information on the housing market.
-	 * @return - score that the City receives based on crimes and housing inflation
+	 * @return 
 	 */
-	public double calculateScore(Crime crimes, PriceIndex priceIndex){
+	private double calculateScore(int crimeWeight, int indexWeight ){
+		
 		//variables
-		double houseScore = ((priceIndex.getIndex_nsa() - priceIndex.getIndex_sa())/priceIndex.getIndex_sa()) * 100 ;
+		double houseScore  = 0;
+		if (index_sa != 0){
+			houseScore = (((this.index_nsa - this.index_sa)/this.index_sa) * 100)*indexWeight ;
+		}
 		double crimeScore = 0.0;
 		double maxScore = 500;
-		double cityScore = 0.0;			//returning Score
+		double cityScore = 0.0;						//returning Score
+		
+		//System.out.println("Index nsa: " + this.index_nsa + " , indes sa: " + this.index_sa);
+	
+		//System.out.println("Crime S: " + crimeScore + " , cityScore: " + cityScore  + " , maxScore:" + maxScore ) ;
 		
 		//Different types of crimes
 		//arson
@@ -513,30 +540,26 @@ public class City implements Comparable{
 		//violentCrime
 		
 		//temporary weights
-		int wtArson = 1;
-		int wtAssualt = 1;
-		int wtBurglary = 1;
-		int wtLarceny = 1;
-		int wtMotor =1 ;
-		int wtMurder = 1;
-		int wtProperty = 1;
-		int wtRape = 1;
-		int wtRobbery = 1;
-		int wtViolentCrime = 1;
-		int wtPriceIndex = 1;
+		double wtArson = 8;
+		double wtAssualt = 8;
+		int wtBurglary = 5;
+		double wtLarceny = 7;
+		double wtMotor = 5 ;
+		int wtMurder = 15;
+		double wtProperty = 7;
+		double wtRape = 10;
+		int wtRobbery = 5;
+		int wtViolentCrime = 15;
 		
-		crimeScore += crimes.getArson()*wtArson + crimes.getAssault()*wtAssualt + crimes.getBurglary()*wtBurglary + crimes.getLarceny()*wtLarceny;  
-		crimeScore 	+=  crimes.getMotor()*wtMotor + crimes.getMurder()*wtMurder + crimes.getProperty()*wtProperty + crimes.getRape()*wtRape + crimes.getRobbery()*wtRobbery + crimes.getViolentCrime()*wtViolentCrime;
-		houseScore = houseScore * wtPriceIndex;
+		crimeScore = this.arson*wtArson + this.assault*wtAssualt + this.burglary*wtBurglary + this.larceny*wtLarceny +  this.motor*wtMotor + this.murder*wtMurder + this.property*wtProperty + this.rape*wtRape + this.robbery*wtRobbery + this.violentCrime*wtViolentCrime;
+		crimeScore = (crimeScore/this.population) * 100;
+		crimeScore = crimeScore*crimeWeight;
+		
 		cityScore = maxScore - crimeScore - houseScore;
+		//System.out.println("---- DONE CALC ----------");
+		//System.out.println("Crime S: " + crimeScore + " , cityScore: " + cityScore + " , maxScore:" + maxScore ) ;
 		
 		return cityScore;
-		
-		//Note
-		//housing prices, range(0 to 100)?
-		//although the inflation rate can go over 100% it is highly unlikely,... if we take the inflation between last year and this year. 
-		//inflation could easily go over 100% if we decide to take inflation into account for a longer period of time ie (over 5 years of inflation) 
-		//for testing purposes I will assume a range of 0 to 100% of inflation rate	
 	}
 	
 	/**
@@ -544,10 +567,9 @@ public class City implements Comparable{
 	 * @param crimes
 	 * @return - Total crimes/population in percent 
 	 */
-	public double calculateCrimeRate(Crime crimes){
-		double totalCrime = totalCrime(crimes);
-		double population = crimes.getPopulation();
-		double crimeRate = (totalCrime/population)*100;		//percentage 
+	private double calculateCrimeRate(){
+		double totalCrime = totalCrime();
+		double crimeRate = (totalCrime/getPopulation())*100;		//percentage 
 		return crimeRate;
 	}
 	
@@ -556,20 +578,12 @@ public class City implements Comparable{
 	 * @param crimes
 	 * @return - the sum of all the crimes
 	 */
-	public double totalCrime(Crime crimes){
-		double totalCrime = crimes.getArson() + crimes.getAssault() + crimes.getBurglary() + crimes.getLarceny()  + crimes.getMotor() + crimes.getMurder() + crimes.getProperty() + crimes.getRape() + crimes.getRobbery() + crimes.getViolentCrime();
+	private double totalCrime(){
+		double totalCrime = arson + assault + burglary + larceny  + motor + murder + property + rape + robbery + violentCrime;
 		return totalCrime;
 	}
 	
-	/**
-	 * calculates the price inflation given a certain time period.
-	 * @param priceIndex - holds information on housing prices over the years.
-	 * @return -the inflation over a certain period of time
-	 */
-	public double priceInflation(PriceIndex priceIndex){
-		double retInflation = ((priceIndex.getIndex_nsa() - priceIndex.getIndex_sa())/priceIndex.getIndex_sa()) * 100;
-		return retInflation;
-	}
+
 	
 	//////////////////////////////////IMPLEMENTED FUNCTIONS////////////////////////////
 	/**

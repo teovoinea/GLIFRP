@@ -1,4 +1,8 @@
 var map;
+window.distance = 0;
+window.crime = 0;
+window.price = 0;
+window.menuOpen = false;
 function setData(selector,percent){
   var transform_styles = ['-webkit-transform',
                         '-ms-transform',
@@ -10,7 +14,7 @@ function setData(selector,percent){
   $(selector + " .fill, "+selector+" .mask.full").css(transform_styles[i],"rotate("+fill_rotation+"deg)");
   $(selector+" .fill.fix").css(transform_styles[i],"rotate("+fix_rotation+"deg)");
  }
- $(selector + " .stat-title span").html(percent * 100+"%");
+ $(selector + " .stat-title span").html(parseInt(percent * 100)+"%");
 }
 
 function explore(){
@@ -31,7 +35,17 @@ function closeinfo(){
   $("#info-popup").animate({"opacity":0},100).css({"display":"none","pointer-events":"none"});
 }
 
+function load_anim(){
+    $($(".loading_bubble")[0]).fadeOut(400).fadeIn(400);
+    $($(".loading_bubble")[1]).delay(400).fadeOut(400).fadeIn(400);
+    $($(".loading_bubble")[2]).delay(800).fadeOut(400).fadeIn(400,function(){
+        load_anim();
+    });
+}
+
 $(document).ready(function(){
+    load_anim();
+    $("#loading").css({"display":"none"});
   map = L.map('map').setView([40.7127, -74.0059], 13);
 
   L.tileLayer('https://{s}.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -58,16 +72,22 @@ $(document).ready(function(){
   map.on('click',onMapClick);*/
 
   function onInputFocus(){
+      if(window.menuOpen)return;
     var left = $("#top-bar h1").outerWidth() + 3;
     var top = $("#search-box").innerHeight();
     $("#menu").css({"left":"calc("+left+"px + 4vw)","top":top+"px","tab-index":2}).slideDown(20);
+    window.menuOpen = true;
   }
+  window.onInputFocus = onInputFocus;
   var mouseInMenu = false;
   function onInputBlur(){
+    if(!window.menuOpen)return;
     if(!mouseInMenu)$("#menu").slideUp(40).css({'tab-index':-1});
+    window.menuOpen = false;
   }
+  window.onInputBlur = onInputBlur;
   $("#menu").slideUp(0);
-  $("#search-box").on('focus',onInputFocus).on('blur',onInputBlur);
+  $("#search-box").on('focus',onInputFocus).on('blur',onInputBlur).on('click',onInputFocus);
   $("#menu").mouseenter(function(){mouseInMenu = true;});
   $("#menu").mouseleave(function(){
     mouseInMenu = false;
@@ -83,9 +103,11 @@ $(document).ready(function(){
     step: 2,
     slide: function(event,ui){
       $("#amount-crime").html(ui.value+"");
+      window.crime = ui.value;
     }
   });
   $("#amount-crime").html(10+"");
+  window.crime=10;
 
   $("#slider-price").slider({
     value: 150000,
@@ -94,11 +116,26 @@ $(document).ready(function(){
     step: 200,
     slide: function(event,ui){
       $("#amount-price").html("$" + ui.value+"");
+      window.price = ui.value;
     }
   });
   $("#amount-price").html("$5000");
+  window.price = 5000;
+    $("#slider-distance").slider({
+        value: 2,
+        min: 0,
+        max: 50,
+        step: 1,
+        slide: function(event,ui){
+            $("#amount-distance").html(ui.value +" states away");
+            window.distance = ui.value;
+        }
+    });
+    $("#amount-distance").html("2 states away");
+    window.distance = 2;
+
   $("#info-popup").animate({"opacity":0},0).css({"display":"none","pointer-events":"none"});
-  setData("#stat-bar",0.6);
+  setData("#stat-bar",0.0);
 });
 
 /**L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {

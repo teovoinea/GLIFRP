@@ -41,7 +41,7 @@ h3 {
   left: 0;
   right: 0;
   height: 100px;
-  background-color: #D8D8D8;
+  background-color: #263238;
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
 }
 #search-box {
@@ -74,7 +74,7 @@ h3 {
   display: none;
   background-color: white;
   z-index: 105;
-  width: calc(70vw);
+  width: calc(79.1vw);
   box-shadow: 0 4px 3px rgba(0, 0, 0, 0.5);
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -89,13 +89,29 @@ h3 {
 #menu * {
   position: relative;
 }
+/*Loading Bubbles*/
+#loading {
+  display: flex;
+  z-index: 1000;
+  position: absolute;
+  top: 45%;
+  left: 35%;
+}
+.loading_bubble {
+  margin: 20px;
+  position: relative;
+  background-color: white;
+  width: 75px;
+  height: 75px;
+  border-radius: 100%;
+}
 /*Popup Style*/
 #info-popup {
   pointer-events: auto;
   position: absolute;
   left: 30%;
   top: 130px;
-  height: calc(-105%);
+  bottom: 100px;
   width: 50%;
   border-radius: 10px;
   background-color: #D8D8D8;
@@ -105,6 +121,10 @@ h3 {
 }
 #info-popup p {
   padding: 0 10px;
+  overflow: scroll;
+}
+#info-popup p strong {
+  padding-right: 30px;
 }
 #info-close {
   cursor: pointer;
@@ -182,7 +202,7 @@ h3 {
 #side-items {
   position: absolute;
   left: -40px;
-  bottom: 40px;
+  top: 200px;
   width: 250px;
   height: 200px;
 }

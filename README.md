@@ -1,4 +1,8 @@
 # GLIFRP
+Live demo can be found here:
+<a href="http://ec2-52-38-0-246.us-west-2.compute.amazonaws.com:4567/index.html">Demo</a>
+
+
 Scrum board can be found here: 
 <a href="https://trello.com/b/YEKUDQie">GLFRP Scrum Board</a>
 To use this sign up for a Trello account
@@ -19,6 +23,7 @@ To use this sign up for a Trello account
 	
 ___________________________________________________________________________________________
 # "Major" update history
+* March 29 - C - Fnished Scoring Algorithm 
 * Mar 15 - CRTNP - Baboon (Prototype)
 * Mar 13 - R - Search by Crime Rate is completed
 * Mar 13 - C - Made Simple Scoring Algorithm (for prototype)
@@ -42,7 +47,9 @@ ________________________________________________________________________________
 * Feb 27 - N - Added the housing database
 
 
-
+#Images
+![alt tag](https://raw.githubusercontent.com/teovoinea/GLIFRP/master/GLIFRP.png?token=AHxexueOqbE_oyPlqyuXZ_fq_gcdcdWhks5XDDXqwA%3D%3D)
+![alt tag](https://raw.githubusercontent.com/teovoinea/GLIFRP/master/glifrp_mobile.png?token=AHxexoGnI1q2ERZf5lZZJU7ZyAyeURJKks5XDEVIwA%3D%3D)
 _________________________________________________________________________________
 # Upcoming version codenames
 * Caterpillar
