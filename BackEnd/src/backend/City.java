@@ -524,7 +524,7 @@ public class City implements Comparable{
 			houseScore = (((this.index_nsa - this.index_sa)/this.index_sa) * 100)*indexWeight ;
 		}
 		
-		//temporary weights
+		//weights
 		double wtArson = 8;
 		double wtAssualt = 8;
 		int wtBurglary = 5;
@@ -542,7 +542,6 @@ public class City implements Comparable{
 		
 		//Calculate the final Score
 		cityScore = maxScore - crimeScore - houseScore;
-		
 		return cityScore;
 	}
 	
