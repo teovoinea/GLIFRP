@@ -307,7 +307,7 @@ public class City implements Comparable{
 	 */
 	public void setInflation(){
 		//if (index_nsa != 0.0 && index_sa !=0.0){
-			inflation  = (((index_nsa - index_sa)/index_sa) * 100);
+			//inflation  = (((index_nsa - index_sa)/index_sa) * 100);
 		//}else {
 			//System.out.println("Indeces have to be set first.");
 		//}
@@ -343,22 +343,21 @@ public class City implements Comparable{
 	 * Set the Score of the City
 	 */
 	public void setScore(){
-		//for prototype we will have this weighting of Crime and housing
-		
-		// if crime and Price have values
-		//if ((getCrime() != 0.0) && (getPrice() != 0.0 )){
-		
-		//}else {
-		//	System.out.println(" Either Crime or Housing Prices have to be set ");
-		//}
-		
 		this.score  = (int) calculateScore(6,4);
 	}
 	
+	/**
+	 * Set the Latitude
+	 * @param lat
+	 */
 	public void setLat(String lat){
 		this.lat = lat;
 	}
 	
+	/**
+	 * Set the Longitude of the City
+	 * @param longe
+	 */
 	public void setLong(String longe){
 		this.lon = longe;
 	}
@@ -516,28 +515,14 @@ public class City implements Comparable{
 		
 		//variables
 		double houseScore  = 0;
-		if (index_sa != 0){
-			houseScore = (((this.index_nsa - this.index_sa)/this.index_sa) * 100)*indexWeight ;
-		}
 		double crimeScore = 0.0;
 		double maxScore = 500;
 		double cityScore = 0.0;						//returning Score
 		
-		//System.out.println("Index nsa: " + this.index_nsa + " , indes sa: " + this.index_sa);
-	
-		//System.out.println("Crime S: " + crimeScore + " , cityScore: " + cityScore  + " , maxScore:" + maxScore ) ;
-		
-		//Different types of crimes
-		//arson
-		//assault
-		//burglary
-		//larceny
-		//motor
-		//murder
-		//property
-		//rape
-		//robbery
-		//violentCrime
+		//get the houseScore
+		if (index_sa != 0){
+			houseScore = (((this.index_nsa - this.index_sa)/this.index_sa) * 100)*indexWeight ;
+		}
 		
 		//temporary weights
 		double wtArson = 8;
@@ -555,9 +540,8 @@ public class City implements Comparable{
 		crimeScore = (crimeScore/this.population) * 100;
 		crimeScore = crimeScore*crimeWeight;
 		
+		//Calculate the final Score
 		cityScore = maxScore - crimeScore - houseScore;
-		//System.out.println("---- DONE CALC ----------");
-		//System.out.println("Crime S: " + crimeScore + " , cityScore: " + cityScore + " , maxScore:" + maxScore ) ;
 		
 		return cityScore;
 	}
@@ -584,7 +568,6 @@ public class City implements Comparable{
 	}
 	
 
-	
 	//////////////////////////////////IMPLEMENTED FUNCTIONS////////////////////////////
 	/**
 	 * Sorts the comparable array by any of the following attributes
