@@ -48,10 +48,6 @@ public class City implements Comparable{
 	public City(String[] ll){
 		lat = ll[0];
 		lon = ll[1];
-//		mapwrap.buildByLatLong(ll);
-//		zip = mapwrap.getZip();
-//		name = mapwrap.getName();
-//		state = mapwrap.getState();
 	}
 	
 	/**
@@ -61,11 +57,6 @@ public class City implements Comparable{
 	 */
 	public City(String zip_code){
 		zip = zip_code;
-//		mapwrap.buildByZip(zip);
-//		lat = mapwrap.getLat();
-//		lon = mapwrap.getLon();
-//		name = mapwrap.getName();
-//		state = mapwrap.getState();
 	}
 
 	/**
@@ -75,16 +66,34 @@ public class City implements Comparable{
 	 * @return            City
 	 */
 	public City(String city_name, String city_state){
-//		mapwrap.buildByCityState(city_name, city_state);
-//		// zip = mapwrap.getZip();
-//		lat = mapwrap.getLat();
-//		lon = mapwrap.getLon();
 		name = city_name;
 		state = city_state;
 	}
 	
+	/**
+	 * Empty constructor for when you don't have all the variables and want to assign them later
+	 * @return City
+	 */
 	public City() {}
 	
+	/**
+	 * Constructor for when you DO have all the variables
+	 * @param  id           unique id of the city
+	 * @param  state        state of the city
+	 * @param  city         name of the city
+	 * @param  population   population of the city
+	 * @param  violentCrime violent crime in the city
+	 * @param  murder       murders in the city
+	 * @param  rape         rape in the city
+	 * @param  robbery      robbery in the city
+	 * @param  assault      assault in the city
+	 * @param  property     property of the city
+	 * @param  burglary     burglary in the city
+	 * @param  larceny      larceny in the city
+	 * @param  motor        motor incidents in the city
+	 * @param  arson        arson in the city
+	 * @return              Completed city object
+	 */
 	public City(int id, String state, String city, int population, int violentCrime, int murder, int rape, int robbery, int assault, int property, int burglary, int larceny, int motor, int arson)
 	{
 
@@ -635,6 +644,11 @@ public class City implements Comparable{
 		return 0;
 	}
 
+	/**
+	 * Checks if the names of 'this' & the passed param citie's names are equal
+	 * @param  c other city to check
+	 * @return   true if the names of the cities are equal
+	 */
 	public boolean equals(City c){
 		return (this.name.equals(c.getName()) && this.state.equals(c.getState()));
 	}
