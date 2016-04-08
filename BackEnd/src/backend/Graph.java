@@ -66,16 +66,6 @@ abstract class Graph implements Searchable{
 		nodes.add(n);
 	}
 
-	public int maxDegree(){
-		int max = 0;
-		for (int i = 0; i < getNodeCount();i++){
-			if (this.getNode(i).degree() > max){
-				max = this.getNode(i).degree();
-			}
-		}
-		return max;
-	}
-
 	/**
 	 * Connect 2 node objects with an edge
 	 *

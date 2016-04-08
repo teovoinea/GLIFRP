@@ -114,7 +114,7 @@ public class Usa extends Graph {
 	 * @param distance - how many states away you are going to look 
 	 * @return - the states within distance hops from your start state
 	 */
-	public ArrayList<State> limitedBFSSearch(State state, int distance){
+	private ArrayList<State> limitedBFSSearch(State state, int distance){
 		ArrayList<State> states = new ArrayList<State>();
 	    Queue<State> queue = new LinkedList<State>();
 	    int outerCount = 0;
@@ -196,7 +196,7 @@ public class Usa extends Graph {
 	 * @param length - how many cities you are looking for
 	 * @param state - the current state you are in
 	 */
-	public void lcmHelper(ArrayList<City> cities, int length, State state){
+	private void lcmHelper(ArrayList<City> cities, int length, State state){
 		state.setMarked(true);
 		ArrayList<City> c = state.findLowestCrimeRate(length);
 		if (c != null){
@@ -258,7 +258,7 @@ public class Usa extends Graph {
 	 * @param flag - the flag for what action you want to do
 	 * @return Object - whatever the object you are return is (state or city)
 	 */
-	public Object rDFS(Object target, Node curNode, int flag) {
+	private Object rDFS(Object target, Node curNode, int flag) {
 		curNode.setMarked(true);
 		switch (flag) {
 			case FIND_STATE_BY_STATE_FLAG:

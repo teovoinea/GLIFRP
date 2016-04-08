@@ -74,26 +74,6 @@ public abstract class Node{
 	public void addAdjacent(Node n){
 		adjacent.add(n);
 	}
-
-	/**
-	 * Add a list of adjacent nodes to this node (connect the node to multiple nodes)
-	 * 
-	 * @param arraylist of nodes to be connected to this node
-	 */
-	public void addAdjacent(ArrayList<Node> n){
-		adjacent.addAll(n);
-		return;
-	}
-	/**
-	 * Return the degree of the node
-	 *
-	 * This is how many other nodes the node touches
-	 * @return The degree of the node
-	 */
-	public int degree(){
-		return adjacent.size();
-	}
-	
 	/**
 	 * String representation of this node
 	 */
