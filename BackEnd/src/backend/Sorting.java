@@ -137,6 +137,12 @@ public class Sorting{
 
 	/////////////////////////////helper functions
 	
+	/**
+	 * sinks the item at an index
+	 * @param pq comparable array
+	 * @param k  index to sink
+	 * @param N  size of pq
+	 */
 	private static void sink(Comparable[] pq, int k, int N){
 		while (2*k <= N){
 			int j = 2 * k;
@@ -147,12 +153,25 @@ public class Sorting{
 		}
 	}
 
+	/**
+	 * exchanges 2 objects in an object array
+	 * @param a array containing objects to exchance
+	 * @param i index of the first to change
+	 * @param j index of the 2nd to change
+	 */
 	private static void exch(Object[] a, int i, int j){
 		Object swap = a[i];
 		a[i] = a[j];
 		a[j] = swap;
 	}
 
+	/**
+	 * [partition description]
+	 * @param  a  [description]
+	 * @param  lo [description]
+	 * @param  hi [description]
+	 * @return    [description]
+	 */
 	private static int partition(Comparable[] a, int lo, int hi){
 		int i = lo;
 		int j = hi + 1;
@@ -177,14 +196,35 @@ public class Sorting{
 		return j;
 	}
 
+	/**
+	 * Checks which of the 2 objects are less
+	 * @param  v object to compare
+	 * @param  w object to compare
+	 * @return   true if 1 is less than 2
+	 */
 	private static boolean less(Comparable v, Comparable w){
 		return ((City)v).compareTo(w, sortBy) < 0;
 	}
 
+	/**
+	 * Checks which of 2 objects are less
+	 * @param  pq array the objects are in
+	 * @param  i  index of the first object
+	 * @param  j  index of the second object
+	 * @return    true if pq[i] < pq[j]
+	 */
 	private static boolean less(Comparable[] pq, int i, int j){
 		return ((City)pq[i-1]).compareTo(pq[j-1], sortBy) < 0;
 	}
 
+	/**
+	 * Merges 2 parts of an array into 1
+	 * @param a   array to merge in
+	 * @param aux copy of array a
+	 * @param lo  low index to merge
+	 * @param mid where the 2 arrays meet
+	 * @param hi  upper bound index
+	 */
 	private static void merge(Comparable[] a, Comparable[] aux, int lo, int mid, int hi){
 		for(int k = lo; k <= hi; k++){
 			aux[k] = a[k];
@@ -200,6 +240,12 @@ public class Sorting{
 		}
 	}
 	
+	/**
+	 * puts a new object in an array
+	 * @param arr  array in which the objects are
+	 * @param elem new object
+	 * @param pos  index of where to put it
+	 */
 	public static void exch(Object[] arr,Object elem, int pos){
 		arr[pos]=elem;
 	}

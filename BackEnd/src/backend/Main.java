@@ -13,10 +13,17 @@ public class Main {
     private static OpenStreetMapWrapper mapwrap = new OpenStreetMapWrapper();
     public static Query q = new Query();
     
+    /**
+     * Main entrance to the program, starts the server
+     * @param args arguments when you run the program
+     */
     public static void main(String[] args) {
         usa = new Usa();
         staticFileLocation("/public");
         init();
+        /**
+         * Loads the index.html
+         */
         get("/", (request, res) -> {
         	System.out.println(request.requestMethod() + " request on " + request.url() + " from ip " + request.ip() + " with user agent " + request.userAgent() + "\nRequest Body:\n" + request.body());
         	res.redirect("/index.html");
@@ -27,12 +34,9 @@ public class Main {
         	"<img src='/img/2.PNG'/>"
         );
 
-        /* 
-         * This function will take a post request with any of the following attributes
-         * latitude + longitude OR
-         * zip_code OR
-         * city name + state name
-         * and will return the top 10 cities with the LOWEST crime rate in that state*/
+        /**
+         * Searches for city based on hops 
+         */
         post("/search", (request, response) ->{
         	System.out.println(request.requestMethod() + " request on " + request.url() + " from ip " + request.ip() + " with user agent " + request.userAgent() + "\nRequest Body:\n" + request.body());
         	try{
@@ -68,36 +72,6 @@ public class Main {
 	        	if (jobject.has("distance")){
 	        		distance = jobject.get("distance").getAsInt();	        		
 	        	}
-
-
-	        	// if (jobject.has("zip")){
-	        	// 	rec = new City(jobject.get("zip").getAsString());
-	        	// }
-	        	// if (jobject.has("lat") && jobject.has("lon")){
-	        	// 	String[] ll = {jobject.get("lat").getAsString(), jobject.get("lon").getAsString()};
-	        	// 	rec = new City(ll);
-	        	// }
-	        	//if (jobject.has("city") && jobject.has("state")){
-	        	//	rec = new City(jobject.get("city").getAsString(), jobject.get("state").getAsString());
-	        	//	distance = jobject.get("dist").getAsInt();
-	        	//}
-	        	//ArrayList<State> states = usa.getNeighbouringStates(usa.findStateByCity(rec), distance);
-	        	//City min = new City("");
-	        	//min.setCrime(999999999999999999999999.9);
-	        	//for(int i = 0; i < states.size(); i++){
-	        	//	if (min.compareTo(states.get(i).findLowestCrimeRate(), 3) > 0){
-	        			//min = states.get(i).findLowestCrimeRate();
-	        	//	}
-	        	//}
-	        	//usa.printUSA();
-	        	
-	        	//ArrayList<City> c= usa.findLowestCrimeRate(count);
-                //for (int i = 0; i < c.size(); i++){
-                //    mapwrap.buildByCityState(c.get(i).getPlace_name(), c.get(i).getState());
-                //    c.get(i).setLat(mapwrap.getLat());
-                //    c.get(i).setLong(mapwrap.getLon());
-                //}        	
-	        	
          
                 ArrayList<City> hopCities = usa.findLowestCrimeRate(usa.getNeighbouringStates(usa.findStateByStateName(state), distance),count);
                 
@@ -122,6 +96,9 @@ public class Main {
         	}
         });
     
+    /**
+     * Searches for city based on lat/long
+     */
     post("/searchLCMByState", (request, response) ->{
     	System.out.println(request.requestMethod() + " request on " + request.url() + " from ip " + request.ip() + " with user agent " + request.userAgent() + "\nRequest Body:\n" + request.body());
     	try{
@@ -184,18 +161,5 @@ public class Main {
     		return e.toString();
     	}
     });
-    
-    
    }
-    
-    
-    private static void init(){
-    	/* 
-    	 * Connect to database
-    	 * SELECT * FROM TABLE
-    	 * for i in row:
-    	 * 	City t = new City()
-    	 * 	t.addAttribute(row info)
-    	 * 	usa.addCity(t)*/
-    }
 }
