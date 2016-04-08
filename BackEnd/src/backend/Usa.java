@@ -109,6 +109,18 @@ public class Usa extends Graph {
 	}
 	
 	/**
+	 * Get the amount of hops between two states
+	 * @param state - start state
+	 * @param state2 - end state 
+	 * @return the integer that is the number of hops between these two states
+	 */
+	public int getHops(State state, State state2) {
+		int distance = this.findDistance(state, state2);
+		this.resetMarked();
+		return distance;
+	}
+	
+	/**
 	 * BFS implementation that only searches for a specific distance
 	 * @param state - start state
 	 * @param distance - how many states away you are going to look 
@@ -128,9 +140,11 @@ public class Usa extends Graph {
 	        State node = queue.remove();
 	        innerCount++;
 	        for (Node s : node.getAdjacent()){
-	        	s.setMarked(true);
-	        	states.add((State) s);
-	        	queue.add((State) s);
+	        	if (!s.isMarked()){
+		        	s.setMarked(true);
+		        	states.add((State) s);
+		        	queue.add((State) s);
+	        	}
 	        }
 	        if (innerCount == curAdjacencySize){
 	        	outerCount++;
@@ -142,6 +156,44 @@ public class Usa extends Graph {
 	        }
 	    }
 	    return states;
+	}
+	
+	/**
+	 * BFS implementation that gets distance between two points
+	 * @param state - start state
+	 * @param distance - how many states away you are going to look 
+	 * @return - the distance between these two states
+	 */
+	private int findDistance(State state, State end){		
+		if (state.equalsName(end)){
+    		return 0;
+    	}
+		Queue<State> queue = new LinkedList<State>();
+	    int outerCount = 1;
+	    int innerCount = 0;
+	    int curAdjacencySize = 1;
+	    queue.add(state);
+	    state.setMarked(true);
+	    
+	    while(!queue.isEmpty()) {
+	        State node = queue.remove();
+	        innerCount++;
+	        for (Node s : node.getAdjacent()){
+	        	if (!s.isMarked()){
+		        	s.setMarked(true);
+		        	if (((State) s).equalsName(end)){
+		        		return outerCount;
+		        	}
+		        	queue.add((State) s);
+	        	}
+	        }
+	        if (innerCount == curAdjacencySize){
+	        	outerCount++;
+	        	innerCount = 0;
+	        	curAdjacencySize = queue.size();
+	        }
+	    }
+	    return 50;
 	}
 
 	/**
@@ -294,7 +346,7 @@ public class Usa extends Graph {
 	 * @param n - the node you are doing your DFS from
 	 * @param flag - the flag for what action you want to do (The only one for this DFS is adding a city)
 	 */
-	public void DFS(Object target, Node n, int flag) {
+	private void DFS(Object target, Node n, int flag) {
 		n.setMarked(true);
 		if (flag == ADD_CITY_FLAG) {
 			if (((State) n).compareState((City) target)) {
