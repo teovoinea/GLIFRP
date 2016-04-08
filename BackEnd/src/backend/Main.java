@@ -20,7 +20,6 @@ public class Main {
     public static void main(String[] args) {
         usa = new Usa();
         staticFileLocation("/public");
-        init();
         /**
          * Loads the index.html
          */
