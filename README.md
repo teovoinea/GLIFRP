@@ -32,6 +32,8 @@ To use this sign up for a Trello account
 	
 ___________________________________________________________________________________________
 # "Major" update history
+* Apr 5 -CRTNP - Caterpillar 
+* Apr 4 - T - GLIFRP on AWS
 * March 29 - C - Fnished Scoring Algorithm 
 * Mar 15 - CRTNP - Baboon (Prototype)
 * Mar 13 - R - Search by Crime Rate is completed
