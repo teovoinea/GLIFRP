@@ -35,6 +35,7 @@ ________________________________________________________________________________
 * Apr 08 - R - Finished JavaDocs & testing for all classes and methods written by Roberto
 * Apr 07 - T - Finished JavaDocs for all the classes and methods written by Teo
 * Apr 06 - C - Updated scoring algorithm based on jail time weights
+* Apr 05 - CRTNP - Caterpillar (Live)
 * Apr 05 - P - Updated UI colors to be more consistent
 * Apr 04 - T - Hosted GLIFRP live on Amazon Web Services
 * Apr 02 - N - Finished UI, connected to spark server using HTTP requests
