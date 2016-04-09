@@ -45,12 +45,13 @@ ________________________________________________________________________________
 * Mar 29 - C - Fnished Scoring Algorithm 
 * Mar 25 - T - Added endpoint to search by latitude & longitude
 * Mar 23 - P - Updated Query class to build City objects instead of Crime
-* Mar 15 - CRTNP - Baboon (Prototype)
+* Mar 15 - CRTNP - Baboon (Beta)
 * Mar 13 - R - Search by Crime Rate is completed
 * Mar 13 - C - Made Simple Scoring Algorithm (for prototype)
 * Mar 11 - C - Edited compareTo and Search by Attribute
 * Mar 10 - T - Added compareTo and Sort by attribute
 * Mar 09 - C - Changed Searching Algorithms to use ArrayList instead of Arrays
+* Mar 07 - CRTNP - Alligator (Alpha)
 * Mar 07 - C - Basic Searching Algorithms
 * Mar 03 - P - Added databases
 * Mar 03 - T - Added all the possible sorting algorithms we will use
