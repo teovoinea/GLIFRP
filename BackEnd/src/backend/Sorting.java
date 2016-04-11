@@ -1,4 +1,7 @@
 package backend;
+
+import java.util.Random;
+
 public class Sorting{
 	private static int sortBy = 0; //attribute by which to work
 	/**
@@ -31,29 +34,43 @@ public class Sorting{
 			mergeSort(a, aux, 0, a.length);
 		}
 		if (attribute == 3){
-			StdRandom.shuffle(a);
+			shuffle(a);
 			quickSort3way(a, 0, a.length - 1);
 			//shellSort(a);
 		}
 		if (attribute == 4){
-			StdRandom.shuffle(a);
+			shuffle(a);
 			quickSort3way(a, 0, a.length - 1);
 			//heapSort(a);
 		}
 		if (attribute == 5){
-			StdRandom.shuffle(a);
+			shuffle(a);
 			quickSort3way(a, 0, a.length - 1);
 		}
 		if (attribute == 6){
-			StdRandom.shuffle(a);
+			shuffle(a);
 			quickSort3way(a, 0, a.length - 1);
 		}
 		if (attribute == 7){
-			StdRandom.shuffle(a);
+			shuffle(a);
 			quickSort3way(a, 0, a.length - 1);
 		}
 	}
 
+	/**
+	 * Shuffles the given array
+	 * @param a
+	 */
+	private static void shuffle(Comparable[] a){
+		Random rand = new Random();
+		for(int i = 0; i < a.length;i++){
+			int index = rand.nextInt(a.length);
+			Comparable temp = a[index];
+			a[index] = a[i];
+			a[i] = temp;
+		}
+	}
+	
 	/**
 	 * Merge sort
 	 * @param a   Array to sort
