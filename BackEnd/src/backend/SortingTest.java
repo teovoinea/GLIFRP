@@ -64,5 +64,13 @@ public class SortingTest {
 		}
 	}
 	
+	@Test
+	public void sortByZipTest(){
+		Sorting.SortByType(2,a);
+		for(int i = 0; i < a.length - 1; i++){
+			assert(a[i].getZip().compareTo(a[i + 1].getZip()) < 0);
+		}
+	}
+	
 
 }

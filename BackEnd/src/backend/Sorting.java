@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class Sorting{
 	private static int sortBy = 0; //attribute by which to work
+	private static Comparable[] aux;
 	/**
 	 * Sorts the comparable array by any of the following attributes
 	 * 0. Lat
@@ -20,17 +21,17 @@ public class Sorting{
 	public static void SortByType(int attribute, Comparable[] a){
 		sortBy = attribute;
 		if (attribute == 0){
-			Comparable[] aux = new Comparable[a.length];
+			aux = new Comparable[a.length];
 			mergeSort(a, aux, 0, a.length);
 		}
 		if (attribute == 1){
-			Comparable[] aux = new Comparable[a.length];
+			aux = new Comparable[a.length];
 			mergeSort(a, aux, 0, a.length);
 			//StdRandom.shuffle(a);
 			//quickSort(a, 0, a.length - 1);
 		}
 		if (attribute == 2){
-			Comparable[] aux = new Comparable[a.length];
+			aux = new Comparable[a.length];
 			mergeSort(a, aux, 0, a.length);
 		}
 		if (attribute == 3){
@@ -83,7 +84,7 @@ public class Sorting{
 		int mid = lo + (hi - lo) / 2;
 		mergeSort(a, aux, lo, mid);
 		mergeSort(a, aux, mid + 1, hi);
-		merge(a, aux, lo, mid, hi);
+		merge(a, aux, lo, mid, hi - 1);
 	}
 
 	/**
