@@ -70,8 +70,8 @@ ________________________________________________________________________________
 
 
 #Images
-![alt tag](https://raw.githubusercontent.com/teovoinea/GLIFRP/master/GLIFRP.png?token=AHxexueOqbE_oyPlqyuXZ_fq_gcdcdWhks5XDDXqwA%3D%3D)
-![alt tag](https://raw.githubusercontent.com/teovoinea/GLIFRP/master/glifrp_mobile.png?token=AHxexoGnI1q2ERZf5lZZJU7ZyAyeURJKks5XDEVIwA%3D%3D)
+![alt tag](https://raw.githubusercontent.com/teovoinea/GLIFRP/master/GLIFRP.png?token=AHxextkSPxcdws0MSVTnbPST6fBJwKSTks5XHmigwA%3D%3D)
+![alt tag](https://raw.githubusercontent.com/teovoinea/GLIFRP/master/glifrp_mobile.png?token=AHxexsbhLkd5KMaIUbrlPVkkycpSzJeBks5XHmjHwA%3D%3D)
 _________________________________________________________________________________
 # Upcoming version codenames
 * Caterpillar
