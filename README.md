@@ -2,6 +2,9 @@
 Live demo can be found here:
 <a href="http://ec2-52-38-0-246.us-west-2.compute.amazonaws.com:4567/index.html">Demo</a>
 
+Design doument can be found here:
+<a href="https://teovoinea.github.io/2XB3DesignDoc">Doc</a>
+
 
 Scrum board can be found here: 
 <a href="https://trello.com/b/YEKUDQie">GLFRP Scrum Board</a>
