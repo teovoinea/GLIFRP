@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"charset="UTF-8">
+        <title>GLIFRP</title>
+        <link rel="icon" type="image/png" href="favicon-64.png" />
+	    <link rel="stylesheet" type="text/css" href="dist/css/jquery-ui.min.css">
+        <link rel="stylesheet" type="text/css" href="dist/css/style.min.css">
+	    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+        <base href="./" />
+        <script src="libs/jquery/dist/jquery.min.js"></script>
+        <script src="libs/jquery-ui/jquery-ui.min.js"></script>
+        <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+        <script src="libs/angular/angular.min.js"></script>
+        <script src="libs/angular-route/angular-route.min.js"></script>
+        <script type="text/javascript" src="dist/js/app.min.js"></script>
+        <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    </head>
+    <body ng-app="GLIFRP">
+	<div ng-controller="mainController">
+		<div id="overlay">
+	      <div id="top-bar">
+	        <h1>GLIFRP</h1>
+	        <input type="text" id="search-box" />
+	        <div id="menu">
+	          <p>
+	            <strong>Search by Attribute</strong><br /><br />
+	            Crime Rate: <span type="text" id="amount-crime"></span> <br />
+	            <div class="slider" id="slider-crime"></div>
+	            <br /><br />
+	            Housing Budget: <span type="text" id="amount-price"></span><br /><br />
+	            <div id="slider-price" class="slider"></div>
+                <br /><br />
+                Distance: <span type="text" id="amount-distance"></span><br /><br />
+	            <div id="slider-distance" class="slider"></div><br /><br />
+	          </p>
+	        </div>
+	      </div>
+          <div id="loading">
+              <div class="loading_bubble"></div>
+              <div class="loading_bubble"></div>
+              <div class="loading_bubble"></div>
+          </div>
+		      <div id="info-popup">
+		        <div id="info-close" onclick="closeinfo()">
+		          <h1>X</h1>
+		        </div>
+		        <p id="info-popup-content">
+		        </p>
+		      </div>
+		      <div id="components">
+		        <div id="stat-bar">
+		          <div class="mask full">
+		            <div class="fill"></div>
+		          </div>
+		          <div class="mask half">
+		            <div class="fill"></div>
+		            <div class="fill fix"></div>
+		          </div>
+		          <div class="stat-title">
+		            <h3>Good Life Score<br /><span style="width:50%;overlow:hidden;">20%</span></h3>
+		          </div>
+		        </div>
+		        <div id="side-items">
+		          <div onclick="moreinfo()">
+		            <h2>More Info</h2>
+		          </div>
+		          <div onclick="explore()">
+		            <h2>Explore</h2>
+		          </div>
+		        </div>
+		      </div>
+		      <div id="show-menu" onclick="menu()">
+		        <h2>Menu</h2>
+		      </div>
+		    </div>
+		    </div>
+	    <div ng-controller="mapController" id="map"></div>
+	  </body>
+	  <script src="dist/js/main.js"></script>
+	</html>
