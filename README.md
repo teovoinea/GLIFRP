@@ -34,6 +34,11 @@ To use this sign up for a Trello account
 	```
 	
 ___________________________________________________________________________________________
+# Images
+
+![alt tag](https://raw.githubusercontent.com/teovoinea/GLIFRP/master/GLIFRP.png?token=AHxextkSPxcdws0MSVTnbPST6fBJwKSTks5XHmigwA%3D%3D)
+![alt tag](https://raw.githubusercontent.com/teovoinea/GLIFRP/master/glifrp_mobile.png?token=AHxexsbhLkd5KMaIUbrlPVkkycpSzJeBks5XHmjHwA%3D%3D)
+___________________________________________________________________________________________
 # "Major" update history
 * Apr 08 - R - Finished JavaDocs & testing for all classes and methods written by Roberto
 * Apr 07 - T - Finished JavaDocs for all the classes and methods written by Teo
@@ -70,34 +75,3 @@ ________________________________________________________________________________
 * Feb 28 - P - Added Spark, update README
 * Feb 27 - N - Added location data to the database
 * Feb 27 - N - Added the housing database
-
-
-#Images
-![alt tag](https://raw.githubusercontent.com/teovoinea/GLIFRP/master/GLIFRP.png?token=AHxextkSPxcdws0MSVTnbPST6fBJwKSTks5XHmigwA%3D%3D)
-![alt tag](https://raw.githubusercontent.com/teovoinea/GLIFRP/master/glifrp_mobile.png?token=AHxexsbhLkd5KMaIUbrlPVkkycpSzJeBks5XHmjHwA%3D%3D)
-_________________________________________________________________________________
-# Upcoming version codenames
-* Caterpillar
-* Dragon
-* Electric Catfish
-* Fossa
-* Guppy
-* Hoatzin
-* Iguana
-* Javelina
-* Kakapo
-* Lynx
-* Molly
-* Nautilus
-* Okapi
-* Pademelon
-* Quokka
-* Ragdoll
-* Sponge
-* Toucan
-* Umbrellabird
-* Vaquita
-* Wombat
-* Xenopus
-* Yak
-* Zorse
